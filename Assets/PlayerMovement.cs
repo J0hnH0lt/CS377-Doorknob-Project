@@ -15,9 +15,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Update()
     {
-        Vector2 movementDirection = new Vector2(movementInput.x, movementInput.y);
+
+        Vector2 movementDirection = new Vector2(movementInput.x, movementInput.y).normalized;
         float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
-        movementDirection.Normalize();
 
         transform.Translate(movementDirection * speed * inputMagnitude * Time.deltaTime, Space.World);
 
