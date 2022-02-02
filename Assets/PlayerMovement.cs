@@ -32,6 +32,11 @@ public class PlayerMovement : MonoBehaviour
 
     private float dashCooldownExpiration;
 
+    public void Start() {
+        GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+    }
+
+
     public void Dash() {
         if (Time.time > dashCooldownExpiration) {
             dashEnabled = true;
