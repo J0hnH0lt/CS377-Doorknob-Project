@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     private float fartTime = 20;
     private float currTime;
 
-    public static 
-
     void Awake() {
         Instance = this;
     }
