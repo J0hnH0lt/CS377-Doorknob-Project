@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5057145181192831599}
   - component: {fileID: 5057145181192831598}
   - component: {fileID: -7987678491945690685}
+  - component: {fileID: 6217668634034457969}
   m_Layer: 0
   m_Name: Player Model
   m_TagString: Untagged
@@ -164,3 +165,16 @@ MonoBehaviour:
   dashCooldown: 2
   rotationSpeed: 600
   currSpeed: 20
+--- !u!114 &6217668634034457969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5057145181192831592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56cb89c0c92a4798b200366bec5bc37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 2790232855970723382, guid: e4761197fb9474804a9d29562e11f5f0, type: 3}
