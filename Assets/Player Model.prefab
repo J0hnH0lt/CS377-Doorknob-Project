@@ -127,10 +127,10 @@ MonoBehaviour:
     m_ActionName: Player 1/Move[/SwitchProControllerHID/leftStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: -7987678491945690685}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnLook
-        m_Mode: 0
+        m_MethodName: Dash
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -139,8 +139,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 23702e82-c978-4dbd-9691-a425d2cf5104
-    m_ActionName: Player Controls/Look[/DualShock4GamepadHID/leftStick]
+    m_ActionId: 2dec5ec5-2ee5-44b6-8e27-d766ab42b5b1
+    m_ActionName: Player Controls/Dash[/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player Controls
@@ -158,5 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc16aa5956214ce6b78ffe260c3e2c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  rotationSpeed: 500
+  normalSpeed: 5
+  dashSpeed: 50
+  dashDuration: 0.2
+  dashCooldown: 2
+  rotationSpeed: 1000

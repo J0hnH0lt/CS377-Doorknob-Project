@@ -6,20 +6,63 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {   
     [SerializeField]
-    private float speed;
+    private float normalSpeed = 5;
 
     [SerializeField]
-    private float rotationSpeed;
+    private float dashSpeed = 50;
+
+    [SerializeField]
+    private float dashDuration = 0.2f;
+
+    [SerializeField]
+    private float dashCooldown = 2f;
+
+    [SerializeField]
+    private float rotationSpeed = 1000;
+
+    private float currSpeed = 5;
 
     private Vector2 movementInput;
+    private bool dashEnabled;
+    private float dashExpiration;
+
+    private float dashX;
+    private float dashY;
+
+    private float dashCooldownExpiration;
+
+    public void Dash() {
+        if (Time.time > dashCooldownExpiration) {
+            dashEnabled = true;
+            dashExpiration = Time.time + dashDuration;
+            dashCooldownExpiration = Time.time + dashCooldown;
+            currSpeed = dashSpeed;
+            dashX = movementInput.x;
+            dashY = movementInput.y;
+        }
+    }
+
+    public void UpdateDash() {
+        if (Time.time > dashExpiration) {
+            dashEnabled = false;
+            currSpeed = normalSpeed;
+        }
+    }
 
     public void Update()
     {
+        Vector2 movementDirection;
 
-        Vector2 movementDirection = new Vector2(movementInput.x, movementInput.y).normalized;
+        if (dashEnabled) {
+            movementDirection = new Vector2(dashX, dashY).normalized;
+            UpdateDash();
+        } else {
+            movementDirection = new Vector2(movementInput.x, movementInput.y).normalized;
+        }
+
         float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
 
-        transform.Translate(movementDirection * speed * inputMagnitude * Time.deltaTime, Space.World);
+        transform.Translate(movementDirection * currSpeed * inputMagnitude * Time.deltaTime, Space.World);
 
         if (movementDirection != Vector2.zero)
         {
