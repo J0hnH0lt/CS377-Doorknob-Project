@@ -6,21 +6,22 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {   
     [SerializeField]
-    private float normalSpeed = 5;
+    private float normalSpeed;
 
     [SerializeField]
-    private float dashSpeed = 50;
+    private float dashSpeed;
 
     [SerializeField]
-    private float dashDuration = 0.2f;
+    private float dashDuration;
 
     [SerializeField]
-    private float dashCooldown = 2f;
+    private float dashCooldown;
 
     [SerializeField]
-    private float rotationSpeed = 1000;
+    private float rotationSpeed;
 
-    private float currSpeed = 5;
+    [SerializeField]
+    private float currSpeed;
 
     private Vector2 movementInput;
     private bool dashEnabled;
