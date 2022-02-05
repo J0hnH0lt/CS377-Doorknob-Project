@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4988633896000558342}
   - component: {fileID: 7968718851786329893}
   m_Layer: 0
-  m_Name: Fist
+  m_Name: FistPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -183,6 +183,7 @@ MonoBehaviour:
   currSpeed: 20
   health: 0
   damage: 0
+  FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
 --- !u!114 &6217668634034457969
 MonoBehaviour:
   m_ObjectHideFlags: 0

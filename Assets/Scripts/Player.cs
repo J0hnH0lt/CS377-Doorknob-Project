@@ -24,10 +24,10 @@ public class Player : MonoBehaviour
     private float currSpeed;
 
     [SerializeField]
-    private int health;
+    public int health;
 
     [SerializeField]
-    private int damage;
+    public int damage;
 
     private Vector2 movementInput;
     private bool dashEnabled;
@@ -40,10 +40,20 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D playerRigidBod;
 
+    private GameObject fist;
+
+    public GameObject FistPrefab;
+
     public void Start() {
         GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
         playerRigidBod = GetComponent<Rigidbody2D>();
+
+        Vector2 vectorCast = transform.up;
+        fist = Instantiate(
+            FistPrefab,
+            playerRigidBod.position + vectorCast,
+            Quaternion.identity);
     }
 
 
