@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {   
     [SerializeField]
     private float normalSpeed;
@@ -23,6 +23,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float currSpeed;
 
+    [SerializeField]
+    private int health;
+
+    [SerializeField]
+    private int damage;
+
     private Vector2 movementInput;
     private bool dashEnabled;
     private float dashExpiration;
@@ -32,13 +38,19 @@ public class PlayerMovement : MonoBehaviour
 
     private float dashCooldownExpiration;
 
+    private Rigidbody2D playerRigidBod;
+
     public void Start() {
         GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
+        playerRigidBod = GetComponent<Rigidbody2D>();
     }
 
 
     public void Dash() {
         if (Time.time > dashCooldownExpiration) {
+            Debug.Log("Dash!");
+
             dashEnabled = true;
             dashExpiration = Time.time + dashDuration;
             dashCooldownExpiration = Time.time + dashCooldown;
@@ -78,4 +90,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
+
+    public void Punch()
+    {
+        Debug.Log("Punch!");
+    }
 }
+
