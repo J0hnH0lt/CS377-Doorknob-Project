@@ -49,8 +49,7 @@ public class Player : MonoBehaviour
 
     public void Dash() {
         if (Time.time > dashCooldownExpiration) {
-            Debug.Log("Dash!");
-
+      
             dashEnabled = true;
             dashExpiration = Time.time + dashDuration;
             dashCooldownExpiration = Time.time + dashCooldown;

@@ -9,10 +9,17 @@ public class GameManager : MonoBehaviour
 
     public GameState State;
 
+    public GameObject doorPrefab;
+
     public static event Action<GameState> OnGameStateChanged;
 
-    private float fartTime = 20;
+    private float fartTime = 10;
     private float currTime;
+
+    private float minDoorSpawnTime = 10.0f;
+    private float maxDoorSpawnTime = 20.0f;
+    private float timer = 0.0f;
+    private float nextTime;
 
     void Awake() {
         Instance = this;
@@ -26,10 +33,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (State == GameState.Menu){
-            currTime = currTime + Time.deltaTime;
-            if (currTime >= fartTime) {
-                UpdateGameState(GameState.Fart);
+        if (State == GameState.ItemPhase){
+            timer += Time.deltaTime;
+            if (timer >= nextTime) {
+                UpdateGameState(GameState.CombatPhase);
             }
         }
     }
@@ -40,10 +47,11 @@ public class GameManager : MonoBehaviour
             case GameState.Menu:
                 HandleMenu();
                 break;
-            case GameState.Fart:
-                HandleFart();
+            case GameState.ItemPhase:
+                HandleItemPhase();
                 break;
-            case GameState.Fight:
+            case GameState.CombatPhase:
+                HandleFart();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -53,13 +61,20 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandleMenu() {
-        currTime = 0;
+        UpdateGameState(GameState.ItemPhase);
+    }
+
+    public void HandleItemPhase()
+    {
+        timer = 0.0f;
+        nextTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
+        Debug.Log(nextTime);
     }
 
     public void HandleFart() {
-        currTime = 0;
         Debug.Log("Ayo We Farting Lads");
-        UpdateGameState(GameState.Fight);
+        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
+        Instantiate(doorPrefab, pos, Quaternion.identity);
     }
 
     public void HandleFight(){
@@ -72,6 +87,6 @@ public class GameManager : MonoBehaviour
 
 public enum GameState {
     Menu,
-    Fart,
-    Fight,
+    ItemPhase,
+    CombatPhase,
 }
