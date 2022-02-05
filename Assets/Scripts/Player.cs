@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
         playerRigidBod = GetComponent<Rigidbody2D>();
 
-        Vector2 vectorCast = transform.up;
+        Vector2 vectorCast = transform.up * 2;
         fist = Instantiate(
             FistPrefab,
             playerRigidBod.position + vectorCast,
@@ -96,6 +96,8 @@ public class Player : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
+
+        fist.transform.position = this.gameObject.transform.position + (transform.up * 2);
     }
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
