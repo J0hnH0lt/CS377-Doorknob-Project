@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash() {
         if (Time.time > dashCooldownExpiration) {
+      
             dashEnabled = true;
             dashExpiration = Time.time + dashDuration;
             dashCooldownExpiration = Time.time + dashCooldown;

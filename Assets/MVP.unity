@@ -316,3 +316,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   State: 0
+  doorPrefab: {fileID: 7624814792528726709, guid: cb324f81ae2884f10adc2b093ad3f167, type: 3}
