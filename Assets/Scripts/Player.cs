@@ -106,5 +106,15 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Punch!");
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "FistPrefab(Clone)")
+        {
+            health -= damage;
+            Debug.Log("AH I HAVE BEEN HIT for " + damage + " I only have " + health + " left");
+        }
+        //collision.otherCollider.health -= damage;
+    }
 }
 
