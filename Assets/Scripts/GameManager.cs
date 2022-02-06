@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    private List<Player> players = new List<Player>();
+
     public GameState State;
 
     public GameObject doorPrefab;
@@ -17,8 +19,6 @@ public class GameManager : MonoBehaviour
     private float maxDoorSpawnTime = 20.0f;
     private float timer = 0.0f;
     private float nextTime;
-
-    private Player[] players;
 
     void Awake() {
         Instance = this;
@@ -32,6 +32,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (State == GameState.Menu)
+        {
+            if (players.Count >=1)
+            {
+                Debug.Log("Starting Game");
+                UpdateGameState(GameState.ItemPhase);
+            }
+        }
         if (State == GameState.ItemPhase){
             timer += Time.deltaTime;
             if (timer >= nextTime) {
@@ -60,7 +68,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandleMenu() {
-        UpdateGameState(GameState.ItemPhase);
+        //UpdateGameState(GameState.ItemPhase);
     }
 
     public void HandleItemPhase()
@@ -75,15 +83,14 @@ public class GameManager : MonoBehaviour
         Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
         Instantiate(doorPrefab, pos, Quaternion.identity);
 
-        // PICK A PLAYER TO GET THE SHIT BEAT OUT OF THEM (WHO FARTS)
-        players = FindObjectsOfType<Player>();
-        // Call player.fart() on a random player in this array
-
+        // GET A RANDOM PLAYER
+        int random_player = UnityEngine.Random.Range(0, players.Count);
+        Debug.Log("Player " + random_player + " is farting");
     }
 
-    public void HandleFight(){
-        Debug.Log("Fight Fight Fight!");
-
+    public void AddPlayer(Player p){
+        players.Add(p);
+        Debug.Log("Player Added");
     }
     
 }
