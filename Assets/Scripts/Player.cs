@@ -51,7 +51,12 @@ public class Player : MonoBehaviour
 
     private GameManager myGameManager;
 
+    private GameObject fart;
 
+    public GameObject FartPrefab;
+
+    private float fartScale;
+    
     //private void Awake()
     //{
     //    playerRigidBod = GetComponent<Rigidbody2D>();
@@ -125,6 +130,13 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
+        if (fart) {
+            fartScale += 0.005f;
+            fart.transform.position = this.gameObject.transform.position;
+            fart.transform.localScale = new Vector3(fartScale,fartScale,1);
+        } else {
+            fartScale = 0.2f;
+        }
         // Position fist infront of player
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
                                                               (transform.up * myFist.GetComponent<FistScript>().currentPosition);
@@ -140,8 +152,18 @@ public class Player : MonoBehaviour
 
     }
 
+
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
 
+
+    public void OnFart() {
+        fart = Instantiate(
+            FartPrefab,
+            playerRigidBod.position,
+            Quaternion.identity);
+        fart.transform.localScale = new Vector3(fartScale,fartScale,1);
+        Destroy(fart,0.6f);
+    }
     public void Punch()
     {
         Debug.Log("Punch!");
