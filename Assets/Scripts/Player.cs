@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     private float dashX;
     private float dashY;
 
+    private bool canTakeDamage;
+
     private float dashCooldownExpiration;
 
     private Rigidbody2D playerRigidBod;
@@ -46,6 +48,9 @@ public class Player : MonoBehaviour
     private GameObject myFist;
 
     public GameObject FistPrefab;
+
+    private GameManager myGameManager;
+
 
     //private void Awake()
     //{
@@ -75,6 +80,8 @@ public class Player : MonoBehaviour
             FistPrefab,
             playerRigidBod.position + vectorCast,
             Quaternion.identity);
+
+        myGameManager = GameManager.Instance;
     }
 
 
@@ -122,6 +129,15 @@ public class Player : MonoBehaviour
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
                                                               (transform.up * myFist.GetComponent<FistScript>().currentPosition);
 
+        if (myGameManager.State == GameState.CombatPhase && canTakeDamage != true)
+        {
+            canTakeDamage = true;
+        }
+        else if (myGameManager.State != GameState.CombatPhase && canTakeDamage == true)
+        {
+            canTakeDamage = false;
+        }
+
     }
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
@@ -135,7 +151,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "FistPrefab(Clone)")
+        if (collision.gameObject.name == "FistPrefab(Clone)" && canTakeDamage)
         {
             health -= damage;
             Debug.Log("AH I HAVE BEEN HIT for " + damage + " I only have " + health + " left");
