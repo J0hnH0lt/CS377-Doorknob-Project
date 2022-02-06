@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=1)
+            if (players.Count >=2)
             {
                 Debug.Log("Starting Game");
                 UpdateGameState(GameState.ItemPhase);

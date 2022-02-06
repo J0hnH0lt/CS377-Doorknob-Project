@@ -20,8 +20,12 @@ public class Door : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Aye you did it you little freak ahahah UwU XD");
-        GM.UpdateGameState(GameState.ItemPhase);
-        Destroy(this.gameObject);
+        if (collision.gameObject.GetComponent<Player>().hasFarted)
+        {
+            Debug.Log("Aye you did it you little freak ahahah UwU XD");
+            GM.UpdateGameState(GameState.ItemPhase);
+            Destroy(this.gameObject);
+        }
+        
     }
 }

@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     private float dashX;
     private float dashY;
 
-    private bool canTakeDamage;
+    public bool hasFarted;
 
     private float dashCooldownExpiration;
 
@@ -56,21 +56,6 @@ public class Player : MonoBehaviour
     public GameObject FartPrefab;
 
     private float fartScale;
-    
-    //private void Awake()
-    //{
-    //    playerRigidBod = GetComponent<Rigidbody2D>();
-
-    //    Vector2 vectorCast = transform.up * 2;
-    //    myFist = Instantiate(
-    //        FistPrefab,
-    //        playerRigidBod.position + vectorCast,
-    //        Quaternion.identity);
-
-    //    Debug.Log("Player is awake");
-
-    //}
-
 
     public void Start() {
         GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
@@ -141,13 +126,10 @@ public class Player : MonoBehaviour
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
                                                               (transform.up * myFist.GetComponent<FistScript>().currentPosition);
 
-        if (myGameManager.State == GameState.CombatPhase && canTakeDamage != true)
+        
+        if (myGameManager.State != GameState.CombatPhase && hasFarted == true)
         {
-            canTakeDamage = true;
-        }
-        else if (myGameManager.State != GameState.CombatPhase && canTakeDamage == true)
-        {
-            canTakeDamage = false;
+            hasFarted = false;
         }
 
     }
@@ -163,17 +145,17 @@ public class Player : MonoBehaviour
             Quaternion.identity);
         fart.transform.localScale = new Vector3(fartScale,fartScale,1);
         Destroy(fart,0.6f);
+        this.hasFarted = true;
     }
     public void Punch()
     {
-        Debug.Log("Punch!");
         myFist.GetComponent<Collider2D>().enabled = true;
         myFist.GetComponent<FistScript>().PunchIt();      
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "FistPrefab(Clone)" && canTakeDamage)
+        if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
         {
             health -= damage;
             Debug.Log("AH I HAVE BEEN HIT for " + damage + " I only have " + health + " left");
