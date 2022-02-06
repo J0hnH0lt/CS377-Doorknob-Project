@@ -68,6 +68,8 @@ public class Player : MonoBehaviour
 
         playerRigidBod = GetComponent<Rigidbody2D>();
 
+        GameManager.Instance.AddPlayer(this);
+
         Vector2 vectorCast = transform.up * 2;
         myFist = Instantiate(
             FistPrefab,
