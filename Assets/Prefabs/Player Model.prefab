@@ -186,6 +186,7 @@ MonoBehaviour:
   health: 10
   damage: 1
   FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
+  FartPrefab: {fileID: 7254340360046970723, guid: 1445beed7aa794357919567014f9ef53, type: 3}
 --- !u!114 &6217668634034457969
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -44,6 +44,12 @@ public class Player : MonoBehaviour
 
     public GameObject FistPrefab;
 
+    private GameObject fart;
+
+    public GameObject FartPrefab;
+
+    private float fartScale;
+
     public void Start() {
         GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
@@ -100,10 +106,27 @@ public class Player : MonoBehaviour
         }
 
         fist.transform.position = this.gameObject.transform.position + (transform.up * 2);
+        if (fart) {
+            fartScale += 0.005f;
+            fart.transform.position = this.gameObject.transform.position;
+            fart.transform.localScale = new Vector3(fartScale,fartScale,1);
+        } else {
+            fartScale = 0.2f;
+        }
     }
+
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
 
+
+    public void OnFart() {
+        fart = Instantiate(
+            FartPrefab,
+            playerRigidBod.position,
+            Quaternion.identity);
+        fart.transform.localScale = new Vector3(fartScale,fartScale,1);
+        Destroy(fart,0.6f);
+    }
     public void Punch()
     {
         Debug.Log("Punch!");

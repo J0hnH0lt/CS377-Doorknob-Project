@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
 
         // GET A RANDOM PLAYER
         int random_player = UnityEngine.Random.Range(0, players.Count);
+        players[random_player].OnFart();
         Debug.Log("Player " + random_player + " is farting");
     }
 
