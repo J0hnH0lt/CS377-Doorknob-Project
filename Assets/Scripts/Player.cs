@@ -129,6 +129,7 @@ public class Player : MonoBehaviour
     public void Punch()
     {
         Debug.Log("Punch!");
+        myFist.GetComponent<Collider2D>().enabled = true;
         myFist.GetComponent<FistScript>().PunchIt();      
     }
 

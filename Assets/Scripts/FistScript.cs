@@ -6,11 +6,11 @@ public class FistScript : MonoBehaviour
 {
     public float currentPosition;
 
-    private float timeOfPunch;
-
     private float endOfPunchDuration;
 
     private float endOfPunchCoolDown;
+
+    private Collider2D myCollider;
 
 
     [SerializeField]
@@ -29,6 +29,10 @@ public class FistScript : MonoBehaviour
     void Start()
     {
         currentPosition = resting;
+
+        myCollider = this.GetComponent<Collider2D>();
+
+        myCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -40,7 +44,12 @@ public class FistScript : MonoBehaviour
         }
         else if(Time.time > endOfPunchDuration && currentPosition == reach)
         {
+            myCollider.enabled = false;
             currentPosition = resting;
+        }
+        else if (Time.time > endOfPunchDuration && myCollider.enabled)
+        {
+            myCollider.enabled = false;
         }
         
     }
@@ -56,7 +65,6 @@ public class FistScript : MonoBehaviour
             endOfPunchCoolDown = Time.time + punchCoolDown;
 
             endOfPunchDuration = Time.time + punchDuration;
-            //timeOfPunch = Time.time;
         }
     }       
 }
