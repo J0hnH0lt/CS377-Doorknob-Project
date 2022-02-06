@@ -57,13 +57,19 @@ public class Player : MonoBehaviour
 
     private float fartScale;
 
+    private int id;
+
     public void Start() {
         GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
 
         playerRigidBod = GetComponent<Rigidbody2D>();
 
+        id = FindObjectsOfType<Player>().Length;
+        Debug.Log("ID: " + id.ToString());
+
         GameManager.Instance.AddPlayer(this);
+        ScoreManager.Instance.AddPlayer(this.id, this.health);
 
         Vector2 vectorCast = transform.up * 2;
         myFist = Instantiate(
@@ -155,10 +161,20 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
         {
             health -= damage;
-            Debug.Log("AH I HAVE BEEN HIT for " + damage + " I only have " + health + " left");
+            if (health <= 0)
+            {
+       
+                ScoreManager.Instance.GameOver();
+                GameManager.Instance.UpdateGameState(GameState.GameOver);
+            }
+            else
+            {
+                ScoreManager.Instance.UpdateHealth(this.id, this.health);
+            }
         }
     }
 }

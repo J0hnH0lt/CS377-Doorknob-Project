@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
             case GameState.CombatPhase:
                 HandleFart();
                 break;
+            case GameState.GameOver:
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -101,4 +103,5 @@ public enum GameState {
     Menu,
     ItemPhase,
     CombatPhase,
+    GameOver
 }

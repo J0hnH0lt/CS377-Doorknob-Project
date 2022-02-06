@@ -56,11 +56,9 @@ public class FistScript : MonoBehaviour
 
     public void PunchIt()
     {
-        Debug.Log("Made it to PunchIt");
 
         if (Time.time > endOfPunchCoolDown)
         {
-            Debug.Log("Made it inside PunchIt");
 
             endOfPunchCoolDown = Time.time + punchCoolDown;
 
