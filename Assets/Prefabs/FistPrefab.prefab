@@ -112,3 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498f7d8e424162f4d8d13e063fd03aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPosition: 2
+  reach: 3
+  resting: 2
+  punchDuration: 0.1
+  punchCoolDown: 0.2

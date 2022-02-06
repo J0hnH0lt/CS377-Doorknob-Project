@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     public int damage;
 
+    [SerializeField]
+    public float punchDistance;
+
     private Vector2 movementInput;
     private bool dashEnabled;
     private float dashExpiration;
@@ -40,17 +43,33 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D playerRigidBod;
 
-    private GameObject fist;
+    private GameObject myFist;
 
     public GameObject FistPrefab;
+
+    //private void Awake()
+    //{
+    //    playerRigidBod = GetComponent<Rigidbody2D>();
+
+    //    Vector2 vectorCast = transform.up * 2;
+    //    myFist = Instantiate(
+    //        FistPrefab,
+    //        playerRigidBod.position + vectorCast,
+    //        Quaternion.identity);
+
+    //    Debug.Log("Player is awake");
+
+    //}
+
 
     public void Start() {
         GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
+
         playerRigidBod = GetComponent<Rigidbody2D>();
 
         Vector2 vectorCast = transform.up * 2;
-        fist = Instantiate(
+        myFist = Instantiate(
             FistPrefab,
             playerRigidBod.position + vectorCast,
             Quaternion.identity);
@@ -97,7 +116,10 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
-        fist.transform.position = this.gameObject.transform.position + (transform.up * 2);
+        // Position fist infront of player
+        myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
+                                                              (transform.up * myFist.GetComponent<FistScript>().currentPosition);
+
     }
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
@@ -105,6 +127,7 @@ public class Player : MonoBehaviour
     public void Punch()
     {
         Debug.Log("Punch!");
+        myFist.GetComponent<FistScript>().PunchIt();      
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -114,7 +137,6 @@ public class Player : MonoBehaviour
             health -= damage;
             Debug.Log("AH I HAVE BEEN HIT for " + damage + " I only have " + health + " left");
         }
-        //collision.otherCollider.health -= damage;
     }
 }
 
