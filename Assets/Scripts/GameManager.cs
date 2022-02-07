@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
-    private float minDoorSpawnTime = 7.0f;
-    private float maxDoorSpawnTime = 20.0f;
+    private float minDoorSpawnTime = 5.0f;
+    private float maxDoorSpawnTime = 15.0f;
     private float timer = 0.0f;
     private float nextTime;
 
