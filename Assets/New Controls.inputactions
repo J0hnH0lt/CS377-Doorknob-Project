@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Punch",
+                    "type": "Button",
+                    "id": "c416caac-5227-4cbf-9816-896bf1b62cbc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -30,7 +39,7 @@
                     "id": "7469e963-3276-479b-888c-f78fe9faabd0",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.2)",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -44,6 +53,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a93bab78-3518-4852-bd5a-3c0794566202",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Punch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
