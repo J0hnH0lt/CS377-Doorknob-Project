@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
         }
 
         if (fart) {
-            fartScale += 0.005f;
+            fartScale += 0.001f;
             fart.transform.position = this.gameObject.transform.position;
             fart.transform.localScale = new Vector3(fartScale,fartScale,1);
         } else {
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
             playerRigidBod.position,
             Quaternion.identity);
         fart.transform.localScale = new Vector3(fartScale,fartScale,1);
-        Destroy(fart,0.6f);
+        Destroy(fart,4f);
         this.hasFarted = true;
     }
     public void Punch()
