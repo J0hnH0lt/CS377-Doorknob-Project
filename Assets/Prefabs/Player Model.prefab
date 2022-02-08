@@ -180,7 +180,7 @@ MonoBehaviour:
   normalSpeed: 20
   dashSpeed: 60
   dashDuration: 0.14
-  dashCooldown: 2
+  dashCooldown: 1.2
   rotationSpeed: 600
   currSpeed: 20
   health: 10
