@@ -1,7 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -17,8 +18,13 @@ public class GameManager : MonoBehaviour
 
     private float minDoorSpawnTime = 3.0f;
     private float maxDoorSpawnTime = 10.0f;
-    private float timer = 0.0f;
-    private float nextTime;
+    private float doorTimer = 0.0f;
+    private float nextDoorTime;
+
+    private float gameOverTimer = 0.0f;
+    private float gameOverTime;
+
+    private 
 
     void Awake() {
         Instance = this;
@@ -41,9 +47,17 @@ public class GameManager : MonoBehaviour
             }
         }
         if (State == GameState.ItemPhase){
-            timer += Time.deltaTime;
-            if (timer >= nextTime) {
+            doorTimer += Time.deltaTime;
+            if (doorTimer >= nextDoorTime) {
                 UpdateGameState(GameState.CombatPhase);
+            }
+        }
+        if (State == GameState.GameOver)
+        {
+            gameOverTimer += Time.deltaTime;
+            if (gameOverTimer >= gameOverTime)
+            {
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }
@@ -61,6 +75,7 @@ public class GameManager : MonoBehaviour
                 HandleFart();
                 break;
             case GameState.GameOver:
+                HandleGameOver();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -75,8 +90,14 @@ public class GameManager : MonoBehaviour
 
     public void HandleItemPhase()
     {
-        timer = 0.0f;
-        nextTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
+        doorTimer = 0.0f;
+        nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
+    }
+
+    public void HandleGameOver()
+    {
+        gameOverTimer = 0.0f;
+        gameOverTime = 5.0f;
     }
 
     public void HandleFart() {
