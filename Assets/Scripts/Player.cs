@@ -59,27 +59,30 @@ public class Player : MonoBehaviour
 
     private int id;
 
-    public void Start() {
+    public Color randomColor;
 
-        Color randomColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-
-        GetComponent<Renderer>().material.color = randomColor;
-
+    public void Awake()
+    {
+        randomColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         playerRigidBod = GetComponent<Rigidbody2D>();
 
-        id = FindObjectsOfType<Player>().Length;
-        Debug.Log("ID: " + id.ToString());
-
-        GameManager.Instance.AddPlayer(this);
-        ScoreManager.Instance.AddPlayer(this.id, this.health);
-
         Vector2 vectorCast = transform.up;
+
         myFist = Instantiate(
             FistPrefab,
             playerRigidBod.position + vectorCast,
             Quaternion.identity);
         myFist.GetComponent<Renderer>().material.color = randomColor;
+        GetComponent<Renderer>().material.color = randomColor;
         myGameManager = GameManager.Instance;
+    }
+
+    public void Start() {
+        id = FindObjectsOfType<Player>().Length;
+        Debug.Log("ID: " + id.ToString());
+
+        GameManager.Instance.AddPlayer(this);
+        ScoreManager.Instance.AddPlayer(this.id, this.health);
     }
 
 
@@ -131,6 +134,7 @@ public class Player : MonoBehaviour
             fartScale = 0.2f;
         }
         // Position fist infront of player
+        // reduendant get component transform
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
                                                               (transform.up * myFist.GetComponent<FistScript>().currentPosition);
 
@@ -163,9 +167,13 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if (collision.gameObject == myFist.gameObject)
+        {
+            return;
+        }
         if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
         {
+            Debug.Log("Punch");
             health -= damage;
             if (health <= 0)
             {
