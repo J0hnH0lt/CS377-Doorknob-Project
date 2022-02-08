@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
-    private float minDoorSpawnTime = 5.0f;
-    private float maxDoorSpawnTime = 15.0f;
+    private float minDoorSpawnTime = 3.0f;
+    private float maxDoorSpawnTime = 10.0f;
     private float timer = 0.0f;
     private float nextTime;
 
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=2)
+            if (players.Count >=1)
             {
                 Debug.Log("Starting Game");
                 UpdateGameState(GameState.ItemPhase);
@@ -86,9 +86,26 @@ public class GameManager : MonoBehaviour
         Instantiate(doorPrefab, pos, Quaternion.identity);
 
         // GET A RANDOM PLAYER
-        int random_player = UnityEngine.Random.Range(0, players.Count);
-        players[random_player].OnFart();
-        Debug.Log("Player " + random_player + " is farting");
+        var healhList = new List<Tuple<int, Player>>();
+  
+        int random_sum = 0;
+        foreach (Player p in players) {
+            random_sum += p.health;
+            healhList.Add(Tuple.Create(random_sum, p));
+        }
+
+        int health_helper = UnityEngine.Random.Range(0, random_sum);
+
+        foreach (var tuple in healhList)
+        {
+            int chance = tuple.Item1;
+            Player player = tuple.Item2;
+            if (health_helper <= chance)
+            {
+                player.OnFart();
+                break;
+            }
+        }
     }
 
     public void AddPlayer(Player p){
