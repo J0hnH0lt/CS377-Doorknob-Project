@@ -20,7 +20,7 @@
                     "id": "2dec5ec5-2ee5-44b6-8e27-d766ab42b5b1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "Tap(duration=0.1)",
                     "initialStateCheck": true
                 },
                 {
@@ -29,8 +29,8 @@
                     "id": "c416caac-5227-4cbf-9816-896bf1b62cbc",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
-                    "initialStateCheck": false
+                    "interactions": "Tap(duration=0.1)",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [

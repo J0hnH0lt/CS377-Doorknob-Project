@@ -60,8 +60,10 @@ public class Player : MonoBehaviour
     private int id;
 
     public void Start() {
-        GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
+        Color randomColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
+        GetComponent<Renderer>().material.color = randomColor;
 
         playerRigidBod = GetComponent<Rigidbody2D>();
 
@@ -71,12 +73,12 @@ public class Player : MonoBehaviour
         GameManager.Instance.AddPlayer(this);
         ScoreManager.Instance.AddPlayer(this.id, this.health);
 
-        Vector2 vectorCast = transform.up * 2;
+        Vector2 vectorCast = transform.up;
         myFist = Instantiate(
             FistPrefab,
             playerRigidBod.position + vectorCast,
             Quaternion.identity);
-
+        myFist.GetComponent<Renderer>().material.color = randomColor;
         myGameManager = GameManager.Instance;
     }
 
@@ -156,7 +158,7 @@ public class Player : MonoBehaviour
     public void Punch()
     {
         myFist.GetComponent<Collider2D>().enabled = true;
-        myFist.GetComponent<FistScript>().PunchIt();      
+        myFist.GetComponent<FistScript>().PunchIt();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
