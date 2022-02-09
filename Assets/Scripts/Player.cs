@@ -59,11 +59,11 @@ public class Player : MonoBehaviour
 
     private int id;
 
-    public Color randomColor;
+    public Color playerColor;
 
     public void Awake()
     {
-        randomColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         playerRigidBod = GetComponent<Rigidbody2D>();
 
         Vector2 vectorCast = transform.up;
@@ -72,8 +72,8 @@ public class Player : MonoBehaviour
             FistPrefab,
             playerRigidBod.position + vectorCast,
             Quaternion.identity);
-        myFist.GetComponent<Renderer>().material.color = randomColor;
-        GetComponent<Renderer>().material.color = randomColor;
+        myFist.GetComponent<Renderer>().material.color = playerColor;
+        GetComponent<Renderer>().material.color = playerColor;
         myGameManager = GameManager.Instance;
     }
 
@@ -82,7 +82,8 @@ public class Player : MonoBehaviour
         Debug.Log("ID: " + id.ToString());
 
         GameManager.Instance.AddPlayer(this);
-        ScoreManager.Instance.AddPlayer(this.id, this.health);
+        ScoreManager.Instance.AddPlayer(this.id, this.playerColor, this.health);
+
     }
 
 
@@ -165,6 +166,7 @@ public class Player : MonoBehaviour
         myFist.GetComponent<FistScript>().PunchIt();
     }
 
+    // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == myFist.gameObject)
@@ -183,7 +185,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                ScoreManager.Instance.UpdateHealth(this.id, this.health);
+                ScoreManager.Instance.updatePlayerHealth(this.id, this.health);
             }
         }
     }

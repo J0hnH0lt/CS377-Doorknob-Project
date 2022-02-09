@@ -40,10 +40,10 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=1)
+            if (players.Count >=2)
             {
-                Debug.Log("Starting Game");
                 UpdateGameState(GameState.ItemPhase);
+                ScoreManager.Instance.GameRunning();
             }
         }
         if (State == GameState.ItemPhase){
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandleFart() {
-        Debug.Log("Ayo We Farting Lads");
+        //Debug.Log("Ayo We Farting Lads");
         // SPAWN A DOOR IN A RANDOM LOCATION
         Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
         Instantiate(doorPrefab, pos, Quaternion.identity);
