@@ -1,7 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -15,10 +16,15 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
-    private float minDoorSpawnTime = 5.0f;
-    private float maxDoorSpawnTime = 15.0f;
-    private float timer = 0.0f;
-    private float nextTime;
+    private float minDoorSpawnTime = 3.0f;
+    private float maxDoorSpawnTime = 7.0f;
+    private float doorTimer = 0.0f;
+    private float nextDoorTime;
+
+    private float gameOverTimer = 0.0f;
+    private float gameOverTime;
+
+    private 
 
     void Awake() {
         Instance = this;
@@ -36,14 +42,22 @@ public class GameManager : MonoBehaviour
         {
             if (players.Count >=2)
             {
-                Debug.Log("Starting Game");
                 UpdateGameState(GameState.ItemPhase);
+                ScoreManager.Instance.GameRunning();
             }
         }
         if (State == GameState.ItemPhase){
-            timer += Time.deltaTime;
-            if (timer >= nextTime) {
+            doorTimer += Time.deltaTime;
+            if (doorTimer >= nextDoorTime) {
                 UpdateGameState(GameState.CombatPhase);
+            }
+        }
+        if (State == GameState.GameOver)
+        {
+            gameOverTimer += Time.deltaTime;
+            if (gameOverTimer >= gameOverTime)
+            {
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }
@@ -61,6 +75,7 @@ public class GameManager : MonoBehaviour
                 HandleFart();
                 break;
             case GameState.GameOver:
+                HandleGameOver();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -75,20 +90,43 @@ public class GameManager : MonoBehaviour
 
     public void HandleItemPhase()
     {
-        timer = 0.0f;
-        nextTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
+        doorTimer = 0.0f;
+        nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
+    }
+
+    public void HandleGameOver()
+    {
+        gameOverTimer = 0.0f;
+        gameOverTime = 5.0f;
     }
 
     public void HandleFart() {
-        Debug.Log("Ayo We Farting Lads");
+        //Debug.Log("Ayo We Farting Lads");
         // SPAWN A DOOR IN A RANDOM LOCATION
         Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
         Instantiate(doorPrefab, pos, Quaternion.identity);
 
         // GET A RANDOM PLAYER
-        int random_player = UnityEngine.Random.Range(0, players.Count);
-        players[random_player].OnFart();
-        Debug.Log("Player " + random_player + " is farting");
+        var healhList = new List<Tuple<int, Player>>();
+  
+        int random_sum = 0;
+        foreach (Player p in players) {
+            random_sum += p.health;
+            healhList.Add(Tuple.Create(random_sum, p));
+        }
+
+        int health_helper = UnityEngine.Random.Range(0, random_sum);
+
+        foreach (var tuple in healhList)
+        {
+            int chance = tuple.Item1;
+            Player player = tuple.Item2;
+            if (health_helper <= chance)
+            {
+                player.OnFart();
+                break;
+            }
+        }
     }
 
     public void AddPlayer(Player p){

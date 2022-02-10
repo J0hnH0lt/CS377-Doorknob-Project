@@ -59,25 +59,31 @@ public class Player : MonoBehaviour
 
     private int id;
 
-    public void Start() {
-        GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+    public Color playerColor;
 
-
+    public void Awake()
+    {
+        playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         playerRigidBod = GetComponent<Rigidbody2D>();
 
-        id = FindObjectsOfType<Player>().Length;
-        Debug.Log("ID: " + id.ToString());
+        Vector2 vectorCast = transform.up;
 
-        GameManager.Instance.AddPlayer(this);
-        ScoreManager.Instance.AddPlayer(this.id, this.health);
-
-        Vector2 vectorCast = transform.up * 2;
         myFist = Instantiate(
             FistPrefab,
             playerRigidBod.position + vectorCast,
             Quaternion.identity);
-
+        myFist.GetComponent<Renderer>().material.color = playerColor;
+        GetComponent<Renderer>().material.color = playerColor;
         myGameManager = GameManager.Instance;
+    }
+
+    public void Start() {
+        id = FindObjectsOfType<Player>().Length;
+        Debug.Log("ID: " + id.ToString());
+
+        GameManager.Instance.AddPlayer(this);
+        ScoreManager.Instance.AddPlayer(this.id, this.playerColor, this.health);
+
     }
 
 
@@ -122,13 +128,14 @@ public class Player : MonoBehaviour
         }
 
         if (fart) {
-            fartScale += 0.005f;
+            fartScale += 0.001f;
             fart.transform.position = this.gameObject.transform.position;
             fart.transform.localScale = new Vector3(fartScale,fartScale,1);
         } else {
             fartScale = 0.2f;
         }
         // Position fist infront of player
+        // reduendant get component transform
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
                                                               (transform.up * myFist.GetComponent<FistScript>().currentPosition);
 
@@ -150,20 +157,25 @@ public class Player : MonoBehaviour
             playerRigidBod.position,
             Quaternion.identity);
         fart.transform.localScale = new Vector3(fartScale,fartScale,1);
-        Destroy(fart,0.6f);
+        Destroy(fart,4f);
         this.hasFarted = true;
     }
     public void Punch()
     {
         myFist.GetComponent<Collider2D>().enabled = true;
-        myFist.GetComponent<FistScript>().PunchIt();      
+        myFist.GetComponent<FistScript>().PunchIt();
     }
 
+    // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if (collision.gameObject == myFist.gameObject)
+        {
+            return;
+        }
         if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
         {
+            Debug.Log("Punch");
             health -= damage;
             if (health <= 0)
             {
@@ -173,7 +185,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                ScoreManager.Instance.UpdateHealth(this.id, this.health);
+                ScoreManager.Instance.updatePlayerHealth(this.id, this.health);
             }
         }
     }

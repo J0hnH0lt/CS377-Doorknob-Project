@@ -22,7 +22,7 @@ public class Door : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Player>().hasFarted)
         {
-            Debug.Log("Aye you did it you little freak ahahah UwU XD");
+            //Debug.Log("Aye you did it you little freak ahahah UwU XD");
             GM.UpdateGameState(GameState.ItemPhase);
             Destroy(this.gameObject);
         }

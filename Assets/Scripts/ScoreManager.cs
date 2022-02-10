@@ -6,45 +6,71 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    Dictionary<int, int> dict = new Dictionary<int, int>();
+    Dictionary<int, Text> playerTextDictionary = new Dictionary<int, Text>();
+    Dictionary<int, int> playerToHealthDictionary = new Dictionary<int, int>();
 
     public static ScoreManager Instance;
 
-    public Text HealthText;
+    public Text Player1Text;
+
+    public Text Player2Text;
+
+    public Text GameText;
+
+    // really booty implementation but idrgaf... its temp
+    private bool player1Added = false;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void AddPlayer(int id, int health)
+    public void AddPlayer(int id, Color playerColor, int health)
     {
-        dict.Add(id, health);
-        updateHealthText();
-    }
-
-    public void UpdateHealth(int id, int health)
-    {
-        dict[id] = health;
-        updateHealthText();
-    }
-
-    public void updateHealthText()
-    {
-        if( dict.Count >= 2)
+        if (!player1Added)
         {
-            string temp = "";
-            foreach (KeyValuePair<int, int> entry in dict)
-            {
-                temp += "Player " + entry.Key.ToString() + ": " + entry.Value.ToString() + " HP \t\t";
-            }
-            HealthText.text = temp.Trim();
+            Player1Text.color = playerColor;
+            playerTextDictionary.Add(id, Player1Text);
+            playerToHealthDictionary.Add(id, health);
+            player1Added = true;
+            updateHealthText(id);
+            return;
         }
- 
+        else
+        {
+            Player2Text.color = playerColor;
+            playerTextDictionary.Add(id, Player2Text);
+            playerToHealthDictionary.Add(id, health);
+            updateHealthText(id);
+        }
+    }
+
+
+    public void updateHealthText(int id)
+    {
+        playerTextDictionary[id].text = "HP: " + playerToHealthDictionary[id].ToString();
+    }
+
+    public void updatePlayerHealth(int id, int health)
+    {
+        playerToHealthDictionary[id] = health;
+        updateHealthText(id);
+    }
+
+    public void StartUp()
+    {
+        GameText.text = "Press X to Join";
+    }
+
+    public void GameRunning()
+    {
+        GameText.text = "";
     }
 
     public void GameOver()
     {
-        HealthText.text = "Game Over";
+        GameText.text = "Game Over";
     }
+
+    
 }
