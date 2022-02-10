@@ -48,7 +48,7 @@ public class ScoreManager : MonoBehaviour
 
     public void updateHealthText(int id)
     {
-        playerTextDictionary[id].text = playerToHealthDictionary[id].ToString();
+        playerTextDictionary[id].text = "HP: " + playerToHealthDictionary[id].ToString();
     }
 
     public void updatePlayerHealth(int id, int health)
