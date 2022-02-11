@@ -47,6 +47,10 @@ public class Player : MonoBehaviour
 
     private GameObject myFist;
 
+    public GameObject myHealthBar;
+
+    public GameObject HealthBarPrefab;
+
     public GameObject FistPrefab;
 
     private GameManager myGameManager;
@@ -63,7 +67,7 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
-        playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f);
         playerRigidBod = GetComponent<Rigidbody2D>();
 
         Vector2 vectorCast = transform.up;
@@ -73,7 +77,18 @@ public class Player : MonoBehaviour
             playerRigidBod.position + vectorCast,
             Quaternion.identity);
         myFist.GetComponent<Renderer>().material.color = playerColor;
+
+        myHealthBar = Instantiate(
+           HealthBarPrefab,
+           playerRigidBod.position,
+           transform.rotation);
+
+        myHealthBar.GetComponent<Transform>().transform.position = this.gameObject.transform.position + Vector3.down * 2f;
+
+        
         GetComponent<Renderer>().material.color = playerColor;
+
+
         myGameManager = GameManager.Instance;
     }
 
@@ -139,7 +154,10 @@ public class Player : MonoBehaviour
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
                                                               (transform.up * myFist.GetComponent<FistScript>().currentPosition);
 
-        
+
+        myHealthBar.GetComponent<Transform>().transform.position = this.gameObject.transform.position + Vector3.down * 2f;
+
+
         if (myGameManager.State != GameState.CombatPhase && hasFarted == true)
         {
             hasFarted = false;

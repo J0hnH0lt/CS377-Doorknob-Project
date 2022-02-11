@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6591056488371857785}
   - component: {fileID: -1202883380981627210}
   m_Layer: 0
-  m_Name: Player Model
+  m_Name: BodyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7a8da84a3ec3a4a54a2b70c2b067c95a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea59f477a2e1946af8d5cbb70ab00d2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -187,8 +187,11 @@ MonoBehaviour:
   damage: 1
   punchDistance: 0
   hasFarted: 0
+  myHealthBar: {fileID: 0}
+  HealthBarPrefab: {fileID: 288946899378578971, guid: 839901aaad78f4dc69ca2ef3fac4d351, type: 3}
   FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
   FartPrefab: {fileID: 7254340360046970723, guid: 1445beed7aa794357919567014f9ef53, type: 3}
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &6217668634034457969
 MonoBehaviour:
   m_ObjectHideFlags: 0
