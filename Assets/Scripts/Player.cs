@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {   
@@ -88,6 +89,8 @@ public class Player : MonoBehaviour
         
         GetComponent<Renderer>().material.color = playerColor;
 
+        GetComponentInChildren<Image>().fillAmount = 1f;
+
 
         myGameManager = GameManager.Instance;
     }
@@ -104,13 +107,13 @@ public class Player : MonoBehaviour
 
     public void Dash() {
         if (Time.time > dashCooldownExpiration) {
-      
             dashEnabled = true;
             dashExpiration = Time.time + dashDuration;
             dashCooldownExpiration = Time.time + dashCooldown;
             currSpeed = dashSpeed;
             dashX = movementInput.x;
             dashY = movementInput.y;
+            StartCoroutine(DashImageLerp());
         }
     }
 
@@ -205,6 +208,19 @@ public class Player : MonoBehaviour
             {
                 ScoreManager.Instance.updatePlayerHealth(this.id, this.health);
             }
+        }
+    }
+
+    private IEnumerator DashImageLerp()
+    {
+        Image fillImage = GetComponentInChildren<Image>();
+        float startTime = Time.time;
+        float timeElapsed = (Time.time - startTime) / dashCooldown;
+        while(timeElapsed < 1f)
+        {
+            timeElapsed = (Time.time - startTime) / dashCooldown;
+            fillImage.fillAmount = Mathf.Lerp(0f, 1f, timeElapsed);
+            yield return null;
         }
     }
 }
