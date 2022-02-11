@@ -96,8 +96,6 @@ public class Player : MonoBehaviour
         Debug.Log("ID: " + id.ToString());
 
         GameManager.Instance.AddPlayer(this);
-        ScoreManager.Instance.AddPlayer(this.id, this.playerColor, this.health);
-
     }
 
 
@@ -193,15 +191,11 @@ public class Player : MonoBehaviour
         if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
         {
             health -= damage;
-            if (health <= 0)
+            myHealthBar.fillAmount -= 0.1f;
+            if (health == 0)
             {
-                ScoreManager.Instance.GameOver();
+                GameTextManager.Instance.GameOver();
                 GameManager.Instance.UpdateGameState(GameState.GameOver);
-            }
-            else
-            {
-                ScoreManager.Instance.updatePlayerHealth(id, health);
-                myHealthBar.fillAmount -= 0.1f;
             }
         }
     }

@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             if (players.Count >=2)
             {
                 UpdateGameState(GameState.ItemPhase);
-                ScoreManager.Instance.GameRunning();
+                GameTextManager.Instance.GameRunning();
             }
         }
         if (State == GameState.ItemPhase){
