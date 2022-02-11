@@ -104,7 +104,9 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Ayo We Farting Lads");
         // SPAWN A DOOR IN A RANDOM LOCATION
         Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-        Instantiate(doorPrefab, pos, Quaternion.identity);
+        GameObject door = Instantiate(doorPrefab, pos, Quaternion.identity);
+
+        
 
         // GET A RANDOM PLAYER
         var healhList = new List<Tuple<int, Player>>();
@@ -123,6 +125,7 @@ public class GameManager : MonoBehaviour
             Player player = tuple.Item2;
             if (health_helper <= chance)
             {
+                door.GetComponent<Renderer>().material.color = player.GetComponent<Renderer>().material.color;
                 player.OnFart();
                 break;
             }
