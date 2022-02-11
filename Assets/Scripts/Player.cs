@@ -48,15 +48,17 @@ public class Player : MonoBehaviour
 
     private GameObject myFist;
 
-    public GameObject myHealthBar;
+    private GameObject myUI;
 
-    public GameObject HealthBarPrefab;
+    private Image myHealthBar;
 
-    public GameObject FistPrefab;
+    private Image myDashIndicator;
 
     private GameManager myGameManager;
 
     private GameObject fart;
+
+    public GameObject FistPrefab;
 
     public GameObject FartPrefab;
 
@@ -66,31 +68,25 @@ public class Player : MonoBehaviour
 
     public Color playerColor;
 
+    
+
     public void Awake()
     {
         playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f);
         playerRigidBod = GetComponent<Rigidbody2D>();
 
-        Vector2 vectorCast = transform.up;
-
+        myUI = gameObject.transform.GetChild(0).gameObject;
         myFist = Instantiate(
             FistPrefab,
-            playerRigidBod.position + vectorCast,
+            playerRigidBod.position,
             Quaternion.identity);
-        myFist.GetComponent<Renderer>().material.color = playerColor;
 
-        myHealthBar = Instantiate(
-           HealthBarPrefab,
-           playerRigidBod.position,
-           transform.rotation);
-
-        myHealthBar.GetComponent<Transform>().transform.position = this.gameObject.transform.position + Vector3.down * 2f;
+        myDashIndicator = myUI.transform.GetChild(0).gameObject.GetComponent<Image>();
+        myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
 
         
         GetComponent<Renderer>().material.color = playerColor;
-
-        GetComponentInChildren<Image>().fillAmount = 1f;
-
+        myFist.GetComponent<Renderer>().material.color = playerColor;
 
         myGameManager = GameManager.Instance;
     }
@@ -155,10 +151,8 @@ public class Player : MonoBehaviour
         // Position fist infront of player
         // reduendant get component transform
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
-                                                              (transform.up * myFist.GetComponent<FistScript>().currentPosition);
-
-
-        myHealthBar.GetComponent<Transform>().transform.position = this.gameObject.transform.position + Vector3.down * 2f;
+                                                              (transform.up * 1.2f * myFist.GetComponent<FistScript>().currentPosition);
+        myUI.GetComponent<Transform>().transform.eulerAngles = new Vector3(0,0,0);
 
 
         if (myGameManager.State != GameState.CombatPhase && hasFarted == true)
@@ -190,36 +184,36 @@ public class Player : MonoBehaviour
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        Debug.Log(collision.gameObject);
         if (collision.gameObject == myFist.gameObject)
         {
             return;
         }
         if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
         {
-            Debug.Log("Punch");
             health -= damage;
             if (health <= 0)
             {
-       
                 ScoreManager.Instance.GameOver();
                 GameManager.Instance.UpdateGameState(GameState.GameOver);
             }
             else
             {
-                ScoreManager.Instance.updatePlayerHealth(this.id, this.health);
+                ScoreManager.Instance.updatePlayerHealth(id, health);
+                myHealthBar.fillAmount -= 0.1f;
             }
         }
     }
 
     private IEnumerator DashImageLerp()
     {
-        Image fillImage = GetComponentInChildren<Image>();
         float startTime = Time.time;
         float timeElapsed = (Time.time - startTime) / dashCooldown;
         while(timeElapsed < 1f)
         {
             timeElapsed = (Time.time - startTime) / dashCooldown;
-            fillImage.fillAmount = Mathf.Lerp(0f, 1f, timeElapsed);
+            myDashIndicator.fillAmount = Mathf.Lerp(1f, 0f, timeElapsed);
             yield return null;
         }
     }
