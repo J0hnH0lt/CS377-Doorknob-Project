@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
     public Color playerColor;
 
-    
+    public TrailRenderer fartTrail;
 
     public void Awake()
     {
@@ -89,6 +89,9 @@ public class Player : MonoBehaviour
         myFist.GetComponent<Renderer>().material.color = playerColor;
 
         myGameManager = GameManager.Instance;
+
+        // Get the fart trail;
+        fartTrail = GetComponent<TrailRenderer>();
     }
 
     public void Start() {
@@ -165,12 +168,7 @@ public class Player : MonoBehaviour
 
 
     public void OnFart() {
-        fart = Instantiate(
-            FartPrefab,
-            playerRigidBod.position,
-            Quaternion.identity);
-        fart.transform.localScale = new Vector3(fartScale,fartScale,1);
-        Destroy(fart,4f);
+        fartTrail.enabled = true;
         this.hasFarted = true;
     }
     public void Punch()

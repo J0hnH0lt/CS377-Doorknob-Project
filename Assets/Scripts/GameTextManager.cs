@@ -10,9 +10,6 @@ public class GameTextManager : MonoBehaviour
 
     public Text GameText;
 
-    // really booty implementation but idrgaf... its temp
-    private bool player1Added = false;
-
     private void Awake()
     {
         Instance = this;
