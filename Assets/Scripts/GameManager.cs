@@ -10,9 +10,13 @@ public class GameManager : MonoBehaviour
 
     private List<Player> players = new List<Player>();
 
+    private List<GameObject> obstacleList = new List<GameObject>();
+
     public GameState State;
 
     public GameObject doorPrefab;
+
+    public GameObject randomObstaclePrefab;
 
     public static event Action<GameState> OnGameStateChanged;
 
@@ -106,7 +110,25 @@ public class GameManager : MonoBehaviour
         Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
         GameObject door = Instantiate(doorPrefab, pos, Quaternion.identity);
 
-        
+
+
+        var numObstacles = obstacleList.Count;
+        for (int i = 0; i < numObstacles; i++)
+        {
+            Destroy(obstacleList[i]);
+        }
+        obstacleList = new List<GameObject>();
+        Debug.Log(obstacleList.Count);
+
+        var randomLen = UnityEngine.Random.Range(0, 10);
+
+        for (int i = 0; i < randomLen; i++)
+        {
+            Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
+            obstacleList.Add(Instantiate(randomObstaclePrefab, randomPos, Quaternion.identity));
+            obstacleList[i].transform.localScale = new Vector3(UnityEngine.Random.Range(1, 10), UnityEngine.Random.Range(1, 10), 1);
+        }
+
 
         // GET A RANDOM PLAYER
         var healhList = new List<Tuple<int, Player>>();
