@@ -125,8 +125,13 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < randomLen; i++)
         {
             Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-            obstacleList.Add(Instantiate(randomObstaclePrefab, randomPos, Quaternion.identity));
-            obstacleList[i].transform.localScale = new Vector3(UnityEngine.Random.Range(1, 10), UnityEngine.Random.Range(1, 10), 1);
+            if(Physics2D.OverlapCircleAll(randomPos, 15f).Length == 0)
+            {
+                obstacleList.Add(Instantiate(randomObstaclePrefab, randomPos, Quaternion.identity));
+            } else
+            {
+                Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
+            }
         }
 
 

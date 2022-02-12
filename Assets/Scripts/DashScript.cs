@@ -53,6 +53,7 @@ public class DashScript : MonoBehaviour
             dashCooldownExpiration = Time.time + dashCooldown;
             dashEnabled = true;
             GetComponent<Player>().currSpeed = dashSpeed;
+            StartCoroutine(DashImageLerp());
         }
     }
 
