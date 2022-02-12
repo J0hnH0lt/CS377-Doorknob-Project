@@ -24,9 +24,10 @@ public class Door : MonoBehaviour
         if (p.hasFarted)
         {
             //Debug.Log("Aye you did it you little freak ahahah UwU XD");
-            p.fartTrail.enabled = false;
+            //p.fartTrail.enabled = false;
             GM.UpdateGameState(GameState.ItemPhase);
             Destroy(this.gameObject);
+            p.DisableTrailSlow();
         }
         
     }
