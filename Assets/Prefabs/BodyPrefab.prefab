@@ -300,7 +300,8 @@ MonoBehaviour:
   FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
   FartPrefab: {fileID: 7254340360046970723, guid: 1445beed7aa794357919567014f9ef53, type: 3}
   playerColor: {r: 0, g: 0, b: 0, a: 0}
-  fartTrail: {fileID: 0}
+  trailRendererObjectPrefab: {fileID: 6677122055893577354, guid: b2bd2e0944ab844c9a8aecf42327b2ec, type: 3}
+  trailRenderObject: {fileID: 0}
 --- !u!114 &6217668634034457969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,8 +409,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.015583038
+        value: 0.0930233
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -417,8 +418,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.45712632
-        value: 0.50575876
+        time: 0.47270554
+        value: 0.8371568
         inSlope: -1.7291926
         outSlope: -1.7291926
         tangentMode: 0
@@ -426,8 +427,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8623614
-        value: 0
+        time: 0.81820244
+        value: 0.5406952
         inSlope: 0
         outSlope: 0
         tangentMode: 0

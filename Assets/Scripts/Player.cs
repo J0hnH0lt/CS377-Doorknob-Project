@@ -68,7 +68,16 @@ public class Player : MonoBehaviour
 
     public Color playerColor;
 
-    public TrailRenderer fartTrail;
+    // FART TRAIL STUFFS
+
+    public GameObject trailRendererObjectPrefab;
+
+    public GameObject trailRenderObject;
+
+    public bool fartTrailActive;
+
+    Vector3 trailVectorPosition;
+
 
     public void Awake()
     {
@@ -89,9 +98,6 @@ public class Player : MonoBehaviour
         myFist.GetComponent<Renderer>().material.color = playerColor;
 
         myGameManager = GameManager.Instance;
-
-        // Get the fart trail;
-        fartTrail = GetComponent<TrailRenderer>();
     }
 
     public void Start() {
@@ -161,16 +167,24 @@ public class Player : MonoBehaviour
             hasFarted = false;
         }
 
+        if (fartTrailActive == true)
+        {
+            trailVectorPosition = gameObject.transform.position;
+            trailRenderObject.transform.position = trailVectorPosition;
+        }
+
     }
 
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
 
-
     public void OnFart() {
-        fartTrail.enabled = true;
+        fartTrailActive = true;
+        trailRenderObject = Instantiate(trailRendererObjectPrefab, playerRigidBod.position, Quaternion.identity);
+        trailVectorPosition = gameObject.transform.position;
         this.hasFarted = true;
     }
+
     public void Punch()
     {
         myFist.GetComponent<Collider2D>().enabled = true;
@@ -209,5 +223,24 @@ public class Player : MonoBehaviour
             yield return null;
         }
     }
+
+    public void DisableTrailSlow()
+    {
+        StartCoroutine(SlowTrailDisable());
+    }
+
+    IEnumerator SlowTrailDisable()
+    {
+        var trail = trailRenderObject.GetComponent<TrailRenderer>();
+        float rate = trail.time / 30f;
+        while (trail.time > 0)
+        {
+            trail.time -= rate;
+            yield return 0;
+        }
+        fartTrailActive = false;
+        Destroy(trailRenderObject);
+    }
 }
+
 
