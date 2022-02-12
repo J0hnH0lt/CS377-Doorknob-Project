@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: -1202883380981627210}
   - component: {fileID: 7818853538716996352}
   - component: {fileID: 2934535439559572969}
+  - component: {fileID: 2398530813345527362}
   m_Layer: 0
   m_Name: BodyPrefab
   m_TagString: Untagged
@@ -240,8 +241,8 @@ MonoBehaviour:
     m_ActionName: Player 1/Move[/SwitchProControllerHID/leftStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -7987678491945690685}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: 2398530813345527362}
+        m_TargetAssemblyTypeName: DashScript, Assembly-CSharp
         m_MethodName: Dash
         m_Mode: 1
         m_Arguments:
@@ -287,12 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc16aa5956214ce6b78ffe260c3e2c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 20
-  dashSpeed: 60
-  dashDuration: 0.14
-  dashCooldown: 1.2
-  rotationSpeed: 600
-  currSpeed: 20
+  currSpeed: 25
   health: 10
   damage: 1
   punchDistance: 0
@@ -302,6 +298,7 @@ MonoBehaviour:
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   trailRendererObjectPrefab: {fileID: 6677122055893577354, guid: b2bd2e0944ab844c9a8aecf42327b2ec, type: 3}
   trailRenderObject: {fileID: 0}
+  fartTrailActive: 0
 --- !u!114 &6217668634034457969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +482,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &2398530813345527362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5057145181192831592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be18d89830954885929a7b5ba6d15a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashSpeed: 100
+  normalSpeed: 25
+  dashDuration: 0.1
+  dashCooldown: 1.8
 --- !u!1 &7188367832598370139
 GameObject:
   m_ObjectHideFlags: 0
