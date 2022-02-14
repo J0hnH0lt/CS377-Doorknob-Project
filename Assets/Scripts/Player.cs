@@ -2,26 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {   
     [SerializeField]
-    private float normalSpeed;
-
-    [SerializeField]
-    private float dashSpeed;
-
-    [SerializeField]
-    private float dashDuration;
-
-    [SerializeField]
-    private float dashCooldown;
-
-    [SerializeField]
-    private float rotationSpeed;
-
-    [SerializeField]
-    private float currSpeed;
+    public float currSpeed;
 
     [SerializeField]
     public int health;
@@ -33,47 +19,55 @@ public class Player : MonoBehaviour
     public float punchDistance;
 
     private Vector2 movementInput;
-    private bool dashEnabled;
-    private float dashExpiration;
-
-    private float dashX;
-    private float dashY;
 
     public bool hasFarted;
-
-    private float dashCooldownExpiration;
 
     private Rigidbody2D playerRigidBod;
 
     private GameObject myFist;
 
-    public GameObject FistPrefab;
+    private GameObject myUI;
+
+    private Image myHealthBar;
 
     private GameManager myGameManager;
 
-    private GameObject fart;
+    public GameObject FistPrefab;
 
     public GameObject FartPrefab;
-
-    private float fartScale;
 
     private int id;
 
     public Color playerColor;
 
+    // FART TRAIL STUFFS
+
+    public GameObject trailRendererObjectPrefab;
+
+    public GameObject trailRenderObject;
+
+    public bool fartTrailActive;
+
+    Vector3 trailVectorPosition;
+
+
     public void Awake()
     {
-        playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f);
         playerRigidBod = GetComponent<Rigidbody2D>();
 
-        Vector2 vectorCast = transform.up;
-
+        myUI = gameObject.transform.GetChild(0).gameObject;
         myFist = Instantiate(
             FistPrefab,
-            playerRigidBod.position + vectorCast,
+            playerRigidBod.position,
             Quaternion.identity);
-        myFist.GetComponent<Renderer>().material.color = playerColor;
+
+        myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
+
+        
         GetComponent<Renderer>().material.color = playerColor;
+        myFist.GetComponent<Renderer>().material.color = playerColor;
+
         myGameManager = GameManager.Instance;
     }
 
@@ -82,84 +76,49 @@ public class Player : MonoBehaviour
         Debug.Log("ID: " + id.ToString());
 
         GameManager.Instance.AddPlayer(this);
-        ScoreManager.Instance.AddPlayer(this.id, this.playerColor, this.health);
-
-    }
-
-
-    public void Dash() {
-        if (Time.time > dashCooldownExpiration) {
-      
-            dashEnabled = true;
-            dashExpiration = Time.time + dashDuration;
-            dashCooldownExpiration = Time.time + dashCooldown;
-            currSpeed = dashSpeed;
-            dashX = movementInput.x;
-            dashY = movementInput.y;
-        }
-    }
-
-    public void UpdateDash() {
-        if (Time.time > dashExpiration) {
-            dashEnabled = false;
-            currSpeed = normalSpeed;
-        }
     }
 
     public void Update()
     {
-        Vector2 movementDirection;
 
-        if (dashEnabled) {
-            movementDirection = new Vector2(dashX, dashY).normalized;
-            UpdateDash();
-        } else {
-            movementDirection = new Vector2(movementInput.x, movementInput.y).normalized;
-        }
+        playerRigidBod.velocity = new Vector3(movementInput.x, movementInput.y, 0) * currSpeed;
 
-        float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
-
-        transform.Translate(movementDirection * currSpeed * inputMagnitude * Time.deltaTime, Space.World);
-
-        if (movementDirection != Vector2.zero)
+        if (movementInput.x + movementInput.y != 0)
         {
-            Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(-playerRigidBod.velocity.x, playerRigidBod.velocity.y) * Mathf.Rad2Deg, Vector3.forward);
+        } else
+        {
+            playerRigidBod.angularVelocity = 0;
         }
+    
 
-        if (fart) {
-            fartScale += 0.001f;
-            fart.transform.position = this.gameObject.transform.position;
-            fart.transform.localScale = new Vector3(fartScale,fartScale,1);
-        } else {
-            fartScale = 0.2f;
-        }
-        // Position fist infront of player
-        // reduendant get component transform
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
-                                                              (transform.up * myFist.GetComponent<FistScript>().currentPosition);
+                                                              (transform.up * 1.2f * myFist.GetComponent<FistScript>().currentPosition);
+        myUI.GetComponent<Transform>().transform.eulerAngles = new Vector3(0,0,0);
 
-        
+
         if (myGameManager.State != GameState.CombatPhase && hasFarted == true)
         {
             hasFarted = false;
         }
 
-    }
+        if (fartTrailActive == true)
+        {
+            trailVectorPosition = gameObject.transform.position;
+            trailRenderObject.transform.position = trailVectorPosition;
+        }
 
+    }
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
 
-
     public void OnFart() {
-        fart = Instantiate(
-            FartPrefab,
-            playerRigidBod.position,
-            Quaternion.identity);
-        fart.transform.localScale = new Vector3(fartScale,fartScale,1);
-        Destroy(fart,4f);
+        fartTrailActive = true;
+        trailRenderObject = Instantiate(trailRendererObjectPrefab, playerRigidBod.position, Quaternion.identity);
+        trailVectorPosition = gameObject.transform.position;
         this.hasFarted = true;
     }
+
     public void Punch()
     {
         myFist.GetComponent<Collider2D>().enabled = true;
@@ -169,25 +128,44 @@ public class Player : MonoBehaviour
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color)
+        {
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
         if (collision.gameObject == myFist.gameObject)
         {
             return;
         }
         if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
         {
-            Debug.Log("Punch");
             health -= damage;
-            if (health <= 0)
+            myHealthBar.fillAmount -= 0.1f;
+            if (health == 0)
             {
-       
-                ScoreManager.Instance.GameOver();
+                GameTextManager.Instance.GameOver();
                 GameManager.Instance.UpdateGameState(GameState.GameOver);
-            }
-            else
-            {
-                ScoreManager.Instance.updatePlayerHealth(this.id, this.health);
             }
         }
     }
+
+    public void DisableTrailSlow()
+    {
+        StartCoroutine(SlowTrailDisable());
+    }
+
+    IEnumerator SlowTrailDisable()
+    {
+        var trail = trailRenderObject.GetComponent<TrailRenderer>();
+        float rate = trail.time / 30f;
+        while (trail.time > 0)
+        {
+            trail.time -= rate;
+            yield return 0;
+        }
+        fartTrailActive = false;
+        Destroy(trailRenderObject);
+    }
 }
+
 

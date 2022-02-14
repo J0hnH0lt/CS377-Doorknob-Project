@@ -3,7 +3,10 @@ guid: ccc16aa5956214ce6b78ffe260c3e2c9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - HealthBarPrefab: {fileID: 288946899378578971, guid: 839901aaad78f4dc69ca2ef3fac4d351, type: 3}
+  - FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
+  - FartPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

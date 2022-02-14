@@ -20,11 +20,14 @@ public class Door : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Player>().hasFarted)
+        Player p = collision.gameObject.GetComponent<Player>();
+        if (p.hasFarted)
         {
             //Debug.Log("Aye you did it you little freak ahahah UwU XD");
+            //p.fartTrail.enabled = false;
             GM.UpdateGameState(GameState.ItemPhase);
             Destroy(this.gameObject);
+            p.DisableTrailSlow();
         }
         
     }
