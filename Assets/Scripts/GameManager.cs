@@ -120,14 +120,16 @@ public class GameManager : MonoBehaviour
         obstacleList = new List<GameObject>();
         Debug.Log(obstacleList.Count);
 
-        var randomLen = UnityEngine.Random.Range(0, 10);
-
-        for (int i = 0; i < randomLen; i++)
+        for (int i = 0; i < 100; i++)
         {
             Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-            if(Physics2D.OverlapCircleAll(randomPos, 15f).Length == 0)
+            Player randomPlayer = players[UnityEngine.Random.Range(0, players.Count)];
+            if(Physics2D.OverlapCircleAll(randomPos, 14f).Length == 0)
             {
                 obstacleList.Add(Instantiate(randomObstaclePrefab, randomPos, Quaternion.identity));
+
+                obstacleList[obstacleList.Count-1].GetComponent<Renderer>().material.color = randomPlayer.GetComponent<Renderer>().material.color;
+
             } else
             {
                 Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
