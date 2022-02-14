@@ -128,6 +128,11 @@ public class Player : MonoBehaviour
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color)
+        {
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
         if (collision.gameObject == myFist.gameObject)
         {
             return;
