@@ -141,6 +141,7 @@ public class Player : MonoBehaviour
         {
             health -= damage;
             myHealthBar.fillAmount -= 0.1f;
+            StartCoroutine(DamageFlash());
             if (health == 0)
             {
                 GameTextManager.Instance.GameOver();
@@ -165,6 +166,19 @@ public class Player : MonoBehaviour
         }
         fartTrailActive = false;
         Destroy(trailRenderObject);
+    }
+
+    IEnumerator DamageFlash()
+    {
+        Color regColor = GetComponent<Renderer>().material.color;
+
+        GetComponent<Renderer>().material.color = Color.red;
+        myFist.GetComponent<Renderer>().material.color = Color.red;
+
+        yield return new WaitForSeconds(0.1f);
+
+        GetComponent<Renderer>().material.color = regColor;
+        myFist.GetComponent<Renderer>().material.color = regColor;
     }
 }
 
