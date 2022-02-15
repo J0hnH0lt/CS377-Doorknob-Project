@@ -170,15 +170,13 @@ public class Player : MonoBehaviour
 
     IEnumerator DamageFlash()
     {
-        Color regColor = GetComponent<Renderer>().material.color;
-
         GetComponent<Renderer>().material.color = Color.red;
         myFist.GetComponent<Renderer>().material.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
-        GetComponent<Renderer>().material.color = regColor;
-        myFist.GetComponent<Renderer>().material.color = regColor;
+        GetComponent<Renderer>().material.color = playerColor;
+        myFist.GetComponent<Renderer>().material.color = playerColor;
     }
 }
 
