@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D playerRigidBod;
 
-    private GameObject myFist;
+    public GameObject myFist;
 
     private GameObject myUI;
 

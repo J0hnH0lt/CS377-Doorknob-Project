@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 2934535439559572969}
   m_Layer: 0
   m_Name: BodyPrefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,11 +297,13 @@ MonoBehaviour:
   damage: 1
   punchDistance: 0
   hasFarted: 0
+  myFist: {fileID: 0}
   FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
   FartPrefab: {fileID: 7254340360046970723, guid: 1445beed7aa794357919567014f9ef53, type: 3}
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   trailRendererObjectPrefab: {fileID: 6677122055893577354, guid: b2bd2e0944ab844c9a8aecf42327b2ec, type: 3}
   trailRenderObject: {fileID: 0}
+  fartTrailActive: 0
 --- !u!114 &6217668634034457969
 MonoBehaviour:
   m_ObjectHideFlags: 0
