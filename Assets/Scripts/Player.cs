@@ -7,22 +7,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {   
     [SerializeField]
-    private float normalSpeed;
-
-    [SerializeField]
-    private float dashSpeed;
-
-    [SerializeField]
-    private float dashDuration;
-
-    [SerializeField]
-    private float dashCooldown;
-
-    [SerializeField]
-    private float rotationSpeed;
-
-    [SerializeField]
-    private float currSpeed;
+    public float currSpeed;
 
     [SerializeField]
     public int health;
@@ -34,15 +19,8 @@ public class Player : MonoBehaviour
     public float punchDistance;
 
     private Vector2 movementInput;
-    private bool dashEnabled;
-    private float dashExpiration;
-
-    private float dashX;
-    private float dashY;
 
     public bool hasFarted;
-
-    private float dashCooldownExpiration;
 
     private Rigidbody2D playerRigidBod;
 
@@ -52,17 +30,11 @@ public class Player : MonoBehaviour
 
     private Image myHealthBar;
 
-    private Image myDashIndicator;
-
     private GameManager myGameManager;
-
-    private GameObject fart;
 
     public GameObject FistPrefab;
 
     public GameObject FartPrefab;
-
-    private float fartScale;
 
     private int id;
 
@@ -90,7 +62,6 @@ public class Player : MonoBehaviour
             playerRigidBod.position,
             Quaternion.identity);
 
-        myDashIndicator = myUI.transform.GetChild(0).gameObject.GetComponent<Image>();
         myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
 
         
@@ -107,56 +78,20 @@ public class Player : MonoBehaviour
         GameManager.Instance.AddPlayer(this);
     }
 
-
-    public void Dash() {
-        if (Time.time > dashCooldownExpiration) {
-            dashEnabled = true;
-            dashExpiration = Time.time + dashDuration;
-            dashCooldownExpiration = Time.time + dashCooldown;
-            currSpeed = dashSpeed;
-            dashX = movementInput.x;
-            dashY = movementInput.y;
-            StartCoroutine(DashImageLerp());
-        }
-    }
-
-    public void UpdateDash() {
-        if (Time.time > dashExpiration) {
-            dashEnabled = false;
-            currSpeed = normalSpeed;
-        }
-    }
-
     public void Update()
     {
-        Vector2 movementDirection;
 
-        if (dashEnabled) {
-            movementDirection = new Vector2(dashX, dashY).normalized;
-            UpdateDash();
-        } else {
-            movementDirection = new Vector2(movementInput.x, movementInput.y).normalized;
-        }
+        playerRigidBod.velocity = new Vector3(movementInput.x, movementInput.y, 0) * currSpeed;
 
-        float inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
-
-        transform.Translate(movementDirection * currSpeed * inputMagnitude * Time.deltaTime, Space.World);
-
-        if (movementDirection != Vector2.zero)
+        if (movementInput.x + movementInput.y != 0)
         {
-            Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(-playerRigidBod.velocity.x, playerRigidBod.velocity.y) * Mathf.Rad2Deg, Vector3.forward);
+        } else
+        {
+            playerRigidBod.angularVelocity = 0;
         }
+    
 
-        if (fart) {
-            fartScale += 0.001f;
-            fart.transform.position = this.gameObject.transform.position;
-            fart.transform.localScale = new Vector3(fartScale,fartScale,1);
-        } else {
-            fartScale = 0.2f;
-        }
-        // Position fist infront of player
-        // reduendant get component transform
         myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
                                                               (transform.up * 1.2f * myFist.GetComponent<FistScript>().currentPosition);
         myUI.GetComponent<Transform>().transform.eulerAngles = new Vector3(0,0,0);
@@ -174,7 +109,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
 
@@ -194,8 +128,11 @@ public class Player : MonoBehaviour
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color)
+        {
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
 
-        Debug.Log(collision.gameObject);
         if (collision.gameObject == myFist.gameObject)
         {
             return;
@@ -204,23 +141,12 @@ public class Player : MonoBehaviour
         {
             health -= damage;
             myHealthBar.fillAmount -= 0.1f;
+            StartCoroutine(DamageFlash());
             if (health == 0)
             {
                 GameTextManager.Instance.GameOver();
                 GameManager.Instance.UpdateGameState(GameState.GameOver);
             }
-        }
-    }
-
-    private IEnumerator DashImageLerp()
-    {
-        float startTime = Time.time;
-        float timeElapsed = (Time.time - startTime) / dashCooldown;
-        while(timeElapsed < 1f)
-        {
-            timeElapsed = (Time.time - startTime) / dashCooldown;
-            myDashIndicator.fillAmount = Mathf.Lerp(1f, 0f, timeElapsed);
-            yield return null;
         }
     }
 
@@ -240,6 +166,19 @@ public class Player : MonoBehaviour
         }
         fartTrailActive = false;
         Destroy(trailRenderObject);
+    }
+
+    IEnumerator DamageFlash()
+    {
+        Color regColor = GetComponent<Renderer>().material.color;
+
+        GetComponent<Renderer>().material.color = Color.red;
+        myFist.GetComponent<Renderer>().material.color = Color.red;
+
+        yield return new WaitForSeconds(0.1f);
+
+        GetComponent<Renderer>().material.color = regColor;
+        myFist.GetComponent<Renderer>().material.color = regColor;
     }
 }
 
