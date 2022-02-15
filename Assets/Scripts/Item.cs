@@ -13,7 +13,6 @@ public class Item : MonoBehaviour
 {
     public string itemName;
     public string itemExplanation;
-    public string itemQuote;
     [Tooltip ("Tick true for power ups that are instant use, eg a health addition that has no delay before expiring")]
     public bool expiresImmediately;
     public GameObject specialEffect;

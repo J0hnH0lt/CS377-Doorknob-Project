@@ -12,11 +12,15 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> obstacleList = new List<GameObject>();
 
+    private List<GameObject> itemList = new List<GameObject>();
+
     public GameState State;
 
     public GameObject doorPrefab;
 
     public GameObject randomObstaclePrefab;
+
+    public GameObject bigFistPrefab;
 
     public static event Action<GameState> OnGameStateChanged;
 
@@ -111,7 +115,7 @@ public class GameManager : MonoBehaviour
         GameObject door = Instantiate(doorPrefab, pos, Quaternion.identity);
 
 
-
+        // SPAWN RANDOM OBSTACLES IN RANDOM lOCATIONS
         var numObstacles = obstacleList.Count;
         for (int i = 0; i < numObstacles; i++)
         {
@@ -131,6 +135,34 @@ public class GameManager : MonoBehaviour
                 obstacleList[obstacleList.Count-1].GetComponent<Renderer>().material.color = randomPlayer.GetComponent<Renderer>().material.color;
 
             } else
+            {
+                Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
+            }
+        }
+
+
+
+        // SPAWN RANDOM ITEMS IN RANDOM lOCATIONS
+        var itemCount = itemList.Count;
+        for (int i = 0; i < itemCount; i++)
+        {
+            Destroy(itemList[i]);
+        }
+        itemList = new List<GameObject>();
+        Debug.Log(itemList.Count);
+
+        for (int i = 0; i < 100; i++)
+        {
+            Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
+            Player randomPlayer = players[UnityEngine.Random.Range(0, players.Count)];
+            if (itemList.Count < 1 && Physics2D.OverlapCircleAll(randomPos, 4f).Length == 0)
+            {
+                itemList.Add(Instantiate(bigFistPrefab, randomPos, Quaternion.identity));
+
+                //itemList[itemList.Count - 1].GetComponent<Renderer>().material.color = randomPlayer.GetComponent<Renderer>().material.color;
+
+            }
+            else
             {
                 Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
             }

@@ -14,6 +14,12 @@ class BigFistItem : Item
         // Payload is to scale the fist
         playerUser.myFist.transform.localScale = new Vector3(fistScale, fistScale, 1);
     }
+
+    protected override void ItemHasExpired()       // Checklist item 2
+    {
+        playerUser.myFist.transform.localScale = new Vector3(1, 1, 1);
+        base.ItemHasExpired();
+    }
     //void Start()
     //{
 
