@@ -5,14 +5,20 @@ using UnityEngine;
 class BigFistItem : Item
 {
     public int fistScale = 2;
-    // Start is called before the first frame update
+
+    public float bigFistDuration = 10;
+
+    private float bigFistExperation;
 
     protected override void ItemPayload()
     {
         base.ItemPayload();
 
+        bigFistExperation = Time.time + bigFistDuration;
+
         // Payload is to scale the fist
         playerUser.myFist.transform.localScale = new Vector3(fistScale, fistScale, 1);
+
     }
 
     protected override void ItemHasExpired()       // Checklist item 2
@@ -20,14 +26,27 @@ class BigFistItem : Item
         playerUser.myFist.transform.localScale = new Vector3(1, 1, 1);
         base.ItemHasExpired();
     }
+
+    public bool IsNotActive()
+    {
+        if (itemState == ItemState.InAttractMode)
+        {
+            return true;
+        }
+
+        return false;
+    }
     //void Start()
     //{
 
     //}
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
+    // Update is called once per frame
+    void Update()
+    {
+        if(itemState == ItemState.IsCollected && Time.time > bigFistExperation)
+        {
+            ItemHasExpired();
+        }
+    }
 }

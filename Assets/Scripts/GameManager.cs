@@ -146,7 +146,10 @@ public class GameManager : MonoBehaviour
         var itemCount = itemList.Count;
         for (int i = 0; i < itemCount; i++)
         {
-            Destroy(itemList[i]);
+            if (itemList[i] != null && itemList[i].GetComponent<BigFistItem>().IsNotActive())
+            {
+                Destroy(itemList[i]);
+            }
         }
         itemList = new List<GameObject>();
         Debug.Log(itemList.Count);
