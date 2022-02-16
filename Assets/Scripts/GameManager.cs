@@ -48,8 +48,13 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=1)
+            if (players.Count >=2 && PlayersReady())
             {
+                foreach (Player p in players)
+                {
+                    p.myReadyUpIcon.color = Color.clear;
+                }
+
                 UpdateGameState(GameState.ItemPhase);
                 GameTextManager.Instance.GameRunning();
             }
@@ -68,6 +73,18 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("MainMenu");
             }
         }
+    }
+
+    public bool PlayersReady()
+    {
+        foreach (Player p in players)
+        {
+            if (!p.isReady)
+            {
+                return false;
+            }
+        }
+        return true;
     }
  
     public void UpdateGameState(GameState newState) {

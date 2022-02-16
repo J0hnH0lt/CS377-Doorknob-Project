@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
 
     public GameObject FartPrefab;
 
+    public Image myReadyUpIcon;
+
     private int id;
 
     public Color playerColor;
@@ -48,14 +50,15 @@ public class Player : MonoBehaviour
 
     public bool fartTrailActive;
 
+    public bool isReady = false;
+
     Vector3 trailVectorPosition;
 
 
     public void Awake()
     {
-        playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f);
+ 
         playerRigidBod = GetComponent<Rigidbody2D>();
-
         myUI = gameObject.transform.GetChild(0).gameObject;
         myFist = Instantiate(
             FistPrefab,
@@ -63,12 +66,50 @@ public class Player : MonoBehaviour
             Quaternion.identity);
 
         myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
+        myReadyUpIcon = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
 
-        
-        GetComponent<Renderer>().material.color = playerColor;
-        myFist.GetComponent<Renderer>().material.color = playerColor;
+        myReadyUpIcon.color = Color.red;
+
+        AssignColor(Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f));
 
         myGameManager = GameManager.Instance;
+    }
+
+    public void SwapColor(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (myGameManager.State == GameState.Menu)
+            {
+                AssignColor(Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f));
+            }
+        }
+    }
+
+    private void AssignColor(Color c)
+    {
+        playerColor = c;
+        GetComponent<Renderer>().material.color = playerColor;
+        myFist.GetComponent<Renderer>().material.color = playerColor;
+    }
+
+    public void ToggleReadyUp(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (myGameManager.State == GameState.Menu)
+            {
+                isReady = !isReady;
+                if(isReady)
+                {
+                    myReadyUpIcon.color = Color.green;
+                } else
+                {
+                    myReadyUpIcon.color = Color.red;
+                }
+            
+            }
+        }
     }
 
     public void Start() {
@@ -119,10 +160,13 @@ public class Player : MonoBehaviour
         this.hasFarted = true;
     }
 
-    public void Punch()
+    public void Punch(InputAction.CallbackContext context)
     {
-        myFist.GetComponent<Collider2D>().enabled = true;
-        myFist.GetComponent<FistScript>().PunchIt();
+        if (context.started)
+        {
+            myFist.GetComponent<Collider2D>().enabled = true;
+            myFist.GetComponent<FistScript>().PunchIt();
+        }
     }
 
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
