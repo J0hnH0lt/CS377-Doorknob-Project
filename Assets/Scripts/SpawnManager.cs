@@ -7,70 +7,71 @@ public class SpawnManager : MonoBehaviour
 
     public GameObject doorPrefab;
 
-    public GameManager myGameManager;
+    public GameObject obstaclePrefab;
 
-    private List<GameObject> itemList = new List<GameObject>();
-
-    public GameObject randomObstaclePrefab;
+    public GameObject bigFistPrefab;
 
     private List<GameObject> obstacleList = new List<GameObject>();
 
+    private List<GameObject> itemList = new List<GameObject>();
+
+    private Vector3 GetRandomPosition()
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
+    }
+
     public void SpawnDoor(Color c)
     {
-        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-        Instantiate(doorPrefab, pos, Quaternion.identity).GetComponent<Renderer>().material.color = c;
-        
+        Vector3 randomPos = GetRandomPosition();
+        while(Physics2D.OverlapCircleAll(randomPos, 4f).Length > 0)
+        {
+            randomPos = GetRandomPosition();
+        }
+        Instantiate(doorPrefab, randomPos, Quaternion.identity).GetComponent<Renderer>().material.color = c;
     }
 
-    public void SpawnObstacles()
+    public void SpawnObstacles(int n)
     {
-        // SPAWN RANDOM OBSTACLES IN RANDOM lOCATIONS
-        var numObstacles = obstacleList.Count;
-        for (int i = 0; i < numObstacles; i++)
+        ClearObstacles();
+        for (int i = 0; i < n; i++)
         {
-            Destroy(obstacleList[i]);
-        }
-        obstacleList = new List<GameObject>();
-
-        for (int i = 0; i < 100; i++)
-        {
-            Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-            Player randomPlayer = myGameManager.players[Random.Range(0, myGameManager.players.Count)];
+            Vector3 randomPos = GetRandomPosition();
+            
             if (Physics2D.OverlapCircleAll(randomPos, 14f).Length == 0)
             {
-                obstacleList.Add(Instantiate(randomObstaclePrefab, randomPos, Quaternion.identity));
-
-                obstacleList[obstacleList.Count - 1].GetComponent<Renderer>().material.color = randomPlayer.GetComponent<Renderer>().material.color;
-
+                obstacleList.Add(Instantiate(obstaclePrefab, randomPos, Quaternion.identity));
             }
         }
     }
 
-    public void SpawnItems()
+    public void ClearObstacles()
     {
-        // SPAWN RANDOM ITEMS IN RANDOM lOCATIONS
-        var itemCount = itemList.Count;
-        for (int i = 0; i < itemCount; i++)
+        foreach (GameObject obstacle in obstacleList)
         {
-            if (itemList[i] != null && itemList[i].GetComponent<BigFistItem>().IsNotActive())
-            {
-                Destroy(itemList[i]);
-            }
+            Destroy(obstacle);
         }
-        itemList = new List<GameObject>();
-        Debug.Log(itemList.Count);
+        // obstacleList = new List<GameObject>();
+    }
 
-        for (int i = 0; i < 100; i++)
+    public void ClearItems()
+    {
+        foreach (GameObject item in itemList)
         {
-            Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-            Player randomPlayer = myGameManager.players[UnityEngine.Random.Range(0, myGameManager.players.Count)];
+            Destroy(item);
+        }
+    }
+
+    public void SpawnItems(int n)
+    {
+        ClearItems();
+
+        for (int i = 0; i < n; i++)
+        {
+            Vector3 randomPos = GetRandomPosition();
             if (itemList.Count < 1 && Physics2D.OverlapCircleAll(randomPos, 4f).Length == 0)
             {
-                itemList.Add(Instantiate(myGameManager.bigFistPrefab, randomPos, Quaternion.identity));
-            }
-            else
-            {
-                Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
+                // @Clem, use this to spawn random items into the game
+                // itemList.Add(RandomItem)
             }
         }
     }

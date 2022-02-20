@@ -12,11 +12,7 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
 
-    private List<GameObject> itemList = new List<GameObject>();
-
     public GameState State;
-
-    public GameObject bigFistPrefab;
 
     public static event Action<GameState> OnGameStateChanged;
 
@@ -122,9 +118,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandleLevelChange() {
-        mySpawnManager.SpawnObstacles();
+        mySpawnManager.SpawnObstacles(100);
 
-        mySpawnManager.SpawnItems();
+        mySpawnManager.SpawnItems(100);
 
         HandlePlayerFart();
     }

@@ -497,8 +497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorPrefab: {fileID: 7624814792528726709, guid: cb324f81ae2884f10adc2b093ad3f167, type: 3}
-  myGameManager: {fileID: 1098129618}
-  randomObstaclePrefab: {fileID: 8826353503448585491, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
+  obstaclePrefab: {fileID: 8826353503448585491, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
+  bigFistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
 --- !u!1 &832279701
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,4 +638,3 @@ MonoBehaviour:
   mySpawnManager: {fileID: 743174549}
   players: []
   State: 0
-  bigFistPrefab: {fileID: 1361610815191936228, guid: e3cc6d7fad48bb649bcd2c42daf09078, type: 3}
