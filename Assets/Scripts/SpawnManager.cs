@@ -48,6 +48,30 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnItems()
     {
-        // Philip can do this
+        // SPAWN RANDOM ITEMS IN RANDOM lOCATIONS
+        var itemCount = itemList.Count;
+        for (int i = 0; i < itemCount; i++)
+        {
+            if (itemList[i] != null && itemList[i].GetComponent<BigFistItem>().IsNotActive())
+            {
+                Destroy(itemList[i]);
+            }
+        }
+        itemList = new List<GameObject>();
+        Debug.Log(itemList.Count);
+
+        for (int i = 0; i < 100; i++)
+        {
+            Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
+            Player randomPlayer = myGameManager.players[UnityEngine.Random.Range(0, myGameManager.players.Count)];
+            if (itemList.Count < 1 && Physics2D.OverlapCircleAll(randomPos, 4f).Length == 0)
+            {
+                itemList.Add(Instantiate(myGameManager.bigFistPrefab, randomPos, Quaternion.identity));
+            }
+            else
+            {
+                Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
+            }
+        }
     }
 }

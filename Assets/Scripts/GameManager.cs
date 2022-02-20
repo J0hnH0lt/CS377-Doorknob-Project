@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=2 && PlayersReady())
+            if (players.Count >=1 && PlayersReady())
             {
                 foreach (Player p in players)
                 {
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
                 HandleItemPhase();
                 break;
             case GameState.CombatPhase:
-                HandleFart();
+                HandleLevelChange();
                 break;
             case GameState.GameOver:
                 HandleGameOver();
@@ -121,45 +121,21 @@ public class GameManager : MonoBehaviour
         gameOverTime = 5.0f;
     }
 
-    public void HandleFart() {
+    public void HandleLevelChange() {
         mySpawnManager.SpawnObstacles();
 
+        mySpawnManager.SpawnItems();
 
-        // SPAWN RANDOM ITEMS IN RANDOM lOCATIONS
-        var itemCount = itemList.Count;
-        for (int i = 0; i < itemCount; i++)
-        {
-            if (itemList[i] != null && itemList[i].GetComponent<BigFistItem>().IsNotActive())
-            {
-                Destroy(itemList[i]);
-            }
-        }
-        itemList = new List<GameObject>();
-        Debug.Log(itemList.Count);
+        HandlePlayerFart();
+    }
 
-        for (int i = 0; i < 100; i++)
-        {
-            Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-            Player randomPlayer = players[UnityEngine.Random.Range(0, players.Count)];
-            if (itemList.Count < 1 && Physics2D.OverlapCircleAll(randomPos, 4f).Length == 0)
-            {
-                itemList.Add(Instantiate(bigFistPrefab, randomPos, Quaternion.identity));
-
-                //itemList[itemList.Count - 1].GetComponent<Renderer>().material.color = randomPlayer.GetComponent<Renderer>().material.color;
-
-            }
-            else
-            {
-                Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
-            }
-        }
-
-
+    public void HandlePlayerFart() {
         // GET A RANDOM PLAYER
         var healhList = new List<Tuple<int, Player>>();
-  
+
         int random_sum = 0;
-        foreach (Player p in players) {
+        foreach (Player p in players)
+        {
             random_sum += p.health;
             healhList.Add(Tuple.Create(random_sum, p));
         }
@@ -178,6 +154,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 
     public void AddPlayer(Player p){
         players.Add(p);

@@ -635,6 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0385d58c559ad48a2bed98364a2552ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mySpawnManager: {fileID: 743174549}
   players: []
   State: 0
   bigFistPrefab: {fileID: 1361610815191936228, guid: e3cc6d7fad48bb649bcd2c42daf09078, type: 3}
