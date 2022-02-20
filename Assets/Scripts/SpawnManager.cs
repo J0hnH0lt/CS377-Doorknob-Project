@@ -9,8 +9,6 @@ public class SpawnManager : MonoBehaviour
 
     public GameObject obstaclePrefab;
 
-    public GameObject bigFistPrefab;
-
     private List<GameObject> obstacleList = new List<GameObject>();
 
     private List<GameObject> itemList = new List<GameObject>();
@@ -46,19 +44,14 @@ public class SpawnManager : MonoBehaviour
 
     public void ClearObstacles()
     {
-        foreach (GameObject obstacle in obstacleList)
-        {
-            Destroy(obstacle);
-        }
-        // obstacleList = new List<GameObject>();
+        foreach (GameObject obstacle in obstacleList) Destroy(obstacle);
+        Debug.Log(obstacleList.Count);
     }
 
     public void ClearItems()
     {
-        foreach (GameObject item in itemList)
-        {
-            Destroy(item);
-        }
+        foreach (GameObject item in itemList) Destroy(item);
+        Debug.Log(itemList.Count);
     }
 
     public void SpawnItems(int n)
