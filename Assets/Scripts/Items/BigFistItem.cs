@@ -4,9 +4,9 @@ using UnityEngine;
 
 class BigFistItem : Item
 {
-    public int fistScale = 2;
+    private int fistScale = 2;
 
-    public float bigFistDuration = 10;
+    private float bigFistDuration = 10;
 
     private float bigFistExperation;
 

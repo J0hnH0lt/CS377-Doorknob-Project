@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
     public void HandleLevelChange() {
         mySpawnManager.SpawnObstacles(100);
 
-        mySpawnManager.SpawnItems(100);
+        mySpawnManager.SpawnItems();
 
         HandlePlayerFart();
     }

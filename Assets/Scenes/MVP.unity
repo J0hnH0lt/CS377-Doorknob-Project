@@ -498,7 +498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorPrefab: {fileID: 7624814792528726709, guid: cb324f81ae2884f10adc2b093ad3f167, type: 3}
   obstaclePrefab: {fileID: 8826353503448585491, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
-  bigFistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
 --- !u!1 &832279701
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +527,7 @@ Transform:
   m_Children:
   - {fileID: 1098129617}
   - {fileID: 743174548}
+  - {fileID: 1869369997}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -638,3 +638,49 @@ MonoBehaviour:
   mySpawnManager: {fileID: 743174549}
   players: []
   State: 0
+--- !u!1 &1869369996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1869369997}
+  - component: {fileID: 1869369998}
+  m_Layer: 0
+  m_Name: ItemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1869369997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869369996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 832279702}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1869369998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869369996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28337c1f6b3cc4ec7b2f52a51a32f22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabList: []
+  bigFistPrefab: {fileID: 1361610815191936228, guid: e3cc6d7fad48bb649bcd2c42daf09078, type: 3}
+  speedPotionPrefab: {fileID: 4352276570954446795, guid: 19f17e2af87d645f9948778fe511cd3d, type: 3}

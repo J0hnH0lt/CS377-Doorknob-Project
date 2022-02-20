@@ -9,9 +9,13 @@ public class SpawnManager : MonoBehaviour
 
     public GameObject obstaclePrefab;
 
+    private GameObject randomItemPrefab;
+
     private List<GameObject> obstacleList = new List<GameObject>();
 
     private List<GameObject> itemList = new List<GameObject>();
+
+    private ItemManager itemManager;
 
     private Vector3 GetRandomPosition()
     {
@@ -51,20 +55,23 @@ public class SpawnManager : MonoBehaviour
     public void ClearItems()
     {
         foreach (GameObject item in itemList) Destroy(item);
-        Debug.Log(itemList.Count);
+        Debug.Log("Item Count: "+ itemList.Count);
+        itemList = new List<GameObject>();
     }
 
-    public void SpawnItems(int n)
+    public void SpawnItems(int numItems = 2)
     {
         ClearItems();
 
-        for (int i = 0; i < n; i++)
+        while (itemList.Count < numItems)
         {
             Vector3 randomPos = GetRandomPosition();
-            if (itemList.Count < 1 && Physics2D.OverlapCircleAll(randomPos, 4f).Length == 0)
+            if (Physics2D.OverlapCircleAll(randomPos, 4f).Length == 0)
             {
                 // @Clem, use this to spawn random items into the game
                 // itemList.Add(RandomItem)
+                randomItemPrefab = ItemManager.Instance.GetRandomItem();
+                itemList.Add(Instantiate(randomItemPrefab, randomPos, Quaternion.identity));
             }
         }
     }
