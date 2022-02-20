@@ -8,17 +8,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private List<Player> players = new List<Player>();
+    public SpawnManager mySpawnManager;
 
-    private List<GameObject> obstacleList = new List<GameObject>();
+    public List<Player> players = new List<Player>();
 
     private List<GameObject> itemList = new List<GameObject>();
 
     public GameState State;
-
-    public GameObject doorPrefab;
-
-    public GameObject randomObstaclePrefab;
 
     public GameObject bigFistPrefab;
 
@@ -126,37 +122,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandleFart() {
-        //Debug.Log("Ayo We Farting Lads");
-        // SPAWN A DOOR IN A RANDOM LOCATION
-        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-        GameObject door = Instantiate(doorPrefab, pos, Quaternion.identity);
-
-
-        // SPAWN RANDOM OBSTACLES IN RANDOM lOCATIONS
-        var numObstacles = obstacleList.Count;
-        for (int i = 0; i < numObstacles; i++)
-        {
-            Destroy(obstacleList[i]);
-        }
-        obstacleList = new List<GameObject>();
-        Debug.Log(obstacleList.Count);
-
-        for (int i = 0; i < 100; i++)
-        {
-            Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-            Player randomPlayer = players[UnityEngine.Random.Range(0, players.Count)];
-            if(Physics2D.OverlapCircleAll(randomPos, 14f).Length == 0)
-            {
-                obstacleList.Add(Instantiate(randomObstaclePrefab, randomPos, Quaternion.identity));
-
-                obstacleList[obstacleList.Count-1].GetComponent<Renderer>().material.color = randomPlayer.GetComponent<Renderer>().material.color;
-
-            } else
-            {
-                Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
-            }
-        }
-
+        mySpawnManager.SpawnObstacles();
 
 
         // SPAWN RANDOM ITEMS IN RANDOM lOCATIONS
@@ -206,7 +172,7 @@ public class GameManager : MonoBehaviour
             Player player = tuple.Item2;
             if (health_helper <= chance)
             {
-                door.GetComponent<Renderer>().material.color = player.GetComponent<Renderer>().material.color;
+                mySpawnManager.SpawnDoor(player.GetComponent<Renderer>().material.color);
                 player.OnFart();
                 break;
             }
