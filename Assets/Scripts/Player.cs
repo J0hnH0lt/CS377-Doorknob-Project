@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     public float currSpeed;
 
+    public float speedModifier = 1;
+
     [SerializeField]
     public int health;
 
@@ -122,7 +124,7 @@ public class Player : MonoBehaviour
     public void Update()
     {
 
-        playerRigidBod.velocity = new Vector3(movementInput.x, movementInput.y, 0) * currSpeed;
+        playerRigidBod.velocity = new Vector3(movementInput.x, movementInput.y, 0) * (currSpeed * speedModifier);
 
         if (movementInput.x + movementInput.y != 0)
         {

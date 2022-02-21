@@ -10,6 +10,8 @@ class BigFistItem : Item
 
     private float bigFistExperation;
 
+    private static GameObject blackHolePrefab;
+
     protected override void ItemPayload()
     {
         base.ItemPayload();

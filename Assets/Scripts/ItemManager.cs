@@ -7,6 +7,7 @@ public class ItemManager : MonoBehaviour
     public List<GameObject> prefabList = new List<GameObject>();
     public GameObject bigFistPrefab;
     public GameObject speedPotionPrefab;
+    //public GameObject blackHolePrefab;
     public static ItemManager Instance;
 
     private void Awake()
@@ -14,6 +15,7 @@ public class ItemManager : MonoBehaviour
         Instance = this;
         prefabList.Add(bigFistPrefab);
         prefabList.Add(speedPotionPrefab);
+        //prefabList.Add(blackHolePrefab);
     }
 
     public GameObject GetRandomItem()

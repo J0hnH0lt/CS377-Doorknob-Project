@@ -12,7 +12,6 @@ public class FistScript : MonoBehaviour
 
     private Collider2D myCollider;
 
-
     [SerializeField]
     private float reach;
 

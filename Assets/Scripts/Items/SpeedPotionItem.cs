@@ -4,7 +4,7 @@ using UnityEngine;
 
 class SpeedPotionItem : Item
 {
-    private float speedScale = 1.5f;
+    private float speedScale = .35f;
 
     private float speedPotionDuration = 3;
 
@@ -17,13 +17,13 @@ class SpeedPotionItem : Item
         speedPotionExpiration = Time.time + speedPotionDuration;
 
         // Payload is to scale the fist
-        playerUser.currSpeed = playerUser.currSpeed * speedScale;
+        playerUser.speedModifier = playerUser.speedModifier + speedScale;
 
     }
 
     protected override void ItemHasExpired()       // Checklist item 2
     {
-        playerUser.currSpeed = playerUser.currSpeed / speedScale;
+        playerUser.speedModifier = playerUser.speedModifier - speedScale;
         base.ItemHasExpired();
     }
 

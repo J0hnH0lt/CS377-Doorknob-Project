@@ -120,14 +120,18 @@ public class GameManager : MonoBehaviour
     public void HandleLevelChange() {
         mySpawnManager.SpawnObstacles(100);
 
-        mySpawnManager.SpawnItems();
+        // Get the number of items to spawn
+        int numItems = UnityEngine.Random.Range(2, 4);
+        mySpawnManager.SpawnItems(numItems);
 
+        // Handle the weighing and selection of who farts
         HandlePlayerFart();
     }
 
     public void HandlePlayerFart() {
-        // GET A RANDOM PLAYER
+        // construct a health range dictionary of all the players
         var healhList = new List<Tuple<int, Player>>();
+
 
         int random_sum = 0;
         foreach (Player p in players)
@@ -136,21 +140,24 @@ public class GameManager : MonoBehaviour
             healhList.Add(Tuple.Create(random_sum, p));
         }
 
+        // get a random number between 0 and the total amount of player health
         int health_helper = UnityEngine.Random.Range(0, random_sum);
 
         foreach (var tuple in healhList)
         {
+        
             int chance = tuple.Item1;
             Player player = tuple.Item2;
+            // select the player if the random number falls within their health range
             if (health_helper <= chance)
             {
+                // spawn the door of the players color
                 mySpawnManager.SpawnDoor(player.GetComponent<Renderer>().material.color);
                 player.OnFart();
                 break;
             }
         }
     }
-
 
     public void AddPlayer(Player p){
         players.Add(p);
