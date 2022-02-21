@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     private List<GameObject> itemList = new List<GameObject>();
 
-    private ItemManager itemManager;
+    public ItemManager itemManager;
 
     private Vector3 GetRandomPosition()
     {
