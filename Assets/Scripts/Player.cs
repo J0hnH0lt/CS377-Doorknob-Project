@@ -215,9 +215,13 @@ public class Player : MonoBehaviour
 
     public void AddItemToInventory(Item item)
     {
+        Debug.Log("Adding Item to inventory");
+
         // if it is empty add the item to the players inventory
+  
         if (item1 == null)
         {
+            Debug.Log("Adding to item slot 1");
             item1 = item;
             // set the myItemSlot1 sprite
             if (myItemSlot1.GetComponent<Image>().sprite == myItemSlot1Default)
@@ -229,6 +233,7 @@ public class Player : MonoBehaviour
 
         else
         {
+            Debug.Log("Adding to item slot 2");
             item2 = item;
             if (myItemSlot2.GetComponent<Image>().sprite == myItemSlot2Default)
             {
@@ -304,8 +309,8 @@ public class Player : MonoBehaviour
 
     public void ResetItem2()
     {
-        myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
-        myItemSlot1.GetComponent<Image>().color = Color.white;
+        myItemSlot2.GetComponent<Image>().sprite = myItemSlot1Default;
+        myItemSlot2.GetComponent<Image>().color = Color.white;
 
     }
 

@@ -61,7 +61,8 @@ public class Item : MonoBehaviour
         // (Note: after pickup the gameObject of the item persists, but with no renderer)
         // TODO MAKE SURE THE PLAYER HAS SPACE IN THEIR INVENTORY
         // TODO PLAYER INVENTORY SHOULD BE ABLE TO HANDLE DROPPING OF ITEMS
-        if (itemState == ItemState.InInventory || itemState == ItemState.InEffect || !(p.item1 || p.item2))
+   
+        if (itemState == ItemState.InInventory || itemState == ItemState.InEffect || (p.item1!=null && p.item2!=null))
         {
             return;
         }
