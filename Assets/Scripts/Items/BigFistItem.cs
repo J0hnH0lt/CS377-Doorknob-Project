@@ -46,7 +46,7 @@ class BigFistItem : Item
     // Update is called once per frame
     void Update()
     {
-        if(itemState == ItemState.InInventory && Time.time > bigFistExperation)
+        if(itemState == ItemState.InEffect && Time.time > bigFistExperation)
         {
             ItemHasExpired();
         }
