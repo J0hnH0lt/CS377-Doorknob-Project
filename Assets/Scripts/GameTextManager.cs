@@ -8,7 +8,9 @@ public class GameTextManager : MonoBehaviour
 {
     public static GameTextManager Instance;
 
-    public Text GameText;
+    public GameObject InstructionPanel;
+    public GameObject TitleText;
+    public GameObject InfoPanel;
 
     private void Awake()
     {
@@ -17,18 +19,27 @@ public class GameTextManager : MonoBehaviour
 
     public void StartUp()
     {
-        GameText.text = "Press X to Join";
     }
 
     public void GameRunning()
     {
-        GameText.text = "";
+        //InfoPanel.transform.position.x = InfoPanel.transform.position.x + 600;
+        InfoPanel.transform.position = new Vector3(InfoPanel.transform.position.x + 600,
+                                                   InfoPanel.transform.position.y, 
+                                                   InfoPanel.transform.position.z);
+
+        TitleText.GetComponent<Text>().text = "";
     }
 
     public void GameOver()
     {
-        GameText.text = "Game Over";
+        TitleText.GetComponent<Text>().text = "GAME OVER";
+        TitleText.transform.position = new Vector3(0, 0, 0);
+
+        //InfoPanel.transform.position = new Vector3(InfoPanel.transform.position.x - 600,
+        //                                           InfoPanel.transform.position.y,
+        //                                           InfoPanel.transform.position.z);
     }
 
-    
+
 }
