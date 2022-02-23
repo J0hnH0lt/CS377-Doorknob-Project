@@ -2073,7 +2073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabList: []
-  bigFistPrefab: {fileID: 1361610815191936228, guid: e3cc6d7fad48bb649bcd2c42daf09078, type: 3}
+  bigFistPrefab: {fileID: 7898285378134162448, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
   speedPotionPrefab: {fileID: 4352276570954446795, guid: 19f17e2af87d645f9948778fe511cd3d, type: 3}
 --- !u!1 &2026019735
 GameObject:

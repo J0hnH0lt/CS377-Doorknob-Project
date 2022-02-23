@@ -221,13 +221,14 @@ public class Player : MonoBehaviour
   
         if (item1 == null)
         {
+            Image itemSlotImage = myItemSlot1.GetComponent<Image>();
             Debug.Log("Adding to item slot 1");
             item1 = item;
             // set the myItemSlot1 sprite
             if (myItemSlot1.GetComponent<Image>().sprite == myItemSlot1Default)
             {
-                myItemSlot1.GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
-                myItemSlot1.GetComponent<Image>().color = item.GetComponent<SpriteRenderer>().color;
+                itemSlotImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
+                itemSlotImage.color = item.GetComponent<SpriteRenderer>().color;
             }
         }
 
@@ -286,18 +287,6 @@ public class Player : MonoBehaviour
 
             item2 = null;
         }
-    }
-
-    public void SetItem1(Sprite itemSprite, Color spriteColor)
-    {
-        myItemSlot1.GetComponent<Image>().sprite = itemSprite;
-        myItemSlot1.GetComponent<Image>().color = spriteColor;
-    }
-
-    public void SetItem2(Sprite itemSprite, Color spriteColor)
-    {
-        myItemSlot2.GetComponent<Image>().sprite = itemSprite;
-        myItemSlot2.GetComponent<Image>().color = spriteColor;
     }
 
     public void ResetItem1()
