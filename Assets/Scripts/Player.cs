@@ -57,9 +57,13 @@ public class Player : MonoBehaviour
     public bool isReady = false;
 
     // item
-    public List<Item> Inventory;
+    public Item item1;
     public GameObject myItemSlot1;
     public Sprite myItemSlot1Default;
+
+    public Item item2;
+    public GameObject myItemSlot2;
+    public Sprite myItemSlot2Default;
 
     Vector3 trailVectorPosition;
 
@@ -77,7 +81,11 @@ public class Player : MonoBehaviour
         myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
         myReadyUpIcon = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
         myItemSlot1 = myUI.transform.GetChild(3).gameObject;
+        myItemSlot2 = myUI.transform.GetChild(4).gameObject;
+
+        // defualt sprites are duplicated
         myItemSlot1Default = myItemSlot1.GetComponent<Image>().sprite;
+        myItemSlot2Default = myItemSlot2.GetComponent<Image>().sprite;
 
         myReadyUpIcon.color = Color.red;
 
@@ -208,27 +216,39 @@ public class Player : MonoBehaviour
     public void AddItemToInventory(Item item)
     {
         // if it is empty add the item to the players inventory
-        Inventory.Add(item);
-   
-        // set the myItemSlot1 sprite
-        myItemSlot1.GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
-        myItemSlot1.GetComponent<Image>().color = item.GetComponent<SpriteRenderer>().color;
+        if (item1 == null)
+        {
+            item1 = item;
+            // set the myItemSlot1 sprite
+            if (myItemSlot1.GetComponent<Image>().sprite == myItemSlot1Default)
+            {
+                myItemSlot1.GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+                myItemSlot1.GetComponent<Image>().color = item.GetComponent<SpriteRenderer>().color;
+            }
+        }
+
+        else
+        {
+            item2 = item;
+            if (myItemSlot2.GetComponent<Image>().sprite == myItemSlot2Default)
+            {
+                myItemSlot2.GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+                myItemSlot2.GetComponent<Image>().color = item.GetComponent<SpriteRenderer>().color;
+            }
+        }
+        
     }
 
 
-    public void UseItem(InputAction.CallbackContext context)
+    public void UseItem1(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             // if the inventory is not empty
-            if (Inventory.Count == 0)
+            if (item1 == null)
             {
                 return;
             }
-
-            // removes the item from the players inventory
-            Item item = Inventory[0];
-            Inventory.RemoveAt(0);
 
 
             // sets the myItemSlot1 sprite to the default neutral slate
@@ -236,7 +256,30 @@ public class Player : MonoBehaviour
 
 
             // calls the item payload
-            item.Activate();
+            item1.Activate();
+
+            item1 = null;
+        }
+    }
+
+    public void UseItem2(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // if the inventory is not empty
+            if (item2 == null)
+            {
+                return;
+            }
+
+            // sets the myItemSlot1 sprite to the default neutral slate
+            ResetItem2();
+
+
+            // calls the item payload
+            item2.Activate();
+
+            item2 = null;
         }
     }
 
@@ -246,9 +289,24 @@ public class Player : MonoBehaviour
         myItemSlot1.GetComponent<Image>().color = spriteColor;
     }
 
+    public void SetItem2(Sprite itemSprite, Color spriteColor)
+    {
+        myItemSlot2.GetComponent<Image>().sprite = itemSprite;
+        myItemSlot2.GetComponent<Image>().color = spriteColor;
+    }
+
     public void ResetItem1()
     {
         myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
+        myItemSlot1.GetComponent<Image>().color = Color.white;
+
+    }
+
+    public void ResetItem2()
+    {
+        myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
+        myItemSlot1.GetComponent<Image>().color = Color.white;
+
     }
 
     public void DisableTrailSlow()
