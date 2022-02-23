@@ -6,7 +6,7 @@ class BigFistItem : Item
 {
     private int fistScale = 2;
 
-    private float bigFistDuration = 10;
+    private float bigFistDuration = 3;
 
     private float bigFistExperation;
 
@@ -21,6 +21,7 @@ class BigFistItem : Item
         // Payload is to scale the fist
         playerUser.myFist.transform.localScale = new Vector3(fistScale, fistScale, 1);
 
+        itemState = ItemState.InEffect;
     }
 
     protected override void ItemHasExpired()       // Checklist item 2
@@ -38,10 +39,6 @@ class BigFistItem : Item
 
         return false;
     }
-    //void Start()
-    //{
-
-    //}
 
     // Update is called once per frame
     void Update()

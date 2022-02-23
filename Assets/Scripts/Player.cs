@@ -249,6 +249,8 @@ public class Player : MonoBehaviour
     public void ResetItem1()
     {
         myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
+        myItemSlot1.GetComponent<Image>().color = Color.white;
+
     }
 
     public void DisableTrailSlow()
