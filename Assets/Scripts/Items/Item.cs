@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Game independent Power Up logic supporting 2D and 3D modes.
@@ -82,6 +83,8 @@ public class Item : MonoBehaviour
         // We must have been collected by a player, store handle to player for later use      
         playerUser = gameObjectCollectingItem.GetComponent<Player> ();
 
+        playerUser.SetItem1(spriteRenderer.sprite);
+
         // We move the power up game object to be under the player that collect it, this isn't essential for functionality 
         // presented so far, but it is neater in the gameObject hierarchy
         gameObject.transform.parent = playerUser.gameObject.transform;
@@ -149,6 +152,7 @@ public class Item : MonoBehaviour
         // Arbitrary delay of some seconds to allow particle, audio is all done
         // TODO could tighten this and inspect the sfx? Hard to know how many, as subclasses could have spawned their own
         Destroy (gameObject, 10f);
+        playerUser.ResetItem1();
     }
 }
 

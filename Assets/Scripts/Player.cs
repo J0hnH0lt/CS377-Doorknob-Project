@@ -54,6 +54,11 @@ public class Player : MonoBehaviour
 
     public bool isReady = false;
 
+    public GameObject myItemSlot1;
+    public GameObject myItemSlot2;
+    public Sprite myItemSlot1Default;
+    public Sprite myItemSlot2Default;
+
     Vector3 trailVectorPosition;
 
 
@@ -69,6 +74,10 @@ public class Player : MonoBehaviour
 
         myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
         myReadyUpIcon = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
+        myItemSlot1 = myUI.transform.GetChild(3).gameObject;
+        myItemSlot2 = myUI.transform.GetChild(4).gameObject;
+        myItemSlot1Default = myItemSlot1.GetComponent<Image>().sprite;
+        myItemSlot2Default = myItemSlot2.GetComponent<Image>().sprite;
 
         myReadyUpIcon.color = Color.red;
 
@@ -93,6 +102,16 @@ public class Player : MonoBehaviour
         playerColor = c;
         GetComponent<Renderer>().material.color = playerColor;
         myFist.GetComponent<Renderer>().material.color = playerColor;
+    }
+
+    public void SetItem1(Sprite itemSprite)
+    {
+        myItemSlot1.GetComponent<Image>().sprite = itemSprite;
+    }
+
+    public void ResetItem1()
+    {
+        myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
     }
 
     public void ToggleReadyUp(InputAction.CallbackContext context)

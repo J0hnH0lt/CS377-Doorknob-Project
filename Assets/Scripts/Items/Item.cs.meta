@@ -3,7 +3,10 @@ guid: 46608a05e29704b608a900ccf01af68d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - specialEffect: {instanceID: 0}
+  - soundEffect: {instanceID: 0}
+  - nullItemSprite: {fileID: 21300000, guid: 0d70f9373d564419e8e12572e1e4ba89, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
