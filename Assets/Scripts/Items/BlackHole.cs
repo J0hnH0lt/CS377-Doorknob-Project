@@ -28,7 +28,7 @@ class BlackHole : Item
 
     public bool IsNotActive()
     {
-        if (itemState == ItemState.InAttractMode)
+        if (itemState == ItemState.Uncollected)
         {
             return true;
         }
@@ -39,7 +39,7 @@ class BlackHole : Item
     // Update is called once per frame
     void Update()
     {
-        if(itemState == ItemState.IsCollected && Time.time > blackHoleExpiration)
+        if(itemState == ItemState.InInventory && Time.time > blackHoleExpiration)
         {
             ItemHasExpired();
         }

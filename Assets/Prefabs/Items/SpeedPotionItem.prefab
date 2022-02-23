@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fdb7f04115c918049a47eb74ca36e592, type: 3}
-  m_Color: {r: 0.33839023, g: 0.9811321, b: 0.0786757, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,10 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  itemExplanation: 
-  expiresImmediately: 0
-  specialEffect: {fileID: 0}
-  soundEffect: {fileID: 0}
+  itemDescription: 
 --- !u!60 &3842649063425922116
 PolygonCollider2D:
   m_ObjectHideFlags: 0
