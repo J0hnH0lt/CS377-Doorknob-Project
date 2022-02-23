@@ -52,12 +52,14 @@ public class Player : MonoBehaviour
 
     public bool fartTrailActive;
 
+    // is the player ready
+
     public bool isReady = false;
 
+    // item
+    public List<Item> Inventory;
     public GameObject myItemSlot1;
-    public GameObject myItemSlot2;
     public Sprite myItemSlot1Default;
-    public Sprite myItemSlot2Default;
 
     Vector3 trailVectorPosition;
 
@@ -75,9 +77,7 @@ public class Player : MonoBehaviour
         myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
         myReadyUpIcon = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
         myItemSlot1 = myUI.transform.GetChild(3).gameObject;
-        myItemSlot2 = myUI.transform.GetChild(4).gameObject;
         myItemSlot1Default = myItemSlot1.GetComponent<Image>().sprite;
-        myItemSlot2Default = myItemSlot2.GetComponent<Image>().sprite;
 
         myReadyUpIcon.color = Color.red;
 
@@ -102,16 +102,6 @@ public class Player : MonoBehaviour
         playerColor = c;
         GetComponent<Renderer>().material.color = playerColor;
         myFist.GetComponent<Renderer>().material.color = playerColor;
-    }
-
-    public void SetItem1(Sprite itemSprite)
-    {
-        myItemSlot1.GetComponent<Image>().sprite = itemSprite;
-    }
-
-    public void ResetItem1()
-    {
-        myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
     }
 
     public void ToggleReadyUp(InputAction.CallbackContext context)
@@ -215,6 +205,52 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void AddItemToInventory(Item item)
+    {
+        // if it is empty add the item to the players inventory
+        Inventory.Add(item);
+   
+        // set the myItemSlot1 sprite
+        myItemSlot1.GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+        myItemSlot1.GetComponent<Image>().color = item.GetComponent<SpriteRenderer>().color;
+    }
+
+
+    public void UseItem(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // if the inventory is not empty
+            if (Inventory.Count == 0)
+            {
+                return;
+            }
+
+            // removes the item from the players inventory
+            Item item = Inventory[0];
+            Inventory.RemoveAt(0);
+
+
+            // sets the myItemSlot1 sprite to the default neutral slate
+            ResetItem1();
+
+
+            // calls the item payload
+            item.Activate();
+        }
+    }
+
+    public void SetItem1(Sprite itemSprite, Color spriteColor)
+    {
+        myItemSlot1.GetComponent<Image>().sprite = itemSprite;
+        myItemSlot1.GetComponent<Image>().color = spriteColor;
+    }
+
+    public void ResetItem1()
+    {
+        myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
+    }
+
     public void DisableTrailSlow()
     {
         StartCoroutine(SlowTrailDisable());
@@ -243,6 +279,8 @@ public class Player : MonoBehaviour
         GetComponent<Renderer>().material.color = playerColor;
         myFist.GetComponent<Renderer>().material.color = playerColor;
     }
+
+
 }
 
 

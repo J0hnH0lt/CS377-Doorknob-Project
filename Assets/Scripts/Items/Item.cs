@@ -20,6 +20,11 @@ public class Item : MonoBehaviour
     // the item's state (uncollected, inventroy, etc).
     protected ItemState itemState;
 
+    public void Activate()
+    {
+        ItemPayload();
+    }
+
     protected virtual void Awake ()
     {
         // get the sprite renderer
@@ -49,33 +54,29 @@ public class Item : MonoBehaviour
             return;
         }
 
+        Player p = gameObjectCollectingItem.GetComponent<Player>();
+
+
         // If the game object has already been picked up, we ignore it
         // (Note: after pickup the gameObject of the item persists, but with no renderer)
         // TODO MAKE SURE THE PLAYER HAS SPACE IN THEIR INVENTORY
         // TODO PLAYER INVENTORY SHOULD BE ABLE TO HANDLE DROPPING OF ITEMS
-        if (itemState == ItemState.InInventory || itemState == ItemState.Expriring)// || gameOBjectCollectingItem.Inventory != full)
+        if (itemState == ItemState.InInventory || itemState == ItemState.InEffect || p.Inventory.Count == 1)
         {
             return;
         }
 
+        // Assign item palyer reference 
+        playerUser = p;
+
         // Add item to player inventory
+        playerUser.AddItemToInventory(this);
         itemState = ItemState.InInventory;
-
-        // Assign item palyer reference   
-        playerUser = gameObjectCollectingItem.GetComponent<Player> ();
-
-        // Put the item into the inventory
-        // TODO WE SHOULD CREATE THIS SO IT IS AN INVENTORY
-        // TODO IN PLAYER --> INVENTORY SHOULD HANDLE THE LOGIC OF ITEM SLOTS
-        playerUser.SetItem1(spriteRenderer.sprite);
 
         // We move the power up game object to be under the player that collect it, this isn't essential for functionality 
         // presented so far, but it is neater in the gameObject hierarchy
         gameObject.transform.parent = playerUser.gameObject.transform;
         gameObject.transform.position = playerUser.gameObject.transform.position;
-
-        // TODODO hehe --> move this to when player has actived their item      
-        ItemPayload();
 
         // Turn of game object sprite renderer
         spriteRenderer.enabled = false;
@@ -92,15 +93,7 @@ public class Item : MonoBehaviour
     // Function to run when the item has been consumed (destroys the item)
     protected virtual void ItemHasExpired ()
     {
-        if (itemState == ItemState.Expriring)
-        {
-            return;
-        }
-
-        itemState = ItemState.Expriring;
-
         Destroy(gameObject);
-
     }
 
 }
@@ -110,6 +103,6 @@ public enum ItemState
 {
     Uncollected, //  the item is on the map
     InInventory, // the item is in the player inventory
-    Expriring // the item has been consumed by the player
+    InEffect // the item has been consumed by the player
 }
 
