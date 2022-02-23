@@ -24,24 +24,28 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnDoor(Color c)
     {
-        Vector3 randomPos = GetRandomPosition();
-        while(Physics2D.OverlapCircleAll(randomPos, 4f).Length > 0)
-        {
-            randomPos = GetRandomPosition();
-        }
-        Instantiate(doorPrefab, randomPos, Quaternion.identity).GetComponent<Renderer>().material.color = c;
+        Instantiate(doorPrefab, GetRandomPosition(), Quaternion.identity).GetComponent<Renderer>().material.color = c;
     }
 
-    public void SpawnObstacles(int n)
+    public void SpawnObstacles(int n, List<Color> colors)
     {
         ClearObstacles();
+
+        colors.Add(Color.black);
+
         for (int i = 0; i < n; i++)
         {
             Vector3 randomPos = GetRandomPosition();
-            
-            if (Physics2D.OverlapCircleAll(randomPos, 14f).Length == 0)
+
+            GameObject obstacle = Instantiate(obstaclePrefab, randomPos, Quaternion.identity);
+
+            if (Physics2D.OverlapCircleAll(randomPos, 14f).Length > 1)
             {
-                obstacleList.Add(Instantiate(obstaclePrefab, randomPos, Quaternion.identity));
+                Destroy(obstacle);
+            } else
+            {
+                obstacle.GetComponent<Renderer>().material.color = colors[Random.Range(0, colors.Count)];
+                obstacleList.Add(obstacle);
             }
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 205040277757789487}
   - component: {fileID: -516714926129297640}
   - component: {fileID: 2451244972420715764}
-  - component: {fileID: 4756913958939092983}
+  - component: {fileID: 7459821586120664789}
   m_Layer: 0
   m_Name: CircleObstacle
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 6f5b7b75e80b1421eb58c706940269a8, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &4756913958939092983
+--- !u!58 &7459821586120664789
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

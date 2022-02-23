@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
 
+    public List<Color> playerColors = new List<Color>();
+
     public GameState State;
 
     public static event Action<GameState> OnGameStateChanged;
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
                 foreach (Player p in players)
                 {
                     p.myReadyUpIcon.color = Color.clear;
+                    playerColors.Add(p.playerColor);
                 }
 
                 UpdateGameState(GameState.ItemPhase);
@@ -118,14 +121,16 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandleLevelChange() {
-        mySpawnManager.SpawnObstacles(100);
+
 
         // Get the number of items to spawn
+        HandlePlayerFart();
         int numItems = UnityEngine.Random.Range(2, 4);
         mySpawnManager.SpawnItems(numItems);
+        mySpawnManager.SpawnObstacles(10000, playerColors);
 
         // Handle the weighing and selection of who farts
-        HandlePlayerFart();
+        
     }
 
     public void HandlePlayerFart() {
