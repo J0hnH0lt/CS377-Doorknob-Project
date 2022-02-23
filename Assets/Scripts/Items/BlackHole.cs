@@ -22,7 +22,7 @@ class BlackHole : Item
 
     protected override void ItemHasExpired()       // Checklist item 2
     {
-        playerUser.myFist.transform.localScale = new Vector3(1, 1, 1);
+        playerReference.myFist.transform.localScale = new Vector3(1, 1, 1);
         base.ItemHasExpired();
     }
 
@@ -47,7 +47,7 @@ class BlackHole : Item
 
     public void BlackHoleEffect()
     {
-        Collider2D[] collidersInRadius = Physics2D.OverlapCircleAll(playerUser.transform.position, 3f);
+        Collider2D[] collidersInRadius = Physics2D.OverlapCircleAll(playerReference.transform.position, 3f);
         foreach (Collider2D collider in collidersInRadius)
         {
             if (collider.tag == "Player")

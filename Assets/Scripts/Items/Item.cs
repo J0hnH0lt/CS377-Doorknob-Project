@@ -12,13 +12,13 @@ public class Item : MonoBehaviour
     public string itemDescription;
 
     // the player who picks up the item
-    protected Player playerUser;
+    protected Player playerReference;
 
     // the sprite for the item
     protected SpriteRenderer spriteRenderer;
 
     // the item's state (uncollected, inventroy, etc).
-    protected ItemState itemState;
+    public ItemState itemState;
 
     public void Activate()
     {
@@ -54,8 +54,7 @@ public class Item : MonoBehaviour
             return;
         }
 
-        Player p = gameObjectCollectingItem.GetComponent<Player>();
-
+        Player p= gameObjectCollectingItem.GetComponent<Player>();
 
         // If the game object has already been picked up, we ignore it
         // (Note: after pickup the gameObject of the item persists, but with no renderer)
@@ -68,16 +67,16 @@ public class Item : MonoBehaviour
         }
 
         // Assign item palyer reference 
-        playerUser = p;
+        playerReference = p;
 
         // Add item to player inventory
-        playerUser.AddItemToInventory(this);
+        playerReference.AddItemToInventory(this);
         itemState = ItemState.InInventory;
 
         // We move the power up game object to be under the player that collect it, this isn't essential for functionality 
         // presented so far, but it is neater in the gameObject hierarchy
-        gameObject.transform.parent = playerUser.gameObject.transform;
-        gameObject.transform.position = playerUser.gameObject.transform.position;
+        gameObject.transform.parent = playerReference.gameObject.transform;
+        gameObject.transform.position = playerReference.gameObject.transform.position;
 
         // Turn of game object sprite renderer
         spriteRenderer.enabled = false;

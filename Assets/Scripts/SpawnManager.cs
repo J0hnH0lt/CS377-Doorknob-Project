@@ -58,7 +58,11 @@ public class SpawnManager : MonoBehaviour
 
     public void ClearItems()
     {
-        foreach (GameObject item in itemList) Destroy(item);
+        foreach (GameObject item in itemList) {
+            if (item.GetComponent<Item>().itemState==ItemState.Uncollected) {
+                Destroy(item);
+            }
+        }
         Debug.Log("Item Count: "+ itemList.Count);
         itemList = new List<GameObject>();
     }

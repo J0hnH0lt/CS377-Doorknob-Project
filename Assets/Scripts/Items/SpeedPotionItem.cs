@@ -17,7 +17,7 @@ class SpeedPotionItem : Item
         speedPotionExpiration = Time.time + speedPotionDuration;
 
         // Payload is to scale the fist
-        playerUser.speedModifier = playerUser.speedModifier + speedScale;
+        playerReference.speedModifier = playerReference.speedModifier + speedScale;
 
         itemState = ItemState.InEffect;
 
@@ -25,7 +25,7 @@ class SpeedPotionItem : Item
 
     protected override void ItemHasExpired()       // Checklist item 2
     {
-        playerUser.speedModifier = playerUser.speedModifier - speedScale;
+        playerReference.speedModifier = playerReference.speedModifier - speedScale;
         base.ItemHasExpired();
     }
 

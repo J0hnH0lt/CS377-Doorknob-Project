@@ -311,7 +311,7 @@ public class Player : MonoBehaviour
     IEnumerator SlowTrailDisable()
     {
         var trail = trailRenderObject.GetComponent<TrailRenderer>();
-        float rate = trail.time / 30f;
+        float rate = trail.time / 100f;
         while (trail.time > 0)
         {
             trail.time -= rate;

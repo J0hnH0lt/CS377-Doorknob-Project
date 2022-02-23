@@ -10,6 +10,8 @@ public class FistScript : MonoBehaviour
 
     private float endOfPunchCoolDown;
 
+    public float fistScaleMod = 1;
+
     private Collider2D myCollider;
 
     [SerializeField]
@@ -37,6 +39,9 @@ public class FistScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        this.transform.localScale = new Vector3(fistScaleMod, fistScaleMod, 1);
+
         if (Time.time < endOfPunchDuration && currentPosition != reach)
         {
             currentPosition = reach;
@@ -50,6 +55,8 @@ public class FistScript : MonoBehaviour
         {
             myCollider.enabled = false;
         }
+
+
         
     }
 

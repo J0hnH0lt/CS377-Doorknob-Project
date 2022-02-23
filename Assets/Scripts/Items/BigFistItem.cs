@@ -19,14 +19,17 @@ class BigFistItem : Item
         bigFistExperation = Time.time + bigFistDuration;
 
         // Payload is to scale the fist
-        playerUser.myFist.transform.localScale = new Vector3(fistScale, fistScale, 1);
+        //playerUser.myFist.transform.localScale = new Vector3(fistScale, fistScale, 1);
+        playerReference.myFist.GetComponent<FistScript>().fistScaleMod += fistScale;
 
         itemState = ItemState.InEffect;
     }
 
     protected override void ItemHasExpired()       // Checklist item 2
     {
-        playerUser.myFist.transform.localScale = new Vector3(1, 1, 1);
+        //playerUser.myFist.transform.localScale = new Vector3(1, 1, 1);
+        playerReference.myFist.GetComponent<FistScript>().fistScaleMod -= fistScale;
+
         base.ItemHasExpired();
     }
 
