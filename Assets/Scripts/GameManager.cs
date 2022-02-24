@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=1 && PlayersReady())
+            if (players.Count >=2 && PlayersReady())
             {
                 foreach (Player p in players)
                 {
@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ItemPhase:
                 HandleItemPhase();
+
                 break;
             case GameState.CombatPhase:
                 HandleLevelChange();
@@ -127,7 +128,7 @@ public class GameManager : MonoBehaviour
         HandlePlayerFart();
         int numItems = UnityEngine.Random.Range(2, 4);
         mySpawnManager.SpawnItems(numItems);
-        mySpawnManager.SpawnObstacles(10000, playerColors);
+        mySpawnManager.SpawnObstacles(200, playerColors);
 
         // Handle the weighing and selection of who farts
         
