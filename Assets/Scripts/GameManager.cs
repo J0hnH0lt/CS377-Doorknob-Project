@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             gameOverTimer += Time.deltaTime;
             if (gameOverTimer >= gameOverTime)
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("MVP");
             }
         }
     }

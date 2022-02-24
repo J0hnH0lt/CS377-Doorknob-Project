@@ -53,7 +53,7 @@ public class SpawnManager : MonoBehaviour
     public void ClearObstacles()
     {
         foreach (GameObject obstacle in obstacleList) Destroy(obstacle);
-        Debug.Log(obstacleList.Count);
+        obstacleList = new List<GameObject>();
     }
 
     public void ClearItems()
