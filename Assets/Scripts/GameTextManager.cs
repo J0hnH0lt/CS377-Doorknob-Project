@@ -31,9 +31,6 @@ public class GameTextManager : MonoBehaviour
     public void GameOver()
     {
         TitleText.GetComponent<Text>().text = "GAME OVER";
-        
-        //TitleText.transform.position = new Vector3(0, 0, 0);
-        TitleText.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
 
         //InfoPanel.transform.position = new Vector3(InfoPanel.transform.position.x - 600,
         //                                           InfoPanel.transform.position.y,
