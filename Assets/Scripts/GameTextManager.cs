@@ -15,15 +15,17 @@ public class GameTextManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        StartCoroutine(InstructionPanelLerpIn());
     }
 
     public void StartUp()
     {
+        
     }
 
     public void GameRunning()
     {
-        StartCoroutine(InstructionPanelLerp());
+        StartCoroutine(InstructionPanelLerpOut());
 
         TitleText.GetComponent<Text>().text = "";
     }
@@ -31,13 +33,9 @@ public class GameTextManager : MonoBehaviour
     public void GameOver()
     {
         TitleText.GetComponent<Text>().text = "GAME OVER";
-
-        //InfoPanel.transform.position = new Vector3(InfoPanel.transform.position.x - 600,
-        //                                           InfoPanel.transform.position.y,
-        //                                           InfoPanel.transform.position.z);
     }
 
-    private IEnumerator InstructionPanelLerp()
+    private IEnumerator InstructionPanelLerpOut()
     {
         float startTime = Time.time;
         float timeElapsed = (Time.time - startTime) / 500.0f;
@@ -47,6 +45,24 @@ public class GameTextManager : MonoBehaviour
             InfoPanel.transform.position = new Vector3(InfoPanel.transform.position.x + Mathf.Lerp(0, 200, timeElapsed),
                                                    InfoPanel.transform.position.y,
                                                    InfoPanel.transform.position.z);
+            yield return null;
+        }
+    }
+
+    private IEnumerator InstructionPanelLerpIn()
+    {
+        float startTime = Time.time;
+        float timeElapsed = (Time.time - startTime);
+        float finalPos = InfoPanel.transform.position.x;
+        while (timeElapsed < 3f)
+        {
+            timeElapsed = (Time.time - startTime);
+            InfoPanel.transform.position = new Vector3(finalPos + Mathf.Lerp(60f, 1f, timeElapsed),
+                                                   InfoPanel.transform.position.y,
+                                                   InfoPanel.transform.position.z);
+            Color c = TitleText.GetComponent<Text>().color;
+            c.a = Mathf.Lerp(0f, 1f, timeElapsed);
+            TitleText.GetComponent<Text>().color = c;
             yield return null;
         }
     }

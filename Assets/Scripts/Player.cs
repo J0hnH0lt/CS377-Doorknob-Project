@@ -90,6 +90,7 @@ public class Player : MonoBehaviour
         myReadyUpIcon.color = Color.red;
 
         AssignColor(Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f));
+        myHealthBar.color = Color.green;
 
         myGameManager = GameManager.Instance;
     }
@@ -204,9 +205,21 @@ public class Player : MonoBehaviour
         {
             health -= damage;
             myHealthBar.fillAmount -= 0.1f;
+            if (health == 6)
+            {
+                myHealthBar.color = Color.yellow;
+            }
+
+            if (health == 3)
+            {
+                myHealthBar.color = Color.red;
+            }
             StartCoroutine(DamageFlash());
             if (health == 0)
             {
+                gameObject.SetActive(false);
+                myFist.SetActive(false);
+                Destroy(trailRenderObject);
                 GameTextManager.Instance.GameOver();
                 GameManager.Instance.UpdateGameState(GameState.GameOver);
             }
