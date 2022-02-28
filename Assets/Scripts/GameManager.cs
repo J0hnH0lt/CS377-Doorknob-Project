@@ -8,15 +8,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private List<Player> players = new List<Player>();
+    public SpawnManager mySpawnManager;
 
-    private List<GameObject> obstacleList = new List<GameObject>();
+    public List<Player> players = new List<Player>();
+
+    public List<Color> playerColors = new List<Color>();
 
     public GameState State;
-
-    public GameObject doorPrefab;
-
-    public GameObject randomObstaclePrefab;
 
     public static event Action<GameState> OnGameStateChanged;
 
@@ -44,8 +42,14 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=1)
+            if (players.Count >=2 && PlayersReady())
             {
+                foreach (Player p in players)
+                {
+                    p.myReadyUpIcon.color = Color.clear;
+                    playerColors.Add(p.playerColor);
+                }
+
                 UpdateGameState(GameState.ItemPhase);
                 GameTextManager.Instance.GameRunning();
             }
@@ -61,9 +65,21 @@ public class GameManager : MonoBehaviour
             gameOverTimer += Time.deltaTime;
             if (gameOverTimer >= gameOverTime)
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("MVP");
             }
         }
+    }
+
+    public bool PlayersReady()
+    {
+        foreach (Player p in players)
+        {
+            if (!p.isReady)
+            {
+                return false;
+            }
+        }
+        return true;
     }
  
     public void UpdateGameState(GameState newState) {
@@ -74,9 +90,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ItemPhase:
                 HandleItemPhase();
+
                 break;
             case GameState.CombatPhase:
-                HandleFart();
+                HandleLevelChange();
                 break;
             case GameState.GameOver:
                 HandleGameOver();
@@ -104,57 +121,44 @@ public class GameManager : MonoBehaviour
         gameOverTime = 5.0f;
     }
 
-    public void HandleFart() {
-        //Debug.Log("Ayo We Farting Lads");
-        // SPAWN A DOOR IN A RANDOM LOCATION
-        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-        GameObject door = Instantiate(doorPrefab, pos, Quaternion.identity);
+    public void HandleLevelChange() {
 
 
+        // Get the number of items to spawn
+        HandlePlayerFart();
+        int numItems = UnityEngine.Random.Range(2, 4);
+        mySpawnManager.SpawnItems(numItems);
+        mySpawnManager.SpawnObstacles(200, playerColors);
 
-        var numObstacles = obstacleList.Count;
-        for (int i = 0; i < numObstacles; i++)
-        {
-            Destroy(obstacleList[i]);
-        }
-        obstacleList = new List<GameObject>();
-        Debug.Log(obstacleList.Count);
+        // Handle the weighing and selection of who farts
+        
+    }
 
-        for (int i = 0; i < 100; i++)
-        {
-            Vector3 randomPos = Camera.main.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0, Screen.width), UnityEngine.Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
-            Player randomPlayer = players[UnityEngine.Random.Range(0, players.Count)];
-            if(Physics2D.OverlapCircleAll(randomPos, 14f).Length == 0)
-            {
-                obstacleList.Add(Instantiate(randomObstaclePrefab, randomPos, Quaternion.identity));
-
-                obstacleList[obstacleList.Count-1].GetComponent<Renderer>().material.color = randomPlayer.GetComponent<Renderer>().material.color;
-
-            } else
-            {
-                Debug.Log(Physics2D.OverlapCircleAll(randomPos, 1f).Length);
-            }
-        }
-
-
-        // GET A RANDOM PLAYER
+    public void HandlePlayerFart() {
+        // construct a health range dictionary of all the players
         var healhList = new List<Tuple<int, Player>>();
-  
+
+
         int random_sum = 0;
-        foreach (Player p in players) {
+        foreach (Player p in players)
+        {
             random_sum += p.health;
             healhList.Add(Tuple.Create(random_sum, p));
         }
 
+        // get a random number between 0 and the total amount of player health
         int health_helper = UnityEngine.Random.Range(0, random_sum);
 
         foreach (var tuple in healhList)
         {
+        
             int chance = tuple.Item1;
             Player player = tuple.Item2;
+            // select the player if the random number falls within their health range
             if (health_helper <= chance)
             {
-                door.GetComponent<Renderer>().material.color = player.GetComponent<Renderer>().material.color;
+                // spawn the door of the players color
+                mySpawnManager.SpawnDoor(player.GetComponent<Renderer>().material.color);
                 player.OnFart();
                 break;
             }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DashScript : MonoBehaviour
 {
@@ -44,17 +45,20 @@ public class DashScript : MonoBehaviour
         }
     }
 
-    public void Dash()
+    public void Dash(InputAction.CallbackContext context)
     {
-        Debug.Log("Dash");
-        if (Time.time > dashCooldownExpiration)
+        if (context.started)
         {
-            dashExpiration = Time.time + dashDuration;
-            dashCooldownExpiration = Time.time + dashCooldown;
-            dashEnabled = true;
-            GetComponent<Player>().currSpeed = dashSpeed;
-            StartCoroutine(DashImageLerp());
+            if (Time.time > dashCooldownExpiration)
+            {
+                dashExpiration = Time.time + dashDuration;
+                dashCooldownExpiration = Time.time + dashCooldown;
+                dashEnabled = true;
+                GetComponent<Player>().currSpeed = dashSpeed;
+                StartCoroutine(DashImageLerp());
+            }
         }
+         
     }
 
     private IEnumerator DashImageLerp()

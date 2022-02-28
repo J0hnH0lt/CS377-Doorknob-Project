@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     public float currSpeed;
 
+    public float speedModifier = 1;
+
     [SerializeField]
     public int health;
 
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D playerRigidBod;
 
-    private GameObject myFist;
+    public GameObject myFist;
 
     private GameObject myUI;
 
@@ -35,6 +37,8 @@ public class Player : MonoBehaviour
     public GameObject FistPrefab;
 
     public GameObject FartPrefab;
+
+    public Image myReadyUpIcon;
 
     private int id;
 
@@ -48,14 +52,26 @@ public class Player : MonoBehaviour
 
     public bool fartTrailActive;
 
+    // is the player ready
+
+    public bool isReady = false;
+
+    // item
+    public Item item1;
+    public GameObject myItemSlot1;
+    public Sprite myItemSlot1Default;
+
+    public Item item2;
+    public GameObject myItemSlot2;
+    public Sprite myItemSlot2Default;
+
     Vector3 trailVectorPosition;
 
 
     public void Awake()
     {
-        playerColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f);
+ 
         playerRigidBod = GetComponent<Rigidbody2D>();
-
         myUI = gameObject.transform.GetChild(0).gameObject;
         myFist = Instantiate(
             FistPrefab,
@@ -63,12 +79,57 @@ public class Player : MonoBehaviour
             Quaternion.identity);
 
         myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
+        myReadyUpIcon = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
+        myItemSlot1 = myUI.transform.GetChild(3).gameObject;
+        myItemSlot2 = myUI.transform.GetChild(4).gameObject;
 
-        
-        GetComponent<Renderer>().material.color = playerColor;
-        myFist.GetComponent<Renderer>().material.color = playerColor;
+        // defualt sprites are duplicated
+        myItemSlot1Default = myItemSlot1.GetComponent<Image>().sprite;
+        myItemSlot2Default = myItemSlot2.GetComponent<Image>().sprite;
+
+        myReadyUpIcon.color = Color.red;
+
+        AssignColor(Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f));
+        myHealthBar.color = Color.green;
 
         myGameManager = GameManager.Instance;
+    }
+
+    public void SwapColor(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (myGameManager.State == GameState.Menu)
+            {
+                AssignColor(Random.ColorHSV(0f, 1f, 1f, 1f, 0.9f, 1f));
+            }
+        }
+    }
+
+    private void AssignColor(Color c)
+    {
+        playerColor = c;
+        GetComponent<Renderer>().material.color = playerColor;
+        myFist.GetComponent<Renderer>().material.color = playerColor;
+    }
+
+    public void ToggleReadyUp(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (myGameManager.State == GameState.Menu)
+            {
+                isReady = !isReady;
+                if(isReady)
+                {
+                    myReadyUpIcon.color = Color.green;
+                } else
+                {
+                    myReadyUpIcon.color = Color.red;
+                }
+            
+            }
+        }
     }
 
     public void Start() {
@@ -81,7 +142,7 @@ public class Player : MonoBehaviour
     public void Update()
     {
 
-        playerRigidBod.velocity = new Vector3(movementInput.x, movementInput.y, 0) * currSpeed;
+        playerRigidBod.velocity = new Vector3(movementInput.x, movementInput.y, 0) * (currSpeed * speedModifier);
 
         if (movementInput.x + movementInput.y != 0)
         {
@@ -119,10 +180,13 @@ public class Player : MonoBehaviour
         this.hasFarted = true;
     }
 
-    public void Punch()
+    public void Punch(InputAction.CallbackContext context)
     {
-        myFist.GetComponent<Collider2D>().enabled = true;
-        myFist.GetComponent<FistScript>().PunchIt();
+        if (context.started)
+        {
+            myFist.GetComponent<Collider2D>().enabled = true;
+            myFist.GetComponent<FistScript>().PunchIt();
+        }
     }
 
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
@@ -141,13 +205,115 @@ public class Player : MonoBehaviour
         {
             health -= damage;
             myHealthBar.fillAmount -= 0.1f;
+            if (health == 6)
+            {
+                myHealthBar.color = Color.yellow;
+            }
+
+            if (health == 3)
+            {
+                myHealthBar.color = Color.red;
+            }
             StartCoroutine(DamageFlash());
             if (health == 0)
             {
+                gameObject.SetActive(false);
+                myFist.SetActive(false);
+                Destroy(trailRenderObject);
                 GameTextManager.Instance.GameOver();
                 GameManager.Instance.UpdateGameState(GameState.GameOver);
             }
         }
+    }
+
+    public void AddItemToInventory(Item item)
+    {
+        Debug.Log("Adding Item to inventory");
+
+        // if it is empty add the item to the players inventory
+  
+        if (item1 == null)
+        {
+            Image itemSlotImage = myItemSlot1.GetComponent<Image>();
+            Debug.Log("Adding to item slot 1");
+            item1 = item;
+            // set the myItemSlot1 sprite
+            if (myItemSlot1.GetComponent<Image>().sprite == myItemSlot1Default)
+            {
+                itemSlotImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
+                itemSlotImage.color = item.GetComponent<SpriteRenderer>().color;
+            }
+        }
+
+        else
+        {
+            Debug.Log("Adding to item slot 2");
+            item2 = item;
+            if (myItemSlot2.GetComponent<Image>().sprite == myItemSlot2Default)
+            {
+                myItemSlot2.GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
+                myItemSlot2.GetComponent<Image>().color = item.GetComponent<SpriteRenderer>().color;
+            }
+        }
+        
+    }
+
+
+    public void UseItem1(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // if the inventory is not empty
+            if (item1 == null)
+            {
+                return;
+            }
+
+
+            // sets the myItemSlot1 sprite to the default neutral slate
+            ResetItem1();
+
+
+            // calls the item payload
+            item1.Activate();
+
+            item1 = null;
+        }
+    }
+
+    public void UseItem2(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // if the inventory is not empty
+            if (item2 == null)
+            {
+                return;
+            }
+
+            // sets the myItemSlot1 sprite to the default neutral slate
+            ResetItem2();
+
+
+            // calls the item payload
+            item2.Activate();
+
+            item2 = null;
+        }
+    }
+
+    public void ResetItem1()
+    {
+        myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
+        myItemSlot1.GetComponent<Image>().color = Color.white;
+
+    }
+
+    public void ResetItem2()
+    {
+        myItemSlot2.GetComponent<Image>().sprite = myItemSlot1Default;
+        myItemSlot2.GetComponent<Image>().color = Color.white;
+
     }
 
     public void DisableTrailSlow()
@@ -158,7 +324,7 @@ public class Player : MonoBehaviour
     IEnumerator SlowTrailDisable()
     {
         var trail = trailRenderObject.GetComponent<TrailRenderer>();
-        float rate = trail.time / 30f;
+        float rate = trail.time / 50f;
         while (trail.time > 0)
         {
             trail.time -= rate;
@@ -170,16 +336,16 @@ public class Player : MonoBehaviour
 
     IEnumerator DamageFlash()
     {
-        Color regColor = GetComponent<Renderer>().material.color;
-
         GetComponent<Renderer>().material.color = Color.red;
         myFist.GetComponent<Renderer>().material.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
-        GetComponent<Renderer>().material.color = regColor;
-        myFist.GetComponent<Renderer>().material.color = regColor;
+        GetComponent<Renderer>().material.color = playerColor;
+        myFist.GetComponent<Renderer>().material.color = playerColor;
     }
+
+
 }
 
 

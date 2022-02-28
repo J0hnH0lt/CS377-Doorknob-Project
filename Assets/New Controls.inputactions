@@ -31,6 +31,42 @@
                     "processors": "",
                     "interactions": "Tap(duration=0.1)",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ReadyUp",
+                    "type": "Button",
+                    "id": "0e09d283-f410-48cf-a4c1-5a856f14c631",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeColor",
+                    "type": "Button",
+                    "id": "26e38d32-c4d2-4e1b-968e-be6d0a88cc39",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem1",
+                    "type": "Button",
+                    "id": "2c0b4d09-e655-4d11-a933-6c02eb617358",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem2",
+                    "type": "Button",
+                    "id": "ea49160e-f825-4a25-99bd-1d0865abbdcd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -64,6 +100,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Punch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6b34160-818e-4a46-9fc0-d24c9a98b298",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReadyUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f76454ab-827f-41a9-8a76-c1fa339fafd5",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeColor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "555fea38-56aa-45ba-9a40-e06cadf63058",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Tap(duration=0.1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4889c16-773a-49e0-b9e9-07a4e022693f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Tap(duration=0.1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
