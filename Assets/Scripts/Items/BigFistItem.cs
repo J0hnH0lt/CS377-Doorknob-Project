@@ -6,7 +6,7 @@ class BigFistItem : Item
 {
     private int fistScale = 2;
 
-    private float bigFistDuration = 3;
+    private float bigFistDuration = 4;
 
     private float bigFistExperation;
 

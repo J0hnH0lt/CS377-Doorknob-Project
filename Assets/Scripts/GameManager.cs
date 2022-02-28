@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=2 && PlayersReady())
+            if (players.Count >=1 && PlayersReady())
             {
                 foreach (Player p in players)
                 {
@@ -90,7 +90,6 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ItemPhase:
                 HandleItemPhase();
-
                 break;
             case GameState.CombatPhase:
                 HandleLevelChange();
@@ -111,6 +110,27 @@ public class GameManager : MonoBehaviour
 
     public void HandleItemPhase()
     {
+        // delete the sandbox items
+        Item[] items = FindObjectsOfType<Item>();
+        foreach (Item i in items)
+        {
+            if (i != null)
+            {
+                Debug.Log("destroying item with tag "+ i.tag);
+                Destroy(i.gameObject);
+            }
+        }
+
+
+        // delete items from player inventory
+        foreach(Player p in players) {
+            p.ResetItem1();
+            p.ResetItem2();
+        }
+
+
+
+        // spawn the door
         doorTimer = 0.0f;
         nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
     }

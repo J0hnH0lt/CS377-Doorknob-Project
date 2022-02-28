@@ -269,15 +269,13 @@ public class Player : MonoBehaviour
                 return;
             }
 
+            // calls the item payload
+            item1.Activate();
 
             // sets the myItemSlot1 sprite to the default neutral slate
             ResetItem1();
 
 
-            // calls the item payload
-            item1.Activate();
-
-            item1 = null;
         }
     }
 
@@ -291,14 +289,11 @@ public class Player : MonoBehaviour
                 return;
             }
 
-            // sets the myItemSlot1 sprite to the default neutral slate
-            ResetItem2();
-
-
             // calls the item payload
             item2.Activate();
 
-            item2 = null;
+            // sets the myItemSlot1 sprite to the default neutral slate
+            ResetItem2();
         }
     }
 
@@ -306,14 +301,14 @@ public class Player : MonoBehaviour
     {
         myItemSlot1.GetComponent<Image>().sprite = myItemSlot1Default;
         myItemSlot1.GetComponent<Image>().color = Color.white;
-
+        item1 = null;
     }
 
     public void ResetItem2()
     {
         myItemSlot2.GetComponent<Image>().sprite = myItemSlot1Default;
         myItemSlot2.GetComponent<Image>().color = Color.white;
-
+        item2 = null;
     }
 
     public void DisableTrailSlow()

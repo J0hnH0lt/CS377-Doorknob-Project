@@ -6,7 +6,7 @@ class SpeedPotionItem : Item
 {
     private float speedScale = .35f;
 
-    private float speedPotionDuration = 3;
+    private float speedPotionDuration = 5;
 
     private float speedPotionExpiration;
 
