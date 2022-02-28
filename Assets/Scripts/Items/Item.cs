@@ -8,6 +8,10 @@ public class Item : MonoBehaviour
     // name of the item
     public string itemName;
 
+    // sandbox trackers
+    public bool isSandBox;
+    private float sandboxItemInterval = 1.0f;
+
     // item description
     public string itemDescription;
 
@@ -28,7 +32,14 @@ public class Item : MonoBehaviour
     protected virtual void Awake ()
     {
         // get the sprite renderer
-        spriteRenderer = GetComponent<SpriteRenderer> ();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // if it is a sandbox item, set the timer inverval at which it can be collected
+        if (isSandBox)
+        {
+            sandboxItemInterval = Time.time + sandboxItemInterval;
+        }
+        
     }
 
     protected virtual void Start ()
@@ -46,7 +57,12 @@ public class Item : MonoBehaviour
     // Function to run on item collection
     protected virtual void ItemCollected (GameObject gameObjectCollectingItem)
     {
-        //Debug.Log("Collected item: " + gameObjectCollectingItem.tag);
+        // if it is a sandbox item, check to see if it can be collected
+        if (isSandBox && Time.time < sandboxItemInterval)
+        {
+            return;
+        }
+
 
         // If the game object collecting the item is not a palyer
         if (gameObjectCollectingItem.tag != "Player")
@@ -58,12 +74,17 @@ public class Item : MonoBehaviour
 
         // If the game object has already been picked up, we ignore it
         // (Note: after pickup the gameObject of the item persists, but with no renderer)
-        // TODO MAKE SURE THE PLAYER HAS SPACE IN THEIR INVENTORY
-        // TODO PLAYER INVENTORY SHOULD BE ABLE TO HANDLE DROPPING OF ITEMS
    
         if (itemState == ItemState.InInventory || itemState == ItemState.InEffect || (p.item1!=null && p.item2!=null))
         {
             return;
+        }
+
+        // if the item is a sandbox item, spawn a direct copy of that item
+        if (isSandBox)
+        {
+            Debug.Log("Spawning new instance of item");
+            Instantiate(this, this.transform.parent, true);
         }
 
         // Assign item palyer reference 
