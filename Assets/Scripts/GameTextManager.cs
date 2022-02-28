@@ -11,6 +11,7 @@ public class GameTextManager : MonoBehaviour
     public GameObject InstructionPanel;
     public GameObject TitleText;
     public GameObject InfoPanel;
+    public GameObject ItemText;
 
     private void Awake()
     {
