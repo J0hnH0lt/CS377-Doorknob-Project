@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
 
+
     public List<Color> playerColors = new List<Color>();
 
     public GameState State;
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     private float gameOverTimer = 0.0f;
     private float gameOverTime;
+
+    private bool isStartAfterSandbox = true;
 
     private 
 
@@ -110,28 +113,12 @@ public class GameManager : MonoBehaviour
 
     public void HandleItemPhase()
     {
-        // delete the sandbox items
-        Item[] items = FindObjectsOfType<Item>();
-        foreach (Item i in items)
+        if (isStartAfterSandbox)
         {
-          
-            if (i.itemState!=ItemState.InEffect)
-            {
-                Debug.Log("destroying item with tag "+ i.tag);
-                Destroy(i.gameObject);
-            }
-
+            handleSandBoxChange();
+            isStartAfterSandbox = false;
         }
-
-
-        // delete items from player inventory
-        foreach(Player p in players) {
-            p.ResetItem1();
-            p.ResetItem2();
-        }
-
-
-
+       
         // spawn the door
         doorTimer = 0.0f;
         nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
@@ -150,7 +137,7 @@ public class GameManager : MonoBehaviour
 
         // Get the number of items to spawn
         HandlePlayerFart();
-        int numItems = UnityEngine.Random.Range(2, 4);
+        int numItems = UnityEngine.Random.Range(4, 10);
         mySpawnManager.SpawnItems(numItems);
         mySpawnManager.SpawnObstacles(200, playerColors);
 
@@ -191,7 +178,33 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(Player p){
         players.Add(p);
+        p.health = 6;
         Debug.Log("Player Added");
+    }
+
+    public void handleSandBoxChange()
+    {
+        // delete the sandbox items
+        Item[] items = FindObjectsOfType<Item>();
+        foreach (Item i in items)
+        {
+            if (i.itemState == ItemState.InEffect) // if the item is in effect, force its expiration
+            {
+                i.ForceExpiration();
+            }
+            else // if the item is in inventory or uncollected, destroy the item
+            { 
+                Destroy(i.gameObject);
+            }
+
+        }
+
+        // delete items from player inventory
+        foreach (Player p in players)
+        {
+            p.ResetItem1();
+            p.ResetItem2();
+        }
     }
     
 }

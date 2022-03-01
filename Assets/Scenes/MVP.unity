@@ -844,7 +844,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Instructions '
+  m_Text: "How to Play\n "
 --- !u!222 &491817495
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2290,6 +2290,8 @@ MonoBehaviour:
   prefabList: []
   bigFistPrefab: {fileID: 7898285378134162448, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
   speedPotionPrefab: {fileID: 4352276570954446795, guid: 19f17e2af87d645f9948778fe511cd3d, type: 3}
+  mineItemPrefab: {fileID: 8519301471431986197, guid: 172d92bacd0b643d586da7066f28b4f5, type: 3}
+  healthPackItemPrefab: {fileID: 8103315186024691492, guid: bfcb80a6e9b1b4d8abeaf75ceca3b6fb, type: 3}
 --- !u!1 &2026019735
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,7 +2516,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Uh oh! You farted! Get to the door before you get hit. \n\nDid your friend
-    fart? GROSS! \nMake sure to punish them for their nasty buisness. \n\nMake sure
+    fart? GROSS! \nMake sure to punish them for their nasty business. \n\nMake sure
     to use items and obstacles to your advantage\n\n"
 --- !u!222 &2104684901
 CanvasRenderer:

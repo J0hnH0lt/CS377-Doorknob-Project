@@ -29,6 +29,11 @@ public class Item : MonoBehaviour
         ItemPayload();
     }
 
+    public void ForceExpiration()
+    {
+        ItemHasExpired();
+    }
+
     protected virtual void Awake ()
     {
         // get the sprite renderer
