@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
         int random_sum = 0;
         foreach (Player p in players)
         {
-            random_sum += p.health;
+            random_sum += p.currHealth;
             healhList.Add(Tuple.Create(random_sum, p));
         }
 
@@ -182,7 +182,8 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(Player p){
         players.Add(p);
-        p.health = 6;
+        p.maxHealth = 25;
+        p.currHealth = 25;
         Debug.Log("Player Added");
 
     }

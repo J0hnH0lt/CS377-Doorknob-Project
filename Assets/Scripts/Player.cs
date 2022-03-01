@@ -12,7 +12,9 @@ public class Player : MonoBehaviour
     public float speedModifier = 1;
 
     [SerializeField]
-    public int health;
+    public int maxHealth;
+    [SerializeField]
+    public int currHealth;
 
     [SerializeField]
     public int damage;
@@ -186,19 +188,19 @@ public class Player : MonoBehaviour
     {
         if (isFarting)
         {
-            health -= damage;
-            myHealthBar.fillAmount -= 0.1f;
-            if (health == 6)
+            currHealth -= damage;
+            myHealthBar.fillAmount = (float)currHealth / maxHealth;
+            if ((float)currHealth / maxHealth < 0.6)
             {
                 myHealthBar.color = Color.yellow;
             }
 
-            if (health == 3)
+            if ((float)currHealth / maxHealth < 0.3)
             {
                 myHealthBar.color = Color.red;
             }
             StartCoroutine(DamageFlash());
-            if (health == 0)
+            if (currHealth == 0)
             {
                 gameObject.SetActive(false);
                 myFist.SetActive(false);

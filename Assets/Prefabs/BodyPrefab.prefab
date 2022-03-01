@@ -265,7 +265,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6668812795786003253}
   - component: {fileID: 7251185130567063396}
-  - component: {fileID: 844296680551735091}
   - component: {fileID: 9119426022462221668}
   m_Layer: 0
   m_Name: myFist
@@ -339,22 +338,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &844296680551735091
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4237633800506504006}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
 --- !u!114 &9119426022462221668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +611,7 @@ MonoBehaviour:
   health: 10
   damage: 1
   punchDistance: 0
-  hasFarted: 0
+  isFarting: 0
   myFist: {fileID: 0}
   FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
   FartPrefab: {fileID: 7254340360046970723, guid: 1445beed7aa794357919567014f9ef53, type: 3}

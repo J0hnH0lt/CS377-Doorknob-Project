@@ -10,9 +10,9 @@ public class HealthPack : Item
     protected override void ItemPayload()
     {
         base.ItemPayload();
-        if (playerReference.health != 10)
+        if (playerReference.currHealth != playerReference.maxHealth)
         {
-            playerReference.health += healthIncrease;
+            playerReference.currHealth += healthIncrease;
         } 
         ItemHasExpired();
     }

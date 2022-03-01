@@ -21,7 +21,6 @@ public class FistScript : MonoBehaviour
     void Start()
     {
         currentPosition = resting;
-        this.GetComponent<CircleCollider2D>().enabled = false;
     }
 
     // Update is called once per frame
