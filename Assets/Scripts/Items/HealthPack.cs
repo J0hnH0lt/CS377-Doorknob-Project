@@ -13,6 +13,7 @@ public class HealthPack : Item
         if (playerReference.currHealth != playerReference.maxHealth)
         {
             playerReference.currHealth += healthIncrease;
+            playerReference.UpdateHealthBar();
         } 
         ItemHasExpired();
     }

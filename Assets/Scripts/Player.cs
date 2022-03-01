@@ -189,16 +189,8 @@ public class Player : MonoBehaviour
         if (isFarting)
         {
             currHealth -= damage;
-            myHealthBar.fillAmount = (float)currHealth / maxHealth;
-            if ((float)currHealth / maxHealth < 0.6)
-            {
-                myHealthBar.color = Color.yellow;
-            }
+            UpdateHealthBar();
 
-            if ((float)currHealth / maxHealth < 0.3)
-            {
-                myHealthBar.color = Color.red;
-            }
             StartCoroutine(DamageFlash());
             if (currHealth == 0)
             {
@@ -209,6 +201,14 @@ public class Player : MonoBehaviour
                 GameManager.Instance.UpdateGameState(GameState.GameOver);
             }
         }
+    }
+
+    public void UpdateHealthBar()
+    {
+        myHealthBar.fillAmount = (float)currHealth / maxHealth;
+        if (myHealthBar.fillAmount < 0.3) myHealthBar.color = Color.red;
+        else if (myHealthBar.fillAmount < 0.6) myHealthBar.color = Color.yellow;
+        else myHealthBar.color = Color.green;
     }
 
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
