@@ -39,25 +39,6 @@ public class MineEffect : Effect
         mineRenderer = GetComponent<Renderer>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // TODO to make effect apply to an area of players implement OnPhysicsOverlapSphere
-        // this makes the effect work for multiple players
-        if (collision.gameObject.tag == "Player" && isEffectActive==false)
-        {
-            playerEffected = collision.gameObject.GetComponent<Player>();
-            if (playerEffected.playerColor != mineColor)
-            {
-                playerEffected.speedModifier -= .5f;
-                isEffectActive = true;
-                mineSlowExpiration = Time.time + mineSlowDuration;
-                mineRenderer.enabled = false;
-            }
-            
-        }
-    }
-
-
     public void Update()
     {
         BlinkEffect();
@@ -70,6 +51,24 @@ public class MineEffect : Effect
         {
             playerEffected.speedModifier += .5f;
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // TODO to make effect apply to an area of players implement OnPhysicsOverlapSphere
+        // this makes the effect work for multiple players
+        if (collision.gameObject.tag == "Player" && isEffectActive == false)
+        {
+            playerEffected = collision.gameObject.GetComponent<Player>();
+            if (playerEffected.playerColor != mineColor)
+            {
+                playerEffected.speedModifier -= .5f;
+                isEffectActive = true;
+                mineSlowExpiration = Time.time + mineSlowDuration;
+                mineRenderer.enabled = false;
+            }
+
         }
     }
 

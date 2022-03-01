@@ -9,6 +9,8 @@ public class ItemManager : MonoBehaviour
     public GameObject speedPotionPrefab;
     public GameObject mineItemPrefab;
     public GameObject healthPackItemPrefab;
+    public GameObject barricadeItemPrefab;
+
     public static ItemManager Instance;
 
     private void Awake()
@@ -18,6 +20,7 @@ public class ItemManager : MonoBehaviour
         prefabList.Add(speedPotionPrefab);
         prefabList.Add(mineItemPrefab);
         prefabList.Add(healthPackItemPrefab);
+        prefabList.Add(barricadeItemPrefab);
     }
 
     public GameObject GetRandomItem()
