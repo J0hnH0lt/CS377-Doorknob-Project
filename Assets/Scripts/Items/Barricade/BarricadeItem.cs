@@ -14,14 +14,13 @@ public class BarricadeItem : Item
     {
 
         // instantiate mine object
-        BarricaideObject = Instantiate(BarricadePrefab, playerReference.transform.parent, true);
+        BarricaideObject = Instantiate(BarricadePrefab, this.gameObject.transform.position, Quaternion.identity);
+        BarricaideObject.GetComponent<Collider2D>().enabled = true;
         // handle colors
         Barricade = BarricaideObject.GetComponent<BarricadeEffect>();
         Barricade.barricadeColor = playerReference.playerColor;
         Barricade.GetComponent<Renderer>().material.color = playerReference.playerColor;
-
-        // assign its position
-        BarricaideObject.transform.position = this.gameObject.transform.position;
+        BarricaideObject.GetComponent<Renderer>().material.color = Barricade.barricadeColor;
 
         // if the item is sandbox, communicate that to the effect
         Barricade.isSandbox = true;
