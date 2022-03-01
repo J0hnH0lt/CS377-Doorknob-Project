@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     private Vector2 movementInput;
 
-    public bool hasFarted;
+    public bool isFarting;
 
     private Rigidbody2D playerRigidBod;
 
@@ -73,10 +73,7 @@ public class Player : MonoBehaviour
  
         playerRigidBod = GetComponent<Rigidbody2D>();
         myUI = gameObject.transform.GetChild(0).gameObject;
-        myFist = Instantiate(
-            FistPrefab,
-            playerRigidBod.position,
-            Quaternion.identity);
+        myFist = gameObject.transform.GetChild(1).gameObject;
 
         myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
         myReadyUpIcon = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
@@ -152,15 +149,11 @@ public class Player : MonoBehaviour
             playerRigidBod.angularVelocity = 0;
         }
     
-
-        myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
-                                                              (transform.up * 1.2f * myFist.GetComponent<FistScript>().currentPosition);
         myUI.GetComponent<Transform>().transform.eulerAngles = new Vector3(0,0,0);
 
-
-        if (myGameManager.State != GameState.CombatPhase && hasFarted == true)
+        if (myGameManager.State != GameState.CombatPhase && isFarting == true)
         {
-            hasFarted = false;
+            isFarting = false;
         }
 
         if (fartTrailActive == true)
@@ -177,31 +170,21 @@ public class Player : MonoBehaviour
         fartTrailActive = true;
         trailRenderObject = Instantiate(trailRendererObjectPrefab, playerRigidBod.position, Quaternion.identity);
         trailVectorPosition = gameObject.transform.position;
-        this.hasFarted = true;
+        this.isFarting = true;
     }
 
     public void Punch(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            myFist.GetComponent<Collider2D>().enabled = true;
-            myFist.GetComponent<FistScript>().PunchIt();
+            Debug.Log("punch");
+            myFist.GetComponent<FistScript>().TriggerPunch();
         }
     }
 
-    // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnHit()
     {
-        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color)
-        {
-            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        }
-
-        if (collision.gameObject == myFist.gameObject)
-        {
-            return;
-        }
-        if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
+        if (isFarting)
         {
             health -= damage;
             myHealthBar.fillAmount -= 0.1f;
@@ -223,6 +206,15 @@ public class Player : MonoBehaviour
                 GameTextManager.Instance.GameOver();
                 GameManager.Instance.UpdateGameState(GameState.GameOver);
             }
+        }
+    }
+
+    // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color)
+        {
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
     }
 

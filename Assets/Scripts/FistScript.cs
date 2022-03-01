@@ -6,13 +6,7 @@ public class FistScript : MonoBehaviour
 {
     public float currentPosition;
 
-    private float endOfPunchDuration;
-
-    private float endOfPunchCoolDown;
-
     public float fistScaleMod = 1;
-
-    private Collider2D myCollider;
 
     [SerializeField]
     private float reach;
@@ -21,54 +15,45 @@ public class FistScript : MonoBehaviour
     private float resting;
 
     [SerializeField]
-    private float punchDuration;
-
-    [SerializeField]
-    private float punchCoolDown;
+    private float punchLength;
 
     // Start is called before the first frame update
     void Start()
     {
         currentPosition = resting;
-
-        myCollider = this.GetComponent<Collider2D>();
-
-        myCollider.enabled = false;
+        this.GetComponent<CircleCollider2D>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         this.transform.localScale = new Vector3(fistScaleMod, fistScaleMod, 1);
-
-        if (Time.time < endOfPunchDuration && currentPosition != reach)
-        {
-            currentPosition = reach;
-        }
-        else if(Time.time > endOfPunchDuration && currentPosition == reach)
-        {
-            myCollider.enabled = false;
-            currentPosition = resting;
-        }
-        else if (Time.time > endOfPunchDuration && myCollider.enabled)
-        {
-            myCollider.enabled = false;
-        }
-
-
-        
+        this.transform.position = this.transform.parent.position + (transform.up * (fistScaleMod + currentPosition));
     }
 
-    public void PunchIt()
+    public void TriggerPunch()
     {
+        Collider2D target = Physics2D.OverlapCircle(this.transform.position, 0.5f*fistScaleMod);
+        if (target != null && target.name == "BodyPrefab(Clone)") target.gameObject.GetComponent<Player>().OnHit();
+        StartCoroutine(AnimatePunch());
+    }
 
-        if (Time.time > endOfPunchCoolDown)
+    private IEnumerator AnimatePunch()
+    {
+        float startTime = Time.time;
+        float timeElapsed = (Time.time - startTime) / punchLength;
+
+        while (timeElapsed < 1f)
         {
+            if (timeElapsed < 0.5f){
+                currentPosition = Mathf.Lerp(resting, reach, timeElapsed);
+            } else
+            {
+                currentPosition = Mathf.Lerp(reach, resting, timeElapsed);
+            }
+            timeElapsed = (Time.time - startTime) / punchLength;
 
-            endOfPunchCoolDown = Time.time + punchCoolDown;
-
-            endOfPunchDuration = Time.time + punchDuration;
+            yield return null;
         }
-    }       
+    }
 }

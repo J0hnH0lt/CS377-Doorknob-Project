@@ -21,7 +21,7 @@ public class Door : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Player p = collision.gameObject.GetComponent<Player>();
-        if (p.hasFarted)
+        if (p.isFarting)
         {
             //Debug.Log("Aye you did it you little freak ahahah UwU XD");
             //p.fartTrail.enabled = false;
