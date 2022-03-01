@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7738062809706484268}
   - component: {fileID: 3275708825162845503}
   - component: {fileID: 2424506425516113336}
-  - component: {fileID: -945831294172590742}
+  - component: {fileID: 5581836084738112390}
   m_Layer: 0
   m_Name: MineItemEffect
   m_TagString: Untagged
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-945831294172590742
+--- !u!114 &5581836084738112390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,8 +109,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3029537499716265409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 609bdfc169ff64df09b2a786d8855b1d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b5bdbb45ddfc45119fcf6dccb0bae7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectName: 
   mineColor: {r: 0, g: 0, b: 0, a: 0}
   isEffectActive: 0
+  isSandbox: 0

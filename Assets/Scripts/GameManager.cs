@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=2 && PlayersReady())
+            if (players.Count >=1 && PlayersReady())
             {
                 foreach (Player p in players)
                 {
@@ -202,7 +202,13 @@ public class GameManager : MonoBehaviour
             { 
                 Destroy(i.gameObject);
             }
+        }
 
+        // force removal of all player effects
+        Effect[] effects = FindObjectsOfType<Effect>();
+        foreach (Effect e in effects)
+        {
+            e.ForceExpireEffect();
         }
 
         // delete items from player inventory

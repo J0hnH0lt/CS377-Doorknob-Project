@@ -6,19 +6,25 @@ public class MineItem : Item
 {
     public GameObject MinePrefab;
 
-    private GameObject Mine;
+    private GameObject MineObject;
+
+    private MineEffect mine;
 
 
     protected override void ItemPayload()
     {
         // instantiate mine object
-        Mine = Instantiate(MinePrefab, playerReference.transform.parent, true);
+        MineObject = Instantiate(MinePrefab, playerReference.transform.parent, true);
         // handle colors
-        Mine.GetComponent<Mine>().mineColor = playerReference.playerColor;
-        Mine.GetComponent<Renderer>().material.color = playerReference.playerColor;
+        mine = MineObject.GetComponent<MineEffect>();
+        mine.mineColor = playerReference.playerColor;
+        MineObject.GetComponent<Renderer>().material.color = playerReference.playerColor;
 
         // assign its position
-        Mine.transform.position = this.gameObject.transform.position;
+        MineObject.transform.position = this.gameObject.transform.position;
+
+        // if the item is sandbox, communicate that to the effect
+        mine.isSandbox = true;
 
         base.ItemPayload();
         ItemHasExpired();

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mine : MonoBehaviour
+public class MineEffect : Effect
 {
-
     public Color mineColor;
 
     private Color mineBlinkColor = Color.red;
@@ -19,7 +18,7 @@ public class Mine : MonoBehaviour
 
     private float mineObjectExpriation;
 
-    private Player playerEffected;
+    private Player playerEffected = null;
 
     public bool isEffectActive = false;
 
@@ -29,9 +28,12 @@ public class Mine : MonoBehaviour
 
     private float mineBlinkTime = .5f;
 
+    public bool isSandbox;
+
 
     public void Start()
     {
+        effectName = "Mine";
         mineObjectExpriation = Time.time + mineObjectDuration;
         mineBlinkTimer = Time.time + mineBlinkTime;
         mineRenderer = GetComponent<Renderer>();
@@ -41,7 +43,7 @@ public class Mine : MonoBehaviour
     {
         // TODO to make effect apply to an area of players implement OnPhysicsOverlapSphere
         // this makes the effect work for multiple players
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && isEffectActive==false)
         {
             playerEffected = collision.gameObject.GetComponent<Player>();
             if (playerEffected.playerColor != mineColor)
@@ -54,6 +56,7 @@ public class Mine : MonoBehaviour
             
         }
     }
+
 
     public void Update()
     {
@@ -68,6 +71,15 @@ public class Mine : MonoBehaviour
             playerEffected.speedModifier += .5f;
             Destroy(this.gameObject);
         }
+    }
+
+    protected override void ExpireEffect()
+    {
+        if (isEffectActive)
+        {
+            playerEffected.speedModifier += .5f;
+        }
+        base.ExpireEffect();
     }
 
     public void BlinkEffect()
