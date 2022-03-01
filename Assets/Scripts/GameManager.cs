@@ -10,10 +10,14 @@ public class GameManager : MonoBehaviour
 
     public SpawnManager mySpawnManager;
 
+    public GameObject obsticlePrefab;
+
     public List<Player> players = new List<Player>();
 
 
     public List<Color> playerColors = new List<Color>();
+
+    public List<GameObject> playerObsticles = new List<GameObject>();
 
     public GameState State;
 
@@ -180,6 +184,7 @@ public class GameManager : MonoBehaviour
         players.Add(p);
         p.health = 6;
         Debug.Log("Player Added");
+
     }
 
     public void handleSandBoxChange()
@@ -207,7 +212,24 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    //public void AddPlayerObstacles()
+    //{
+
+    //    GameObject obstacle = Instantiate(obsticlePrefab, randomPos, Quaternion.identity);
+
+    //    if (Physics2D.OverlapCircleAll(randomPos, 14f).Length > 1)
+    //    {
+    //        Destroy(obstacle);
+    //    }
+    //    else
+    //    {
+    //        obstacle.GetComponent<Renderer>().material.color = playe;
+    //        obstacleList.Add(obstacle);
+    //    }
+    //}
+
 }
+
 
 
 public enum GameState {

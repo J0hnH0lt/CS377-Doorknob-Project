@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4978447043435459492}
   - component: {fileID: -2200535589006052123}
   - component: {fileID: -2597628830356922194}
-  - component: {fileID: 3842649063425922116}
+  - component: {fileID: 3438563166380696130}
   m_Layer: 0
   m_Name: SpeedPotionItem
   m_TagString: SpeedPotion
@@ -97,8 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
+  isSandBox: 0
   itemDescription: 
---- !u!60 &3842649063425922116
+  itemState: 0
+--- !u!60 &3438563166380696130
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +125,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.12, y: 1.12}
-      - {x: -1.12, y: -1.12}
-      - {x: 1.12, y: -1.12}
-      - {x: 1.12, y: 1.12}
+    - - {x: 10.29, y: -1.675934}
+      - {x: 8.742985, y: 0.42191344}
+      - {x: 5.9653873, y: 2.3556836}
+      - {x: 7.418645, y: 8.789864}
+      - {x: 3.5159454, y: 12.001094}
+      - {x: -3.4925058, y: 12.001094}
+      - {x: -6.949852, y: 8.602346}
+      - {x: -6.914693, y: 6.832654}
+      - {x: -5.602073, y: 6.516219}
+      - {x: -10.29, y: -1.675934}
+      - {x: -10.29, y: -6.8795333}
+      - {x: -8.578907, y: -8.625786}
+      - {x: -5.16844, y: -12.001094}
+      - {x: 5.16844, y: -12.001094}
+      - {x: 10.29, y: -6.8795333}
