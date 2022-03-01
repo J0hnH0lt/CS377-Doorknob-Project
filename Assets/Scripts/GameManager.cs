@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=1 && PlayersReady())
+            if (players.Count >=2 && PlayersReady())
             {
                 foreach (Player p in players)
                 {
@@ -114,11 +114,13 @@ public class GameManager : MonoBehaviour
         Item[] items = FindObjectsOfType<Item>();
         foreach (Item i in items)
         {
-            if (i != null)
+          
+            if (i.itemState!=ItemState.InEffect)
             {
                 Debug.Log("destroying item with tag "+ i.tag);
                 Destroy(i.gameObject);
             }
+
         }
 
 
@@ -133,6 +135,8 @@ public class GameManager : MonoBehaviour
         // spawn the door
         doorTimer = 0.0f;
         nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
+
+        Destroy(GameTextManager.Instance.ItemText);
     }
 
     public void HandleGameOver()
