@@ -74,11 +74,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 59daff86b050e4f40a7300d49f9410b5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7311321, g: 1, b: 0.738948, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.24, y: 2.24}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fb233e2bb534f43a19bcbfbe9ddca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: 0
   isSandBox: 0
+  isSelected: 1
   itemDescription: 
   itemState: 0
 --- !u!61 &4113546598945296851
@@ -118,7 +119,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3, y: 3}
-    newSize: {x: 2.24, y: 2.24}
+    newSize: {x: 3, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

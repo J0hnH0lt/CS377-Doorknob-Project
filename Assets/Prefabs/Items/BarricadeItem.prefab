@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d8bb893d2babb40d781246404c4b2efd, type: 3}
-  m_Color: {r: 0, g: 0.7830189, b: 0.7352836, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2c92cd7692e5e3444a87aaefb7cdce24, type: 3}
+  m_Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a503f0763a294c36a531d55061c7949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: 0
   isSandBox: 0
+  isSelected: 1
   itemDescription: 
   itemState: 0
   BarricadePrefab: {fileID: 8141723394447188706, guid: 115c63d061a7a4fb0b514233892cb310, type: 3}
@@ -118,7 +119,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.24, y: 2.24}
+    oldSize: {x: 3, y: 3}
     newSize: {x: 2.24, y: 2.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
