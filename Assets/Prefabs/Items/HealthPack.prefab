@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8330032769054247026}
   - component: {fileID: -7299633660740111563}
   - component: {fileID: 909036133444846234}
-  - component: {fileID: 4113546598945296851}
+  - component: {fileID: -8112654996736451355}
   m_Layer: 0
   m_Name: HealthPack
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   isSelected: 1
   itemDescription: 
   itemState: 0
---- !u!61 &4113546598945296851
+--- !u!61 &-8112654996736451355
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
