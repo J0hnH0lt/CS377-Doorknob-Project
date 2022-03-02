@@ -12,7 +12,7 @@ public class Safety : Item
 
     protected override void ItemPayload()
     {
-        if (isSandBox == false)
+        if (isSandBox == false && playerReference.isFarting == true)
         {
             GameManager.Instance.UpdateGameState(GameState.ItemPhase);
         }
