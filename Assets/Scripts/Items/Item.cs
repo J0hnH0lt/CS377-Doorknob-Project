@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class Item : MonoBehaviour
 {
     // name of the item
-    public string itemName;
+    public ItemName itemName;
 
     // sandbox trackers
     public bool isSandBox;
+    public bool isSelected = true;
     private float sandboxItemInterval = 1.0f;
 
     // item description
@@ -36,6 +37,7 @@ public class Item : MonoBehaviour
 
     protected virtual void Awake ()
     {
+        this.tag = "item";
         // get the sprite renderer
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -122,6 +124,20 @@ public class Item : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // function to toggle the item in spawning
+    public void ToggleItem()
+    {
+        ItemManager.Instance.ToggleItemSpawning(itemName);
+        if (isSelected == true)
+        {
+            isSelected = false;
+            spriteRenderer.material.color = Color.grey;
+        } else
+        {
+            isSelected = true;
+            spriteRenderer.material.color = Color.white;
+        }
+    }
 }
 
 // Enumerable of the possible item states

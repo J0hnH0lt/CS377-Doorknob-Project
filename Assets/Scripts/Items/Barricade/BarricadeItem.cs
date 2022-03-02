@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class BarricadeItem : Item
 {
+   
     public GameObject BarricadePrefab;
 
     private GameObject BarricadeObject;
 
     private BarricadeEffect Barricade;
+
+    protected override void Awake()
+    {
+        itemName = ItemName.Block;
+        base.Awake();
+    }
+
 
     protected override void ItemPayload()
     {

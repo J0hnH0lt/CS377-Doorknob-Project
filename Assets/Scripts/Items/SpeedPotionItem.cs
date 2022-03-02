@@ -4,6 +4,12 @@ using UnityEngine;
 
 class SpeedPotionItem : Item
 {
+    protected override void Awake()
+    {
+        itemName = ItemName.Boost;
+        base.Awake();
+    }
+
     private float speedScale = .35f;
 
     private float speedPotionDuration = 5;

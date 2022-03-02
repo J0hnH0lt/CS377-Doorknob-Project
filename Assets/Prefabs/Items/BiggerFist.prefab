@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7e33c6d331e4640ae3a15e98b47e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: 0
   isSandBox: 0
+  isSelected: 1
   itemDescription: 
   itemState: 0
 --- !u!60 &2323770071489436763

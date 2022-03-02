@@ -9,6 +9,12 @@ public class Phase : Item
 
     private Color phaseColor;
 
+    protected override void Awake()
+    {
+        itemName = ItemName.Phase;
+        base.Awake();
+    }
+
     protected override void ItemPayload()
     {
         base.ItemPayload();

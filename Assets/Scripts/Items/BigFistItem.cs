@@ -10,6 +10,13 @@ class BigFistItem : Item
 
     private float bigFistExperation;
 
+    protected override void Awake()
+    {
+        itemName = ItemName.BigFist;
+        base.Awake();
+    }
+
+
     protected override void ItemPayload()
     {
         base.ItemPayload();

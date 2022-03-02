@@ -6,6 +6,11 @@ public class HealthPack : Item
 {
     private int healthIncrease = 1;
 
+    protected override void Awake()
+    {
+        itemName = ItemName.HealthBoost;
+        base.Awake();
+    }
 
     protected override void ItemPayload()
     {

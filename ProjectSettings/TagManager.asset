@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Door
   - BigFist
-  - SpeedPotion
   layers:
   - Default
   - TransparentFX

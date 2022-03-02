@@ -10,6 +10,12 @@ public class MineItem : Item
 
     private MineEffect mine;
 
+    protected override void Awake()
+    {
+        itemName = ItemName.Mine;
+        base.Awake();
+    }
+
 
     protected override void ItemPayload()
     {
