@@ -28,7 +28,7 @@ public class GameTextManager : MonoBehaviour
     public void GameRunning()
     {
         StartCoroutine(InstructionPanelLerpOut());
-        StartCoroutine(ItemPanelLerpOut(ItemPanel));
+        StartCoroutine(PanelLerpOut(ItemPanel));
 
         Destroy(JoinStartText);
 
@@ -73,7 +73,9 @@ public class GameTextManager : MonoBehaviour
             yield return null;
         }
     }
-    private IEnumerator ItemPanelLerpOut(GameObject textPanel)
+
+    // TODO add ability to input direction and distance
+    private IEnumerator PanelLerpOut(GameObject textPanel)
     {
         float startTime = Time.time;
         float timeElapsed = (Time.time - startTime) / 500.0f;
@@ -87,7 +89,7 @@ public class GameTextManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ItemPanelLerpIn(GameObject textPanel)
+    private IEnumerator PanelLerpIn(GameObject textPanel)
     {
         float startTime = Time.time;
         float timeElapsed = (Time.time - startTime);
