@@ -455,10 +455,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2087,10 +2087,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 205040277757789487, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2323770071489436763, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -2490,6 +2486,10 @@ PrefabInstance:
     - target: {fileID: 7898285378134162448, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
       propertyPath: m_TagString
       value: BigFist
+      objectReference: {fileID: 0}
+    - target: {fileID: 205040277757789487, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
@@ -3404,7 +3404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28337c1f6b3cc4ec7b2f52a51a32f22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabList: []
   bigFistPrefab: {fileID: 7898285378134162448, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
   speedPotionPrefab: {fileID: 4352276570954446795, guid: 19f17e2af87d645f9948778fe511cd3d, type: 3}
   mineItemPrefab: {fileID: 8519301471431986197, guid: 172d92bacd0b643d586da7066f28b4f5, type: 3}
