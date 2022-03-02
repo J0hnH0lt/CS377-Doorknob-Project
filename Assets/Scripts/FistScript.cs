@@ -32,7 +32,7 @@ public class FistScript : MonoBehaviour
 
     public void TriggerPunch()
     {
-        Collider2D target = Physics2D.OverlapCircle(this.transform.position, 0.5f*fistScaleMod);
+        Collider2D target = Physics2D.OverlapCircle(this.transform.parent.position + (transform.up * (fistScaleMod + currentPosition)), 1f * fistScaleMod);
         if (target != null && target.name == "PlayerPrefab(Clone)") target.gameObject.GetComponent<Player>().OnHit();
         if (target != null && target.tag == "item") target.gameObject.GetComponent<Item>().ToggleItem();
 

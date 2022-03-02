@@ -191,8 +191,8 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(Player p){
         players.Add(p);
-        p.maxHealth = 25;
-        p.currHealth = 25;
+        p.maxHealth = 10;
+        p.currHealth = 10;
         Debug.Log("Player Added");
 
     }
