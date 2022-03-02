@@ -11,6 +11,8 @@ public class ItemManager : MonoBehaviour
     public GameObject healthPackItemPrefab;
     public GameObject barricadeItemPrefab;
     public GameObject phaseItemPrefab;
+    public GameObject safetyItemPrefab;
+
 
 
     public static ItemManager Instance;
@@ -24,6 +26,8 @@ public class ItemManager : MonoBehaviour
         prefabList.Add(healthPackItemPrefab);
         prefabList.Add(barricadeItemPrefab);
         prefabList.Add(phaseItemPrefab);
+        prefabList.Add(safetyItemPrefab);
+
 
     }
 

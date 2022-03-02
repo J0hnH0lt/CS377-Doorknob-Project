@@ -22,9 +22,11 @@ public class SpawnManager : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
     }
 
-    public void SpawnDoor(Color c)
+    public GameObject SpawnDoor(Color c)
     {
-        Instantiate(doorPrefab, GetRandomPosition(), Quaternion.identity).GetComponent<Renderer>().material.color = c;
+        GameObject door = Instantiate(doorPrefab, GetRandomPosition(), Quaternion.identity);
+        door.GetComponent<Renderer>().material.color = c;
+        return door;
     }
 
     public void SpawnObstacles(int n, List<Color> colors)

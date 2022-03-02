@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public List<Player> players = new List<Player>();
 
+    public Player fartingPlayer;
 
     public List<Color> playerColors = new List<Color>();
 
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     private float maxDoorSpawnTime = 7.0f;
     private float doorTimer = 0.0f;
     private float nextDoorTime;
+    private GameObject door;
 
     private float gameOverTimer = 0.0f;
     private float gameOverTime;
@@ -122,7 +124,14 @@ public class GameManager : MonoBehaviour
             handleSandBoxChange();
             isStartAfterSandbox = false;
         }
-       
+
+        if (door!=null)
+        {
+            fartingPlayer.DisableTrailSlow();
+            fartingPlayer = null;
+            Destroy(door);
+        }
+
         // spawn the door
         doorTimer = 0.0f;
         nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
@@ -173,8 +182,9 @@ public class GameManager : MonoBehaviour
             if (health_helper <= chance)
             {
                 // spawn the door of the players color
-                mySpawnManager.SpawnDoor(player.GetComponent<Renderer>().material.color);
+                door = mySpawnManager.SpawnDoor(player.GetComponent<Renderer>().material.color);
                 player.OnFart();
+                fartingPlayer = player;
                 break;
             }
         }
