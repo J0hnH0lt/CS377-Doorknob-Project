@@ -6,7 +6,7 @@ public class BarricadeItem : Item
 {
     public GameObject BarricadePrefab;
 
-    private GameObject BarricaideObject;
+    private GameObject BarricadeObject;
 
     private BarricadeEffect Barricade;
 
@@ -14,13 +14,14 @@ public class BarricadeItem : Item
     {
 
         // instantiate mine object
-        BarricaideObject = Instantiate(BarricadePrefab, this.gameObject.transform.position, Quaternion.identity);
-        BarricaideObject.GetComponent<Collider2D>().enabled = true;
+        BarricadeObject = Instantiate(BarricadePrefab, this.gameObject.transform.position, Quaternion.identity);
+        BarricadeObject.GetComponent<Collider2D>().enabled = true;
         // handle colors
-        Barricade = BarricaideObject.GetComponent<BarricadeEffect>();
-        Barricade.barricadeColor = playerReference.playerColor;
+        Barricade = BarricadeObject.GetComponent<BarricadeEffect>();
+        Barricade.playerRef = playerReference;
+
         Barricade.GetComponent<Renderer>().material.color = playerReference.playerColor;
-        BarricaideObject.GetComponent<Renderer>().material.color = Barricade.barricadeColor;
+        BarricadeObject.GetComponent<Renderer>().material.color = Barricade.barricadeColor;
 
         // if the item is sandbox, communicate that to the effect
         Barricade.isSandbox = true;

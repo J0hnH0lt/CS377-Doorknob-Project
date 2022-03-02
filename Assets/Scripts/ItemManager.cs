@@ -10,6 +10,8 @@ public class ItemManager : MonoBehaviour
     public GameObject mineItemPrefab;
     public GameObject healthPackItemPrefab;
     public GameObject barricadeItemPrefab;
+    public GameObject phaseItemPrefab;
+
 
     public static ItemManager Instance;
 
@@ -21,6 +23,8 @@ public class ItemManager : MonoBehaviour
         prefabList.Add(mineItemPrefab);
         prefabList.Add(healthPackItemPrefab);
         prefabList.Add(barricadeItemPrefab);
+        prefabList.Add(phaseItemPrefab);
+
     }
 
     public GameObject GetRandomItem()
