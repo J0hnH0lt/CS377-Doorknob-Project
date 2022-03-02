@@ -133,7 +133,7 @@ public class Item : MonoBehaviour
             if (isSelected == true)
             {
                 isSelected = false;
-                spriteRenderer.material.color = Color.grey;
+                spriteRenderer.material.color = new Color(0.2f, 0.2f, 0.2f, 1f);
             }
             else
             {
