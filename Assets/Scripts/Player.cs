@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     public float currSpeed;
 
+    public bool isGhost = false;
+
     public float speedModifier = 1;
 
     [SerializeField]
@@ -214,7 +216,7 @@ public class Player : MonoBehaviour
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color)
+        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color || isGhost)
         {
             Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
