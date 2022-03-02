@@ -345,7 +345,8 @@ MonoBehaviour:
   InstructionPanel: {fileID: 851421964}
   TitleText: {fileID: 480894143}
   InfoPanel: {fileID: 1227533597}
-  ItemText: {fileID: 1357439393}
+  ItemPanel: {fileID: 1239834312}
+  JoinStartText: {fileID: 480894143}
 --- !u!114 &214790431
 MonoBehaviour:
   m_ObjectHideFlags: 0
