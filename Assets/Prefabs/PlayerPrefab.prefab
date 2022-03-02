@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 794488721782834358}
   - component: {fileID: 6881078150513469694}
   - component: {fileID: 2775769644767086563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ReadyUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 3754707038675276239}
   - component: {fileID: 6968701171182514988}
   - component: {fileID: 8208862447381554044}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Inventory Slot 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 2508309325567455520}
   - component: {fileID: 3832126287063014320}
   - component: {fileID: 2464707040236844777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 6668812795786003253}
   - component: {fileID: 7251185130567063396}
   - component: {fileID: 9119426022462221668}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: myFist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 7818853538716996352}
   - component: {fileID: 2934535439559572969}
   - component: {fileID: 2398530813345527362}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -727,7 +727,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Time: 1.25
   m_Parameters:
     serializedVersion: 3
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 8039239106847636293}
   - component: {fileID: 7026217813093667218}
   - component: {fileID: 6520828335351306812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Inventory Slot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +914,7 @@ GameObject:
   - component: {fileID: 3046496290913567889}
   - component: {fileID: 4607502187724758654}
   - component: {fileID: 1287199172269708341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -989,7 +989,7 @@ GameObject:
   - component: {fileID: 6557114880352268169}
   - component: {fileID: 8268715058510595221}
   - component: {fileID: 7332537187158631406}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthBarWrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,7 +1064,7 @@ GameObject:
   - component: {fileID: 1637318279601075658}
   - component: {fileID: 8455157308184275736}
   - component: {fileID: 1428896260122500166}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: DashRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

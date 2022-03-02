@@ -20,7 +20,9 @@ public class MineItem : Item
     protected override void ItemPayload()
     {
         // instantiate mine object
-        MineObject = Instantiate(MinePrefab, playerReference.transform.parent, true);
+        Vector3 BarricadePosn = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 498);
+
+        MineObject = Instantiate(MinePrefab, BarricadePosn, Quaternion.identity, playerReference.transform.parent);
         // handle colors
         mine = MineObject.GetComponent<MineEffect>();
         mine.mineColor = playerReference.playerColor;

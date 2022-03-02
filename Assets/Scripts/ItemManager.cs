@@ -40,7 +40,10 @@ public class ItemManager : MonoBehaviour
                 return safetyItemPrefab;
             }
         }
-
+        if (prefabDictionary.Count == 0) // if all objects have been removed from the game
+        {
+            return null;
+        }
         List<ItemName> keyList = new List<ItemName>(prefabDictionary.Keys);
         ItemName randomItemKey = keyList[UnityEngine.Random.Range(0, keyList.Count)];
 

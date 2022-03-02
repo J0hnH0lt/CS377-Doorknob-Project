@@ -83,10 +83,11 @@ public class SpawnManager : MonoBehaviour
             Vector3 randomPos = GetRandomPosition();
             if (Physics2D.OverlapCircleAll(randomPos, 4f).Length == 0)
             {
-                // @Clem, use this to spawn random items into the game
-                // itemList.Add(RandomItem)
                 randomItemPrefab = ItemManager.Instance.GetRandomItem();
-                itemList.Add(Instantiate(randomItemPrefab, randomPos, Quaternion.identity));
+                if (randomItemPrefab != null)
+                {
+                    itemList.Add(Instantiate(randomItemPrefab, randomPos, Quaternion.identity));
+                }
             }
         }
     }

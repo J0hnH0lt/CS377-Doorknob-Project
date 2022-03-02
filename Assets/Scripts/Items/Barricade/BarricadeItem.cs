@@ -22,8 +22,10 @@ public class BarricadeItem : Item
     {
 
         // instantiate mine object
-        BarricadeObject = Instantiate(BarricadePrefab, this.gameObject.transform.position, Quaternion.identity);
+        Vector3 BarricadePosn = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 498);
+        BarricadeObject = Instantiate(BarricadePrefab, BarricadePosn, Quaternion.identity, playerReference.transform.parent);
         BarricadeObject.GetComponent<Collider2D>().enabled = true;
+
         // handle colors
         Barricade = BarricadeObject.GetComponent<BarricadeEffect>();
         Barricade.playerRef = playerReference;
