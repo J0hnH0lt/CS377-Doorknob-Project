@@ -99,6 +99,7 @@ public class Item : MonoBehaviour
 
         // Add item to player inventory
         playerReference.AddItemToInventory(this);
+        GetComponent<Collider2D>().enabled = false;
         itemState = ItemState.InInventory;
 
         // We move the power up game object to be under the player that collect it, this isn't essential for functionality 
@@ -127,15 +128,19 @@ public class Item : MonoBehaviour
     // function to toggle the item in spawning
     public void ToggleItem()
     {
-        ItemManager.Instance.ToggleItemSpawning(itemName);
-        if (isSelected == true)
+        if (isSandBox)
         {
-            isSelected = false;
-            spriteRenderer.material.color = Color.grey;
-        } else
-        {
-            isSelected = true;
-            spriteRenderer.material.color = Color.white;
+            ItemManager.Instance.ToggleItemSpawning(itemName);
+            if (isSelected == true)
+            {
+                isSelected = false;
+                spriteRenderer.material.color = Color.grey;
+            }
+            else
+            {
+                isSelected = true;
+                spriteRenderer.material.color = Color.white;
+            }
         }
     }
 }
