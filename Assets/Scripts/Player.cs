@@ -302,7 +302,7 @@ public class Player : MonoBehaviour
 
     public void ResetItem2()
     {
-        myItemSlot2.GetComponent<Image>().sprite = myItemSlot1Default;
+        myItemSlot2.GetComponent<Image>().sprite = myItemSlot2Default;
         myItemSlot2.GetComponent<Image>().color = Color.white;
         item2 = null;
     }
