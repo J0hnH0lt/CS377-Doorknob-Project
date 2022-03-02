@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         doorTimer = 0.0f;
         nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
 
-        Destroy(GameTextManager.Instance.ItemText);
+        //Destroy(GameTextManager.Instance.ItemPanel);
     }
 
     public void HandleGameOver()
