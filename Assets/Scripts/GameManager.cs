@@ -153,8 +153,6 @@ public class GameManager : MonoBehaviour
         int numItems = UnityEngine.Random.Range(4, 10);
         mySpawnManager.SpawnItems(numItems);
         mySpawnManager.SpawnObstacles(200, playerColors);
-
-        // Handle the weighing and selection of who farts
         
     }
 
@@ -171,6 +169,7 @@ public class GameManager : MonoBehaviour
         }
 
         // get a random number between 0 and the total amount of player health
+        // TODO I beleive random_sum might need to be random_sum += 1, but not sure
         int health_helper = UnityEngine.Random.Range(0, random_sum);
 
         foreach (var tuple in healhList)
