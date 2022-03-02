@@ -44,7 +44,6 @@ public class MineEffect : Effect
         BlinkEffect();
         if (!isEffectActive && Time.time > mineObjectExpriation) // if the mine has not been hit for its object's duration
         {
-            Debug.Log("Despawning unusedMine");
             Destroy(this.gameObject); // destroy itself
         }
         if (isEffectActive && Time.time > mineSlowExpiration)

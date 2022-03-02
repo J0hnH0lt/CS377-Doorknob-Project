@@ -135,7 +135,6 @@ public class Player : MonoBehaviour
 
     public void Start() {
         id = FindObjectsOfType<Player>().Length;
-        Debug.Log("ID: " + id.ToString());
 
         GameManager.Instance.AddPlayer(this);
     }
@@ -181,7 +180,6 @@ public class Player : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("punch");
             myFist.GetComponent<FistScript>().TriggerPunch();
         }
     }
@@ -224,14 +222,13 @@ public class Player : MonoBehaviour
 
     public void AddItemToInventory(Item item)
     {
-        Debug.Log("Adding Item to inventory");
 
         // if it is empty add the item to the players inventory
   
         if (item1 == null)
         {
             Image itemSlotImage = myItemSlot1.GetComponent<Image>();
-            Debug.Log("Adding to item slot 1");
+     
             item1 = item;
             // set the myItemSlot1 sprite
             if (myItemSlot1.GetComponent<Image>().sprite == myItemSlot1Default)
@@ -243,7 +240,6 @@ public class Player : MonoBehaviour
 
         else
         {
-            Debug.Log("Adding to item slot 2");
             item2 = item;
             if (myItemSlot2.GetComponent<Image>().sprite == myItemSlot2Default)
             {

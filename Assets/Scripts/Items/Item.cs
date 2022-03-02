@@ -90,7 +90,6 @@ public class Item : MonoBehaviour
         // if the item is a sandbox item, spawn a direct copy of that item
         if (isSandBox)
         {
-            Debug.Log("Spawning new instance of item");
             Instantiate(this, this.transform.parent, true);
         }
 

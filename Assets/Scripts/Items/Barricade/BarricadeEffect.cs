@@ -7,7 +7,7 @@ public class BarricadeEffect : Effect
 
     public bool isSandbox;
 
-    private float barricadeDuration = 5.0f;
+    private float barricadeDuration = 3.5f;
 
     private float barricadeExpiration;
 
