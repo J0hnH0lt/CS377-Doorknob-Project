@@ -30,10 +30,10 @@ public class GameTextManager : MonoBehaviour
         StartCoroutine(InstructionPanelLerpOut());
         StartCoroutine(PanelLerpOut(ItemPanel));
 
-        Destroy(JoinStartText);
-
 
         TitleText.GetComponent<Text>().text = "";
+        JoinStartText.GetComponent<Text>().text = "";
+
     }
 
     public void GameOver()
@@ -69,6 +69,8 @@ public class GameTextManager : MonoBehaviour
             Color c = TitleText.GetComponent<Text>().color;
             c.a = Mathf.Lerp(0f, 1f, timeElapsed);
             TitleText.GetComponent<Text>().color = c;
+            JoinStartText.GetComponent<Text>().color = c;
+
 
             yield return null;
         }
@@ -100,9 +102,6 @@ public class GameTextManager : MonoBehaviour
             textPanel.transform.position = new Vector3(finalPos + Mathf.Lerp(60f, 1f, timeElapsed),
                                                    textPanel.transform.position.y,
                                                    textPanel.transform.position.z);
-            Color c = TitleText.GetComponent<Text>().color;
-            c.a = Mathf.Lerp(0f, 1f, timeElapsed);
-            TitleText.GetComponent<Text>().color = c;
             yield return null;
         }
     }
