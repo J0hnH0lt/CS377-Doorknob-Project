@@ -381,7 +381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BLOCK
+  m_Text: safety
 --- !u!222 &134743044
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40491456, g: 0.39747238, b: 0.41509432, a: 1}
+  m_Color: {r: 0.5372549, g: 0.5372549, b: 0.5372549, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1686,11 +1686,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4132846011164757877, guid: 158cdb00d0c6347158044e9d2d1eea92, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.3
+      value: -21.2
       objectReference: {fileID: 0}
     - target: {fileID: 4132846011164757877, guid: 158cdb00d0c6347158044e9d2d1eea92, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -30.1
+      value: -27.6
       objectReference: {fileID: 0}
     - target: {fileID: 4132846011164757877, guid: 158cdb00d0c6347158044e9d2d1eea92, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2938,7 +2938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3884548602301299903, guid: bb75d5c0d702a41c0b6de06e4d21fcac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.2
+      value: 16.5
       objectReference: {fileID: 0}
     - target: {fileID: 3884548602301299903, guid: bb75d5c0d702a41c0b6de06e4d21fcac, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3206,7 +3206,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Safety
+  m_Text: Block
 --- !u!222 &1773701156
 CanvasRenderer:
   m_ObjectHideFlags: 0
