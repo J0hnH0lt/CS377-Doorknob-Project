@@ -33,7 +33,7 @@ public class SpawnManager : MonoBehaviour
     {
         ClearObstacles();
 
-        colors.Add(Color.black);
+        colors.Add(Color.grey);
 
         for (int i = 0; i < n; i++)
         {

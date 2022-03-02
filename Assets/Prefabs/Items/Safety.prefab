@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4132846011164757877}
   - component: {fileID: -2734678047866687465}
   - component: {fileID: 4465153294288029869}
-  - component: {fileID: -2531774365180366237}
+  - component: {fileID: -5407064957060621183}
   m_Layer: 0
   m_Name: Safety
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   isSelected: 1
   itemDescription: 
   itemState: 0
---- !u!61 &-2531774365180366237
+--- !u!61 &-5407064957060621183
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,5 +125,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.24, y: 2.24}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0

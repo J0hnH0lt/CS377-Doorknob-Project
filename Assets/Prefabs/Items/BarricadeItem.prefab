@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3884548602301299903}
   - component: {fileID: 3544333056673827290}
   - component: {fileID: 2198518022544674758}
-  - component: {fileID: -4162282368795668455}
+  - component: {fileID: 4216134390572980445}
   m_Layer: 0
   m_Name: BarricadeItem
   m_TagString: Untagged
@@ -102,7 +102,7 @@ MonoBehaviour:
   itemDescription: 
   itemState: 0
   BarricadePrefab: {fileID: 8141723394447188706, guid: 115c63d061a7a4fb0b514233892cb310, type: 3}
---- !u!61 &-4162282368795668455
+--- !u!61 &4216134390572980445
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,5 +126,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.24, y: 2.24}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
