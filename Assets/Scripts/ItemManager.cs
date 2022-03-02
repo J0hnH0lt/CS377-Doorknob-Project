@@ -47,13 +47,11 @@ public class ItemManager : MonoBehaviour
         List<ItemName> keyList = new List<ItemName>(prefabDictionary.Keys);
         ItemName randomItemKey = keyList[UnityEngine.Random.Range(0, keyList.Count)];
 
-        Debug.Log("Attempting to spawn Item: " + randomItemKey);
         return prefabDictionary[randomItemKey];
     }
 
     public void ToggleItemSpawning(ItemName itemName)
     {
-        Debug.Log("Toggle for Item: " + itemName);
         switch (itemName)
         {
             case ItemName.Boost:
@@ -134,7 +132,6 @@ public class ItemManager : MonoBehaviour
                     break;
                 }
         }
-        Debug.Log("Dictionary length is now: " + prefabDictionary.Count.ToString());
     }
 }
 

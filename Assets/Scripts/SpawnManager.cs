@@ -70,7 +70,7 @@ public class SpawnManager : MonoBehaviour
             }
             
         }
-        Debug.Log("Item Count: "+ itemList.Count);
+        
         itemList = new List<GameObject>();
     }
 

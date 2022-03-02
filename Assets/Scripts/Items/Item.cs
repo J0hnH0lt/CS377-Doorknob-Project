@@ -90,7 +90,6 @@ public class Item : MonoBehaviour
         // if the item is a sandbox item, spawn a direct copy of that item
         if (isSandBox)
         {
-            Debug.Log("Spawning new instance of item");
             Instantiate(this, this.transform.parent, true);
         }
 
@@ -134,7 +133,7 @@ public class Item : MonoBehaviour
             if (isSelected == true)
             {
                 isSelected = false;
-                spriteRenderer.material.color = Color.grey;
+                spriteRenderer.material.color = new Color(0.2f, 0.2f, 0.2f, 1f);
             }
             else
             {
