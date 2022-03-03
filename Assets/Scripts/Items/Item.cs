@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class Item : MonoBehaviour
 {
     // name of the item
-    public string itemName;
+    public ItemName itemName;
 
     // sandbox trackers
     public bool isSandBox;
+    public bool isSelected = true;
     private float sandboxItemInterval = 1.0f;
 
     // item description
@@ -29,8 +30,14 @@ public class Item : MonoBehaviour
         ItemPayload();
     }
 
+    public void ForceExpiration()
+    {
+        ItemHasExpired();
+    }
+
     protected virtual void Awake ()
     {
+        this.tag = "item";
         // get the sprite renderer
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -83,7 +90,6 @@ public class Item : MonoBehaviour
         // if the item is a sandbox item, spawn a direct copy of that item
         if (isSandBox)
         {
-            Debug.Log("Spawning new instance of item");
             Instantiate(this, this.transform.parent, true);
         }
 
@@ -92,6 +98,7 @@ public class Item : MonoBehaviour
 
         // Add item to player inventory
         playerReference.AddItemToInventory(this);
+        GetComponent<Collider2D>().enabled = false;
         itemState = ItemState.InInventory;
 
         // We move the power up game object to be under the player that collect it, this isn't essential for functionality 
@@ -117,6 +124,24 @@ public class Item : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // function to toggle the item in spawning
+    public void ToggleItem()
+    {
+        if (isSandBox)
+        {
+            ItemManager.Instance.ToggleItemSpawning(itemName);
+            if (isSelected == true)
+            {
+                isSelected = false;
+                spriteRenderer.material.color = new Color(0.2f, 0.2f, 0.2f, 1f);
+            }
+            else
+            {
+                isSelected = true;
+                spriteRenderer.material.color = Color.white;
+            }
+        }
+    }
 }
 
 // Enumerable of the possible item states

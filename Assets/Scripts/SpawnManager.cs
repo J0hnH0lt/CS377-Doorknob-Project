@@ -22,16 +22,18 @@ public class SpawnManager : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
     }
 
-    public void SpawnDoor(Color c)
+    public GameObject SpawnDoor(Color c)
     {
-        Instantiate(doorPrefab, GetRandomPosition(), Quaternion.identity).GetComponent<Renderer>().material.color = c;
+        GameObject door = Instantiate(doorPrefab, GetRandomPosition(), Quaternion.identity);
+        door.GetComponent<Renderer>().material.color = c;
+        return door;
     }
 
     public void SpawnObstacles(int n, List<Color> colors)
     {
         ClearObstacles();
 
-        colors.Add(Color.black);
+        colors.Add(Color.grey);
 
         for (int i = 0; i < n; i++)
         {
@@ -68,7 +70,7 @@ public class SpawnManager : MonoBehaviour
             }
             
         }
-        Debug.Log("Item Count: "+ itemList.Count);
+        
         itemList = new List<GameObject>();
     }
 
@@ -81,10 +83,11 @@ public class SpawnManager : MonoBehaviour
             Vector3 randomPos = GetRandomPosition();
             if (Physics2D.OverlapCircleAll(randomPos, 4f).Length == 0)
             {
-                // @Clem, use this to spawn random items into the game
-                // itemList.Add(RandomItem)
                 randomItemPrefab = ItemManager.Instance.GetRandomItem();
-                itemList.Add(Instantiate(randomItemPrefab, randomPos, Quaternion.identity));
+                if (randomItemPrefab != null)
+                {
+                    itemList.Add(Instantiate(randomItemPrefab, randomPos, Quaternion.identity));
+                }
             }
         }
     }

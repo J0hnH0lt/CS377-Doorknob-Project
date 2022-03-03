@@ -10,9 +10,15 @@ public class GameManager : MonoBehaviour
 
     public SpawnManager mySpawnManager;
 
+    public GameObject obsticlePrefab;
+
     public List<Player> players = new List<Player>();
 
+    public Player fartingPlayer;
+
     public List<Color> playerColors = new List<Color>();
+
+    public List<GameObject> playerObsticles = new List<GameObject>();
 
     public GameState State;
 
@@ -22,9 +28,12 @@ public class GameManager : MonoBehaviour
     private float maxDoorSpawnTime = 7.0f;
     private float doorTimer = 0.0f;
     private float nextDoorTime;
+    private GameObject door;
 
     private float gameOverTimer = 0.0f;
     private float gameOverTime;
+
+    private bool isStartAfterSandbox = true;
 
     private 
 
@@ -110,33 +119,24 @@ public class GameManager : MonoBehaviour
 
     public void HandleItemPhase()
     {
-        // delete the sandbox items
-        Item[] items = FindObjectsOfType<Item>();
-        foreach (Item i in items)
+        if (isStartAfterSandbox)
         {
-          
-            if (i.itemState!=ItemState.InEffect)
-            {
-                Debug.Log("destroying item with tag "+ i.tag);
-                Destroy(i.gameObject);
-            }
-
+            handleSandBoxChange();
+            isStartAfterSandbox = false;
         }
 
-
-        // delete items from player inventory
-        foreach(Player p in players) {
-            p.ResetItem1();
-            p.ResetItem2();
+        if (door!=null)
+        {
+            fartingPlayer.DisableTrailSlow();
+            fartingPlayer = null;
+            Destroy(door);
         }
-
-
 
         // spawn the door
         doorTimer = 0.0f;
         nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
 
-        Destroy(GameTextManager.Instance.ItemText);
+        //Destroy(GameTextManager.Instance.ItemPanel);
     }
 
     public void HandleGameOver()
@@ -150,11 +150,9 @@ public class GameManager : MonoBehaviour
 
         // Get the number of items to spawn
         HandlePlayerFart();
-        int numItems = UnityEngine.Random.Range(2, 4);
+        int numItems = UnityEngine.Random.Range(4, 10);
         mySpawnManager.SpawnItems(numItems);
         mySpawnManager.SpawnObstacles(200, playerColors);
-
-        // Handle the weighing and selection of who farts
         
     }
 
@@ -166,11 +164,12 @@ public class GameManager : MonoBehaviour
         int random_sum = 0;
         foreach (Player p in players)
         {
-            random_sum += p.health;
+            random_sum += p.currHealth;
             healhList.Add(Tuple.Create(random_sum, p));
         }
 
         // get a random number between 0 and the total amount of player health
+        // TODO I beleive random_sum might need to be random_sum += 1, but not sure
         int health_helper = UnityEngine.Random.Range(0, random_sum);
 
         foreach (var tuple in healhList)
@@ -182,8 +181,9 @@ public class GameManager : MonoBehaviour
             if (health_helper <= chance)
             {
                 // spawn the door of the players color
-                mySpawnManager.SpawnDoor(player.GetComponent<Renderer>().material.color);
+                door = mySpawnManager.SpawnDoor(player.GetComponent<Renderer>().material.color);
                 player.OnFart();
+                fartingPlayer = player;
                 break;
             }
         }
@@ -191,10 +191,61 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(Player p){
         players.Add(p);
+        p.maxHealth = 5;
+        p.currHealth = 5;
         Debug.Log("Player Added");
+
+    }
+
+    public void handleSandBoxChange()
+    {
+        // delete the sandbox items
+        Item[] items = FindObjectsOfType<Item>();
+        foreach (Item i in items)
+        {
+            if (i.itemState == ItemState.InEffect) // if the item is in effect, force its expiration
+            {
+                i.ForceExpiration();
+            }
+            else // if the item is in inventory or uncollected, destroy the item
+            { 
+                Destroy(i.gameObject);
+            }
+        }
+
+        // force removal of all player effects
+        Effect[] effects = FindObjectsOfType<Effect>();
+        foreach (Effect e in effects)
+        {
+            e.ForceExpireEffect();
+        }
+
+        // delete items from player inventory
+        foreach (Player p in players)
+        {
+            p.ResetItem1();
+            p.ResetItem2();
+        }
     }
     
+    //public void AddPlayerObstacles()
+    //{
+
+    //    GameObject obstacle = Instantiate(obsticlePrefab, randomPos, Quaternion.identity);
+
+    //    if (Physics2D.OverlapCircleAll(randomPos, 14f).Length > 1)
+    //    {
+    //        Destroy(obstacle);
+    //    }
+    //    else
+    //    {
+    //        obstacle.GetComponent<Renderer>().material.color = playe;
+    //        obstacleList.Add(obstacle);
+    //    }
+    //}
+
 }
+
 
 
 public enum GameState {

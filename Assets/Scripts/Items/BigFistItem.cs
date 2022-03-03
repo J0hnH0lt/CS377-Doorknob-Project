@@ -10,7 +10,12 @@ class BigFistItem : Item
 
     private float bigFistExperation;
 
-    private static GameObject blackHolePrefab;
+    protected override void Awake()
+    {
+        itemName = ItemName.BigFist;
+        base.Awake();
+    }
+
 
     protected override void ItemPayload()
     {

@@ -9,10 +9,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     public float currSpeed;
 
+    public bool isGhost = false;
+
     public float speedModifier = 1;
 
     [SerializeField]
-    public int health;
+    public int maxHealth;
+    [SerializeField]
+    public int currHealth;
 
     [SerializeField]
     public int damage;
@@ -22,7 +26,7 @@ public class Player : MonoBehaviour
 
     private Vector2 movementInput;
 
-    public bool hasFarted;
+    public bool isFarting;
 
     private Rigidbody2D playerRigidBod;
 
@@ -73,10 +77,7 @@ public class Player : MonoBehaviour
  
         playerRigidBod = GetComponent<Rigidbody2D>();
         myUI = gameObject.transform.GetChild(0).gameObject;
-        myFist = Instantiate(
-            FistPrefab,
-            playerRigidBod.position,
-            Quaternion.identity);
+        myFist = gameObject.transform.GetChild(1).gameObject;
 
         myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
         myReadyUpIcon = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
@@ -134,7 +135,6 @@ public class Player : MonoBehaviour
 
     public void Start() {
         id = FindObjectsOfType<Player>().Length;
-        Debug.Log("ID: " + id.ToString());
 
         GameManager.Instance.AddPlayer(this);
     }
@@ -152,15 +152,11 @@ public class Player : MonoBehaviour
             playerRigidBod.angularVelocity = 0;
         }
     
-
-        myFist.GetComponent<Transform>().transform.position = this.gameObject.transform.position + 
-                                                              (transform.up * 1.2f * myFist.GetComponent<FistScript>().currentPosition);
         myUI.GetComponent<Transform>().transform.eulerAngles = new Vector3(0,0,0);
 
-
-        if (myGameManager.State != GameState.CombatPhase && hasFarted == true)
+        if (myGameManager.State != GameState.CombatPhase && isFarting == true)
         {
-            hasFarted = false;
+            isFarting = false;
         }
 
         if (fartTrailActive == true)
@@ -177,45 +173,26 @@ public class Player : MonoBehaviour
         fartTrailActive = true;
         trailRenderObject = Instantiate(trailRendererObjectPrefab, playerRigidBod.position, Quaternion.identity);
         trailVectorPosition = gameObject.transform.position;
-        this.hasFarted = true;
+        this.isFarting = true;
     }
 
     public void Punch(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            myFist.GetComponent<Collider2D>().enabled = true;
-            myFist.GetComponent<FistScript>().PunchIt();
+            myFist.GetComponent<FistScript>().TriggerPunch();
         }
     }
 
-    // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnHit()
     {
-        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color)
+        if (isFarting)
         {
-            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        }
+            currHealth -= damage;
+            UpdateHealthBar();
 
-        if (collision.gameObject == myFist.gameObject)
-        {
-            return;
-        }
-        if (collision.gameObject.name == "FistPrefab(Clone)" && hasFarted)
-        {
-            health -= damage;
-            myHealthBar.fillAmount -= 0.1f;
-            if (health == 6)
-            {
-                myHealthBar.color = Color.yellow;
-            }
-
-            if (health == 3)
-            {
-                myHealthBar.color = Color.red;
-            }
             StartCoroutine(DamageFlash());
-            if (health == 0)
+            if (currHealth == 0)
             {
                 gameObject.SetActive(false);
                 myFist.SetActive(false);
@@ -226,16 +203,32 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void UpdateHealthBar()
+    {
+        myHealthBar.fillAmount = (float)currHealth / maxHealth;
+        if (myHealthBar.fillAmount < 0.3) myHealthBar.color = Color.red;
+        else if (myHealthBar.fillAmount < 0.6) myHealthBar.color = Color.yellow;
+        else myHealthBar.color = Color.green;
+    }
+
+    // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color || isGhost)
+        {
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+    }
+
     public void AddItemToInventory(Item item)
     {
-        Debug.Log("Adding Item to inventory");
 
         // if it is empty add the item to the players inventory
   
         if (item1 == null)
         {
             Image itemSlotImage = myItemSlot1.GetComponent<Image>();
-            Debug.Log("Adding to item slot 1");
+     
             item1 = item;
             // set the myItemSlot1 sprite
             if (myItemSlot1.GetComponent<Image>().sprite == myItemSlot1Default)
@@ -247,7 +240,6 @@ public class Player : MonoBehaviour
 
         else
         {
-            Debug.Log("Adding to item slot 2");
             item2 = item;
             if (myItemSlot2.GetComponent<Image>().sprite == myItemSlot2Default)
             {
@@ -306,7 +298,7 @@ public class Player : MonoBehaviour
 
     public void ResetItem2()
     {
-        myItemSlot2.GetComponent<Image>().sprite = myItemSlot1Default;
+        myItemSlot2.GetComponent<Image>().sprite = myItemSlot2Default;
         myItemSlot2.GetComponent<Image>().color = Color.white;
         item2 = null;
     }
