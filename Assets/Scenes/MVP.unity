@@ -2152,7 +2152,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098129616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9a92e98e681b42e4a78efea749acd13, type: 3}
   m_Name: 
@@ -2239,6 +2239,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 205040277757789487, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3897825332112959322, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
       propertyPath: isSandBox
       value: 1
@@ -2294,10 +2298,6 @@ PrefabInstance:
     - target: {fileID: 7898285378134162448, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
       propertyPath: m_TagString
       value: BigFist
-      objectReference: {fileID: 0}
-    - target: {fileID: 205040277757789487, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
