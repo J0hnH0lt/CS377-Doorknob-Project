@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Boundaries : MonoBehaviour {    
-    public Camera MainCamera;
+    private Camera MainCamera;
     private Vector2 screenBounds;
     private float objectWidth;
     private float objectHeight;
+
+    private void Awake()
+    {
+        MainCamera = FindObjectOfType<Camera>();
+    }
 
     // Use this for initialization
     void Start () {
