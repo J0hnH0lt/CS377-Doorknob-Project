@@ -226,6 +226,10 @@ public class GameManager : MonoBehaviour
                 continue;
             }
         }
+        if (players.Count != 1)
+        {
+            GameManager.Instance.UpdateGameState(GameState.ItemPhase);
+        }
         Debug.Log("Player Removed");
 
     }
