@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=2 && PlayersReady())
+            if (players.Count >=1 && PlayersReady())
             {
                 foreach (Player p in players)
                 {

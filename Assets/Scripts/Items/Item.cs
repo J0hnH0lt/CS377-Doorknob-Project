@@ -25,6 +25,9 @@ public class Item : MonoBehaviour
     // the item's state (uncollected, inventroy, etc).
     public ItemState itemState;
 
+    // sandbox states
+    public Vector3 SandboxScreenCoordiantes;
+
     public void Activate()
     {
         ItemPayload();
@@ -45,6 +48,7 @@ public class Item : MonoBehaviour
         if (isSandBox)
         {
             sandboxItemInterval = Time.time + sandboxItemInterval;
+            SandboxScreenCoordiantes = FindObjectOfType<Camera>().WorldToScreenPoint(this.transform.position);
         }
         
     }
