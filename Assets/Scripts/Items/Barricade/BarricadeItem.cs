@@ -23,6 +23,14 @@ public class BarricadeItem : Item
 
         // instantiate mine object
         Vector3 BarricadePosn = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 498);
+        foreach (Collider2D c in Physics2D.OverlapCircleAll(BarricadePosn, 0))
+        {
+            if(c.name == "BarricadePrefab(Clone)" && c.GetComponent<Renderer>().material.color == playerReference.playerColor)
+            {
+                c.GetComponent<BarricadeEffect>().scale += 1;
+                return;
+            }
+        }
         BarricadeObject = Instantiate(BarricadePrefab, BarricadePosn, Quaternion.identity, playerReference.transform.parent);
         BarricadeObject.GetComponent<Collider2D>().enabled = true;
 

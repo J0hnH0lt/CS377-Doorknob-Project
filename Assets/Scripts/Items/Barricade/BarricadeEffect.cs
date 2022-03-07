@@ -9,9 +9,11 @@ public class BarricadeEffect : Effect
 
     private float barricadeDuration = 3.5f;
 
-    private float barricadeExpiration;
+    public float barricadeExpiration;
 
     public Player playerRef;
+
+    public float scale = 1f;
 
     private void Start()
     {
@@ -32,9 +34,20 @@ public class BarricadeEffect : Effect
             GetComponent<Renderer>().material.color = barricadeColor = playerRef.playerColor;
         }
 
+        GetComponent<Transform>().transform.localScale = new Vector3(5,5,5) * scale;
+
         if (Time.time > barricadeExpiration)
         {
-            ExpireEffect();
+            if(scale > 1f)
+            {
+                scale -= 1f;
+                barricadeExpiration = Time.time + 1f;
+            }
+            else
+            {
+                ExpireEffect();
+            }
+            
         }
     }
 }

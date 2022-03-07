@@ -79,10 +79,10 @@ public class Player : MonoBehaviour
         myUI = gameObject.transform.GetChild(0).gameObject;
         myFist = gameObject.transform.GetChild(1).gameObject;
 
-        myHealthBar = myUI.transform.GetChild(1).gameObject.GetComponent<Image>();
-        myReadyUpIcon = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
-        myItemSlot1 = myUI.transform.GetChild(3).gameObject;
-        myItemSlot2 = myUI.transform.GetChild(4).gameObject;
+        myHealthBar = myUI.transform.GetChild(2).gameObject.GetComponent<Image>();
+        myReadyUpIcon = myUI.transform.GetChild(3).gameObject.GetComponent<Image>();
+        myItemSlot1 = myUI.transform.GetChild(4).gameObject;
+        myItemSlot2 = myUI.transform.GetChild(5).gameObject;
 
         // defualt sprites are duplicated
         myItemSlot1Default = myItemSlot1.GetComponent<Image>().sprite;
