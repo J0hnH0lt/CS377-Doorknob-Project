@@ -163,8 +163,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandleLevelChange() {
-
-
         // Get the number of items to spawn
         HandlePlayerFart();
         int numItems = UnityEngine.Random.Range(4, 10);
@@ -263,6 +261,11 @@ public class GameManager : MonoBehaviour
             p.ResetItem1();
             p.ResetItem2();
         }
+
+        Destroy(FindObjectOfType<GameModeButton>().gameObject);
+        Destroy(FindObjectOfType<CameraSizeButton>().gameObject);
+
+
     }
 
     public void TurnJoinOff()

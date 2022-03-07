@@ -34,7 +34,7 @@ public class DashScript : MonoBehaviour
         dashCooldownExpiration = Time.time;
         dashExpiration = Time.time;
         dashEnabled = false;
-        myDashIndicator = gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>();
+        myDashIndicator = gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<Image>();
         myPlayer = GetComponent<Player>();
     }
 

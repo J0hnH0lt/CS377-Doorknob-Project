@@ -62,7 +62,10 @@ public class CameraManager : MonoBehaviour
     public void LateUpdate()
     {
         MainCamera.orthographicSize = Mathf.Lerp(MainCamera.orthographicSize, cameraSize, lerpSpeed);
-        MoveItemsOnScreen();
+        if(GameManager.Instance.State == GameState.Menu)
+        {
+            MoveItemsOnScreen();
+        }
     }
 
     public void MoveItemsOnScreen()
