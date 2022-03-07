@@ -637,7 +637,7 @@ MonoBehaviour:
   isFarting: 0
   myFist: {fileID: 0}
   FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
-  FartPrefab: {fileID: 7254340360046970723, guid: 1445beed7aa794357919567014f9ef53, type: 3}
+  FartPrefab: {fileID: 6207786454403878167, guid: 88a2d2c2b8a184bdd8624c2ec8080167, type: 3}
   myReadyUpIcon: {fileID: 0}
   id: 0
   playerColor: {r: 0, g: 0, b: 0, a: 0}

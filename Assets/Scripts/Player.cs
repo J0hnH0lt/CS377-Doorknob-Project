@@ -180,6 +180,7 @@ public class Player : MonoBehaviour
         fartTrailActive = true;
         trailRenderObject = Instantiate(trailRendererObjectPrefab, playerRigidBod.position, Quaternion.identity);
         trailVectorPosition = gameObject.transform.position;
+        Instantiate(FartPrefab, transform.position, Quaternion.identity);
         this.isFarting = true;
     }
 
