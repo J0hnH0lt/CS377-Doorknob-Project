@@ -1236,6 +1236,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5986871066584758450, guid: fd75298670a804e9e99bf03548c501d6, type: 3}
+      propertyPath: m_AllowJoining
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5986871066584758451, guid: fd75298670a804e9e99bf03548c501d6, type: 3}
       propertyPath: m_Name
       value: Player Manager
@@ -2226,6 +2230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySpawnManager: {fileID: 743174549}
+  inputManager: {fileID: 0}
   obsticlePrefab: {fileID: 8826353503448585491, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
   players: []
   fartingPlayer: {fileID: 0}
@@ -3551,6 +3556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 1292104357}
   currState: 1
+  lerpSpeed: 0
 --- !u!1 &2082214274
 GameObject:
   m_ObjectHideFlags: 0

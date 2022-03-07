@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public SpawnManager mySpawnManager;
+
+    public PlayerInputManager inputManager;
 
     public GameObject obsticlePrefab;
 
@@ -35,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private bool isStartAfterSandbox = true;
 
-    private 
+    private
 
     void Awake() {
         Instance = this;
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UpdateGameState(GameState.Menu);
+        inputManager = PlayerInputManager.instance;
     }
 
     // Update is called once per frame
@@ -51,19 +55,19 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >=1 && PlayersReady())
+            if (players.Count >= 1 && PlayersReady())
             {
                 foreach (Player p in players)
                 {
                     p.myReadyUpIcon.color = Color.clear;
                     playerColors.Add(p.playerColor);
                 }
-
+                TurnJoinOff();
                 UpdateGameState(GameState.ItemPhase);
                 GameTextManager.Instance.GameRunning();
             }
         }
-        if (State == GameState.ItemPhase){
+        if (State == GameState.ItemPhase) {
             doorTimer += Time.deltaTime;
             if (doorTimer >= nextDoorTime) {
                 UpdateGameState(GameState.CombatPhase);
@@ -90,12 +94,13 @@ public class GameManager : MonoBehaviour
         }
         return true;
     }
- 
+
     public void UpdateGameState(GameState newState) {
         State = newState;
         switch (newState) {
             case GameState.Menu:
                 HandleMenu();
+                TurnJoinOn();
                 break;
             case GameState.ItemPhase:
                 HandleItemPhase();
@@ -125,7 +130,7 @@ public class GameManager : MonoBehaviour
             isStartAfterSandbox = false;
         }
 
-        if (door!=null)
+        if (door != null)
         {
             fartingPlayer.DisableTrailSlow();
             fartingPlayer = null;
@@ -153,7 +158,7 @@ public class GameManager : MonoBehaviour
         int numItems = UnityEngine.Random.Range(4, 10);
         mySpawnManager.SpawnItems(numItems);
         mySpawnManager.SpawnObstacles(200, playerColors);
-        
+
     }
 
     public void HandlePlayerFart() {
@@ -174,7 +179,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var tuple in healhList)
         {
-        
+
             int chance = tuple.Item1;
             Player player = tuple.Item2;
             // select the player if the random number falls within their health range
@@ -189,7 +194,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer(Player p){
+    public void AddPlayer(Player p) {
         players.Add(p);
         p.maxHealth = 5;
         p.currHealth = 5;
@@ -208,7 +213,7 @@ public class GameManager : MonoBehaviour
                 i.ForceExpiration();
             }
             else // if the item is in inventory or uncollected, destroy the item
-            { 
+            {
                 Destroy(i.gameObject);
             }
         }
@@ -227,22 +232,18 @@ public class GameManager : MonoBehaviour
             p.ResetItem2();
         }
     }
-    
-    //public void AddPlayerObstacles()
-    //{
 
-    //    GameObject obstacle = Instantiate(obsticlePrefab, randomPos, Quaternion.identity);
+    public void TurnJoinOff()
+    {
+        //inputManager.DisableJoining();
+        PlayerInputManager.instance.DisableJoining();
+    }
 
-    //    if (Physics2D.OverlapCircleAll(randomPos, 14f).Length > 1)
-    //    {
-    //        Destroy(obstacle);
-    //    }
-    //    else
-    //    {
-    //        obstacle.GetComponent<Renderer>().material.color = playe;
-    //        obstacleList.Add(obstacle);
-    //    }
-    //}
+    public void TurnJoinOn()
+    {
+        //inputManager.EnableJoining();
+        PlayerInputManager.instance.EnableJoining();
+    }
 
 }
 
