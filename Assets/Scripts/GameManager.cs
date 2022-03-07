@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
-    private float minDoorSpawnTime = 3.0f;
-    private float maxDoorSpawnTime = 7.0f;
+    private float minDoorSpawnTime = 2.0f;
+    private float maxDoorSpawnTime = 4.0f;
     private float doorTimer = 0.0f;
     private float nextDoorTime;
     private GameObject door;
@@ -35,10 +35,13 @@ public class GameManager : MonoBehaviour
 
     private bool isStartAfterSandbox = true;
 
-    private 
+    public bool isFartRoyale = false;
+    public bool fartRoyaleTickComplete = false;
+
 
     void Awake() {
         Instance = this;
+
     }
     // Start is called before the first frame update
     void Start()
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
             if (doorTimer >= nextDoorTime) {
                 UpdateGameState(GameState.CombatPhase);
             }
+
         }
         if (State == GameState.GameOver)
         {
@@ -119,6 +123,12 @@ public class GameManager : MonoBehaviour
 
     public void HandleItemPhase()
     {
+
+        if (isFartRoyale)
+        {
+            CameraManager.Instance.FartRoyaleTick();
+        }
+
         if (isStartAfterSandbox)
         {
             handleSandBoxChange();
@@ -135,8 +145,6 @@ public class GameManager : MonoBehaviour
         // spawn the door
         doorTimer = 0.0f;
         nextDoorTime = UnityEngine.Random.Range(minDoorSpawnTime, maxDoorSpawnTime);
-
-        //Destroy(GameTextManager.Instance.ItemPanel);
     }
 
     public void HandleGameOver()
@@ -157,6 +165,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void HandlePlayerFart() {
+
         // construct a health range dictionary of all the players
         var healhList = new List<Tuple<int, Player>>();
 

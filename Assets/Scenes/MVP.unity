@@ -236,7 +236,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3388603402877905749, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
 --- !u!1 &128415134
 GameObject:
@@ -1480,6 +1481,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534939126}
   m_CullTransparentMesh: 1
+--- !u!1 &558039173 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4393081674079596346, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
+  m_PrefabInstance: {fileID: 119656182}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &558039174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558039173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d489996eb3aa43579ebc176c6071a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SandboxScreenCoordinates: {x: 0, y: 0, z: 0}
 --- !u!1 &584082106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,6 +2370,7 @@ MonoBehaviour:
   playerColors: []
   playerObsticles: []
   State: 0
+  isFartRoyale: 0
 --- !u!114 &1098129619
 MonoBehaviour:
   m_ObjectHideFlags: 0
