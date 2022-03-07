@@ -73,6 +73,10 @@ public class GameManager : MonoBehaviour
                 UpdateGameState(GameState.CombatPhase);
             }
         }
+        if (State == GameState.CombatPhase)
+        {
+            CheckForGameOver();
+        }
         if (State == GameState.GameOver)
         {
             gameOverTimer += Time.deltaTime;
@@ -194,11 +198,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer(Player p) {
+    public void AddPlayer(Player p)
+    {
         players.Add(p);
         p.maxHealth = 5;
         p.currHealth = 5;
         Debug.Log("Player Added");
+
+    }
+
+    public void RemovePlayer(int id)
+    {
+        for(int i = 0; i < players.Count; i++)
+        {
+            if (players[i].GetComponent<Player>().id == id)
+            {
+                players.RemoveAt(i);
+                continue;
+            }
+        }
+        Debug.Log("Player Removed");
 
     }
 
@@ -243,6 +262,15 @@ public class GameManager : MonoBehaviour
     {
         //inputManager.EnableJoining();
         PlayerInputManager.instance.EnableJoining();
+    }
+
+    public void CheckForGameOver()
+    {
+        if (players.Count == 1)
+        {
+            GameTextManager.Instance.GameOver();
+            GameManager.Instance.UpdateGameState(GameState.GameOver);
+        }
     }
 
 }
