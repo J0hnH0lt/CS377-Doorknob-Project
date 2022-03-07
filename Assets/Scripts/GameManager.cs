@@ -40,12 +40,13 @@ public class GameManager : MonoBehaviour
 
     private bool isStartAfterSandbox = true;
 
-    public bool isFartRoyale = false;
+    public bool isFartRoyale;
     public bool fartRoyaleTickComplete = false;
 
 
     void Awake() {
         Instance = this;
+        isFartRoyale = true;
 
     }
     // Start is called before the first frame update
@@ -137,6 +138,7 @@ public class GameManager : MonoBehaviour
 
         if (isFartRoyale)
         {
+            Debug.Log("Fart Royale Tick");
             CameraManager.Instance.FartRoyaleTick();
         }
 

@@ -109,7 +109,6 @@ public class CameraManager : MonoBehaviour
         if (MainCamera.orthographicSize > minCameraSize)
         {
             cameraSize = cameraSize - 5.0f;
-
         }
     }
 }
