@@ -27,8 +27,12 @@ public class CameraManager : MonoBehaviour
     { 
         switch (camState)
         {
+            case CameraState.Tiny:
+                cameraSize = 15f;
+                currState = CameraState.Tiny;
+                break;
             case CameraState.Small:
-                cameraSize = 20f;
+                cameraSize = 25f;
                 currState = CameraState.Small;
                 break;
             case CameraState.Medium:
@@ -112,6 +116,7 @@ public class CameraManager : MonoBehaviour
 
 public enum CameraState
 {
+    Tiny,
     Small,
     Medium,
     Large,

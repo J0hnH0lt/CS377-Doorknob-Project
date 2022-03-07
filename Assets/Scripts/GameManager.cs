@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
     {
         winner = players[0];
         winner.GetComponent<Boundaries>().enabled = false;
-        CameraManager.Instance.setCameraSize(CameraState.Small);
+        CameraManager.Instance.setCameraSize(CameraState.Tiny);
 
         gameOverTimer = 0.0f;
         gameOverTime = 20.0f;
