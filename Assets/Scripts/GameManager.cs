@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
         CameraManager.Instance.setCameraSize(CameraState.Tiny);
 
         gameOverTimer = 0.0f;
-        gameOverTime = 20.0f;
+        gameOverTime = 5.0f;
     }
 
     public void HandleLevelChange() {
@@ -214,8 +214,8 @@ public class GameManager : MonoBehaviour
     public void AddPlayer(Player p)
     {
         players.Add(p);
-        p.maxHealth = 5;
-        p.currHealth = 5;
+        p.maxHealth = 8;
+        p.currHealth = 8;
         Debug.Log("Player Added");
 
     }
