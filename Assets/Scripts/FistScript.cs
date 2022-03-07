@@ -39,6 +39,8 @@ public class FistScript : MonoBehaviour
         if (target != null && target.name == "PlayerPrefab(Clone)") target.gameObject.GetComponent<Player>().OnHit();
         if (target != null && target.tag == "item") target.gameObject.GetComponent<Item>().ToggleItem();
         if (target != null && target.tag == "CameraSizeButton") cameraManager.ToggleMapSize();
+        if (target != null && target.tag == "GameModeButton") target.GetComponent<GameModeButton>().EnableFartRoyale();
+
 
 
         StartCoroutine(AnimatePunch());

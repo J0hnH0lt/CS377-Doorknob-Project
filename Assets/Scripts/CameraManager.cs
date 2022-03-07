@@ -6,13 +6,15 @@ public class CameraManager : MonoBehaviour
 
     public Camera MainCamera;
 
-    private float cameraSize = 40;
+    private float cameraSize = 40f;
 
     public CameraState currState;
 
     public static CameraManager Instance;
 
     private float lerpSpeed = .09f;
+
+    private float minCameraSize = 16f;
 
     private void Awake()
     {
@@ -88,6 +90,15 @@ public class CameraManager : MonoBehaviour
         GameModeButton gameModeButton = FindObjectOfType<GameModeButton>();
         gameModeButton.transform.position = MainCamera.ScreenToWorldPoint(gameModeButton.SandboxScreenCoordinates);
     }
+
+    public void FartRoyaleTick()
+    {
+        if (MainCamera.orthographicSize > minCameraSize)
+        {
+            cameraSize = cameraSize - 5.0f;
+
+        }
+    }
 }
 
 public enum CameraState
@@ -95,5 +106,4 @@ public enum CameraState
     Small,
     Medium,
     Large,
-    FartRoyale
 }
