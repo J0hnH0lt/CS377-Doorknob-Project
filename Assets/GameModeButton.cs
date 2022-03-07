@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraSizeButton : MonoBehaviour
+public class GameModeButton : MonoBehaviour
 {
     // Start is called before the first frame update
     public Vector3 SandboxScreenCoordinates;

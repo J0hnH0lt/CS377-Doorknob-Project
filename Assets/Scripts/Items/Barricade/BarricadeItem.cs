@@ -22,7 +22,7 @@ public class BarricadeItem : Item
     {
 
         // instantiate mine object
-        Vector3 BarricadePosn = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 498);
+        Vector3 BarricadePosn = new Vector3(playerReference.gameObject.transform.position.x, playerReference.gameObject.transform.position.y, 498);
         foreach (Collider2D c in Physics2D.OverlapCircleAll(BarricadePosn, 0))
         {
             if(c.name == "BarricadePrefab(Clone)" && c.GetComponent<Renderer>().material.color == playerReference.playerColor)

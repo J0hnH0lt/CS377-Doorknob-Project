@@ -20,7 +20,7 @@ public class MineItem : Item
     protected override void ItemPayload()
     {
         // instantiate mine object
-        Vector3 MinePosn = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 497.0f);
+        Vector3 MinePosn = new Vector3(playerReference.gameObject.transform.position.x, playerReference.gameObject.transform.position.y, 497.0f);
 
         MineObject = Instantiate(MinePrefab, MinePosn, Quaternion.identity, playerReference.transform.parent);
         // handle colors

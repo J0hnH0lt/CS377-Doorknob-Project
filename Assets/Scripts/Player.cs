@@ -69,6 +69,8 @@ public class Player : MonoBehaviour
     public GameObject myItemSlot2;
     public Sprite myItemSlot2Default;
 
+    public Vector3 SandboxScreenCoordinates;
+
     Vector3 trailVectorPosition;
 
 
@@ -141,6 +143,7 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
+        SandboxScreenCoordinates = FindObjectOfType<Camera>().WorldToScreenPoint(this.transform.position);
 
         playerRigidBod.velocity = new Vector3(movementInput.x, movementInput.y, 0) * (currSpeed * speedModifier);
 
