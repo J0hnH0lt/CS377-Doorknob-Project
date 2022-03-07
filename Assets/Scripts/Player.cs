@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     public Image myReadyUpIcon;
 
-    private int id;
+    public int id;
 
     public Color playerColor;
 
@@ -200,8 +200,9 @@ public class Player : MonoBehaviour
                 gameObject.SetActive(false);
                 myFist.SetActive(false);
                 Destroy(trailRenderObject);
-                GameTextManager.Instance.GameOver();
-                GameManager.Instance.UpdateGameState(GameState.GameOver);
+                //GameTextManager.Instance.GameOver();
+                //GameManager.Instance.UpdateGameState(GameState.GameOver);
+                GameManager.Instance.RemovePlayer(id);
             }
         }
     }

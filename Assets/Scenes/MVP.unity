@@ -1314,6 +1314,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5986871066584758450, guid: fd75298670a804e9e99bf03548c501d6, type: 3}
+      propertyPath: m_AllowJoining
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5986871066584758451, guid: fd75298670a804e9e99bf03548c501d6, type: 3}
       propertyPath: m_Name
       value: Player Manager
@@ -1436,8 +1440,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 670, y: -114}
-  m_SizeDelta: {x: 265, y: 48}
+  m_AnchoredPosition: {x: 710, y: -114}
+  m_SizeDelta: {x: 350, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &534939128
 MonoBehaviour:
@@ -1544,12 +1548,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 71e42d48df8d53643af8092aa48620ed, type: 3}
+      objectReference: {fileID: 21300000, guid: 6601bb9f0466b01459b04a4da2a1116f, type: 3}
     - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.9902849
       objectReference: {fileID: 0}
     - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_Color.g
@@ -1557,6 +1569,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_Color.r
+      value: 0.8820755
+      objectReference: {fileID: 0}
+    - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5709491759855994014, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
@@ -1601,7 +1617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1613,7 +1629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1625,7 +1641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -5709491759855994014, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
@@ -2029,8 +2045,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 670, y: -114}
-  m_SizeDelta: {x: 265, y: 48}
+  m_AnchoredPosition: {x: 710, y: -114}
+  m_SizeDelta: {x: 350, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1004815484
 MonoBehaviour:
@@ -2364,6 +2380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySpawnManager: {fileID: 743174549}
+  inputManager: {fileID: 0}
   obsticlePrefab: {fileID: 8826353503448585491, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
   players: []
   fartingPlayer: {fileID: 0}
