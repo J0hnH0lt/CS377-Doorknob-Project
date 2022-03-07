@@ -69,6 +69,8 @@ public class Player : MonoBehaviour
     public GameObject myItemSlot2;
     public Sprite myItemSlot2Default;
 
+    public Vector3 SandboxScreenCoordinates;
+
     Vector3 trailVectorPosition;
 
 

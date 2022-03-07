@@ -5,14 +5,10 @@ using UnityEngine;
 public class CameraSizeButton : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector3 SandboxScreenCoordinates;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        SandboxScreenCoordinates = FindObjectOfType<Camera>().WorldToScreenPoint(this.transform.position);
     }
 }

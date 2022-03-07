@@ -26,7 +26,7 @@ public class Item : MonoBehaviour
     public ItemState itemState;
 
     // sandbox states
-    public Vector3 SandboxScreenCoordiantes;
+    public Vector3 SandboxScreenCoordinates;
 
     public void Activate()
     {
@@ -48,7 +48,7 @@ public class Item : MonoBehaviour
         if (isSandBox)
         {
             sandboxItemInterval = Time.time + sandboxItemInterval;
-            SandboxScreenCoordiantes = FindObjectOfType<Camera>().WorldToScreenPoint(this.transform.position);
+            SandboxScreenCoordinates = FindObjectOfType<Camera>().WorldToScreenPoint(this.transform.position);
         }
         
     }

@@ -71,9 +71,12 @@ public class CameraManager : MonoBehaviour
             if (i!=null && i.isSandBox)
             {
                 Vector3 currScreenPosition = MainCamera.WorldToScreenPoint(i.transform.position);
-                i.transform.position = MainCamera.ScreenToWorldPoint(i.SandboxScreenCoordiantes);
+                i.transform.position = MainCamera.ScreenToWorldPoint(i.SandboxScreenCoordinates);
             }
         }
+        CameraSizeButton button = FindObjectOfType<CameraSizeButton>();
+        button.transform.position = MainCamera.ScreenToWorldPoint(button.SandboxScreenCoordinates);
+
     }
 }
 
