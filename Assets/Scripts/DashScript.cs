@@ -14,6 +14,8 @@ public class DashScript : MonoBehaviour
 
     private float dashExpiration;
 
+    private Player myPlayer;
+
     [SerializeField]
     private float dashSpeed;
 
@@ -32,7 +34,8 @@ public class DashScript : MonoBehaviour
         dashCooldownExpiration = Time.time;
         dashExpiration = Time.time;
         dashEnabled = false;
-        myDashIndicator = gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>();
+        myDashIndicator = gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<Image>();
+        myPlayer = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -49,13 +52,17 @@ public class DashScript : MonoBehaviour
     {
         if (context.started)
         {
-            if (Time.time > dashCooldownExpiration)
+            if (myPlayer.speedModifier == 1 && myPlayer.GetComponent<Rigidbody2D>().velocity.x != 0 && myPlayer.GetComponent<Rigidbody2D>().velocity.y != 0)
             {
-                dashExpiration = Time.time + dashDuration;
-                dashCooldownExpiration = Time.time + dashCooldown;
-                dashEnabled = true;
-                GetComponent<Player>().currSpeed = dashSpeed;
-                StartCoroutine(DashImageLerp());
+                if (Time.time > dashCooldownExpiration)
+                {
+                    dashExpiration = Time.time + dashDuration;
+                    dashCooldownExpiration = Time.time + dashCooldown;
+                    dashEnabled = true;
+                    //GetComponent<Player>().currSpeed = dashSpeed;
+                    myPlayer.currSpeed = dashSpeed;
+                    StartCoroutine(DashImageLerp());
+                }
             }
         }
          
