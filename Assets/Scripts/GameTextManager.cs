@@ -38,9 +38,7 @@ public class GameTextManager : MonoBehaviour
 
     public void GameOver()
     {
-        TitleText.GetComponent<Text>().text = "GAME OVER";
-        TitleText.GetComponent<Text>().color = GameManager.Instance.players[0].playerColor;
-        TitleText.transform.position = new Vector3(0, 0, 0);
+        GameManager.Instance.players[0].transform.GetChild(0).transform.GetChild(7).GetComponent<Renderer>().enabled = true;
     }
 
     private IEnumerator InstructionPanelLerpOut()
