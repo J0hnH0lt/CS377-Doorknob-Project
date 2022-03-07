@@ -187,8 +187,16 @@ PrefabInstance:
       value: 2.24
       objectReference: {fileID: 0}
     - target: {fileID: -4793290224136157224, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4793290224136157224, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3709549624240894201, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4393081674079596346, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
       propertyPath: m_Name
@@ -1397,7 +1405,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3e8aeefc47c38f941b44eb0bc245f187, type: 3}
-    m_FontSize: 64
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1653,7 +1661,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &633337995
@@ -1830,8 +1838,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 626.24994, y: -114}
-  m_SizeDelta: {x: 355, y: 48}
+  m_AnchoredPosition: {x: 701.546, y: -114.000015}
+  m_SizeDelta: {x: 505.592, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &673800197
 MonoBehaviour:
@@ -1866,7 +1874,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '/       : Punch'
+  m_Text: '/       : Punch / Interact'
 --- !u!222 &673800198
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2604,10 +2612,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 205040277757789487, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 3897825332112959322, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
       propertyPath: isSandBox
       value: 1
@@ -2663,6 +2667,10 @@ PrefabInstance:
     - target: {fileID: 7898285378134162448, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
       propertyPath: m_TagString
       value: BigFist
+      objectReference: {fileID: 0}
+    - target: {fileID: 205040277757789487, guid: 2ba5ac66b9d874790b353a7a4b076af1, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94947516435f047c087ebc13af6b0cd6, type: 3}
@@ -3118,7 +3126,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3e8aeefc47c38f941b44eb0bc245f187, type: 3}
-    m_FontSize: 64
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -3383,6 +3391,85 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9082139733668722465, guid: eaaeda97fd61a51418b6ffbb8420f391, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eaaeda97fd61a51418b6ffbb8420f391, type: 3}
+--- !u!1 &1482784259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1482784260}
+  - component: {fileID: 1482784262}
+  - component: {fileID: 1482784261}
+  m_Layer: 5
+  m_Name: Instructions Text (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1482784260
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482784259}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1511374439}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 683, y: 380}
+  m_SizeDelta: {x: 476.16, y: 45.757}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1482784261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482784259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.86666673, g: 0.86666673, b: 0.86666673, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 3e8aeefc47c38f941b44eb0bc245f187, type: 3}
+    m_FontSize: 36
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 128
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Who just farterd?!!!
+--- !u!222 &1482784262
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482784259}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1482828622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3568,6 +3655,7 @@ RectTransform:
   m_Children:
   - {fileID: 491817493}
   - {fileID: 2104684899}
+  - {fileID: 1482784260}
   m_Father: {fileID: 1227533598}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4465,8 +4553,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 683.73364, y: 208.3977}
-  m_SizeDelta: {x: 457.0804, y: 359.4552}
+  m_AnchoredPosition: {x: 678, y: 94}
+  m_SizeDelta: {x: 506.7, y: 475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2104684900
 MonoBehaviour:
@@ -4490,20 +4578,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3e8aeefc47c38f941b44eb0bc245f187, type: 3}
-    m_FontSize: 27
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 128
+    m_MaxSize: 256
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Uh oh! You farted! Get to the door before you get hit. \n\nDid your friend
-    fart? GROSS! \nMake sure to punish them for their nasty business. \n\nMake sure
-    to use items and obstacles to your advantage\n\n"
+  m_Text: "- Was it you? Get to the door before you get hit!\n\n- Was it your friend?
+    GROSS! Make sure to punch them for their nasty business. \n\n- Use items and
+    obstacles to your advantage\n\n- Punch items to choose what will spawn in game\n\n"
 --- !u!222 &2104684901
 CanvasRenderer:
   m_ObjectHideFlags: 0

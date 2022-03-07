@@ -73,6 +73,10 @@ public class Player : MonoBehaviour
 
     Vector3 trailVectorPosition;
 
+    // phase
+    public bool isPhase;
+    public List<GameObject> physicObjects;
+
 
     public void Awake()
     {
@@ -218,10 +222,17 @@ public class Player : MonoBehaviour
     // WE NEED TO SWITCH COMBAT FROM COLLISION TO ONTRIGGER
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color || isGhost)
+        if (isPhase && collision.gameObject.tag == "Obstacle")
+        {
+            Debug.Log("ignoring Collsion");
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+            physicObjects.Add(collision.gameObject);
+        }
+        if (collision.gameObject.GetComponent<Renderer>().material.color == GetComponent<Renderer>().material.color || isGhost)
         {
             Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
+
     }
 
     public void AddItemToInventory(Item item)

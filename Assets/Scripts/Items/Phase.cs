@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Phase : Item
 {
@@ -21,7 +21,7 @@ public class Phase : Item
         phaseExperiation = Time.time + phaseDuration;
 
         // Payload is to scale the fist
-        playerReference.GetComponent<Collider2D>().enabled = false;
+        playerReference.isPhase = true;
 
         phaseColor = playerReference.playerColor;
         // set transparency to 0
@@ -32,9 +32,20 @@ public class Phase : Item
 
     protected override void ItemHasExpired()       // Checklist item 2
     {
-        playerReference.GetComponent<Collider2D>().enabled = true;
+        playerReference.isPhase= false;
         playerReference.GetComponent<Renderer>().material.color = playerReference.playerColor;
         playerReference.myFist.GetComponent<Renderer>().material.color = playerReference.playerColor;
+
+        foreach (GameObject obstacle in playerReference.physicObjects)
+        {
+            if (obstacle != null)
+            {
+                Debug.Log("restoring Collsion");
+                Physics2D.IgnoreCollision(obstacle.GetComponent<Collider2D>(), playerReference.GetComponent<Collider2D>(), false);
+            }
+
+        }
+        playerReference.physicObjects = new List<GameObject>();
 
         base.ItemHasExpired();
     }

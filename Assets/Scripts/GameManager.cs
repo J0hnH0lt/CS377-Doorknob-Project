@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
             if (health_helper <= chance)
             {
                 // spawn the door of the players color
-                door = mySpawnManager.SpawnDoor(player.GetComponent<Renderer>().material.color);
+                door = mySpawnManager.SpawnDoor(player.playerColor);
                 player.OnFart();
                 fartingPlayer = player;
                 break;
@@ -262,6 +262,8 @@ public class GameManager : MonoBehaviour
             p.ResetItem2();
         }
 
+        CameraManager.Instance.setCameraSize(CameraState.Large);
+
         Destroy(FindObjectOfType<GameModeButton>().gameObject);
         Destroy(FindObjectOfType<CameraSizeButton>().gameObject);
 
@@ -282,7 +284,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckForGameOver()
     {
-        if (players.Count == 1)
+        if (players.Count == 0)
         {
             GameTextManager.Instance.GameOver();
             GameManager.Instance.UpdateGameState(GameState.GameOver);

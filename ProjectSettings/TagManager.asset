@@ -9,6 +9,7 @@ TagManager:
   - item
   - CameraSizeButton
   - GameModeButton
+  - Obstacle
   layers:
   - Default
   - TransparentFX
