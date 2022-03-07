@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
 
         // get a random number between 0 and the total amount of player health
         // TODO I beleive random_sum might need to be random_sum += 1, but not sure
-        int health_helper = UnityEngine.Random.Range(0, random_sum);
+        int health_helper = UnityEngine.Random.Range(1, random_sum+1);
 
         foreach (var tuple in healhList)
         {
