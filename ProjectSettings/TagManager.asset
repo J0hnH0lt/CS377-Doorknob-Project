@@ -8,6 +8,7 @@ TagManager:
   - BigFist
   - item
   - CameraSizeButton
+  - GameModeButton
   layers:
   - Default
   - TransparentFX

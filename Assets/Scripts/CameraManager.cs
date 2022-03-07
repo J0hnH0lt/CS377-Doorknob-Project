@@ -84,6 +84,9 @@ public class CameraManager : MonoBehaviour
                 p.transform.position = MainCamera.ScreenToWorldPoint(p.SandboxScreenCoordinates);
             }
         }
+
+        GameModeButton gameModeButton = FindObjectOfType<GameModeButton>();
+        gameModeButton.transform.position = MainCamera.ScreenToWorldPoint(gameModeButton.SandboxScreenCoordinates);
     }
 }
 
