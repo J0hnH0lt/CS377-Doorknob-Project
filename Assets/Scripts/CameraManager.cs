@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
 
     public static CameraManager Instance;
 
-    public float lerpSpeed;
+    private float lerpSpeed = .09f;
 
     private void Awake()
     {
@@ -70,13 +70,20 @@ public class CameraManager : MonoBehaviour
         {
             if (i!=null && i.isSandBox)
             {
-                Vector3 currScreenPosition = MainCamera.WorldToScreenPoint(i.transform.position);
                 i.transform.position = MainCamera.ScreenToWorldPoint(i.SandboxScreenCoordinates);
             }
         }
         CameraSizeButton button = FindObjectOfType<CameraSizeButton>();
         button.transform.position = MainCamera.ScreenToWorldPoint(button.SandboxScreenCoordinates);
 
+        Player[] players = FindObjectsOfType<Player>();
+        foreach (Player p in players)
+        {
+            if (p != null)
+            {
+                p.transform.position = MainCamera.ScreenToWorldPoint(p.SandboxScreenCoordinates);
+            }
+        }
     }
 }
 

@@ -143,6 +143,7 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
+        SandboxScreenCoordinates = FindObjectOfType<Camera>().WorldToScreenPoint(this.transform.position);
 
         playerRigidBod.velocity = new Vector3(movementInput.x, movementInput.y, 0) * (currSpeed * speedModifier);
 
