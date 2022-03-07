@@ -1469,11 +1469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -59.736492
+      value: -60.8
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4538918
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1526,6 +1526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea66893fa42034f679ff06320ddcacd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SandboxScreenCoordinates: {x: 0, y: 0, z: 0}
 --- !u!1 &673800195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3551,6 +3552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 1292104357}
   currState: 1
+  lerpSpeed: 0.0125
 --- !u!1 &2082214274
 GameObject:
   m_ObjectHideFlags: 0
