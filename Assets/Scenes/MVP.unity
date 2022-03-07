@@ -1439,8 +1439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 670, y: -114}
-  m_SizeDelta: {x: 265, y: 48}
+  m_AnchoredPosition: {x: 710, y: -114}
+  m_SizeDelta: {x: 350, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &534939128
 MonoBehaviour:
@@ -2026,8 +2026,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 670, y: -114}
-  m_SizeDelta: {x: 265, y: 48}
+  m_AnchoredPosition: {x: 710, y: -114}
+  m_SizeDelta: {x: 350, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1004815484
 MonoBehaviour:
@@ -3687,7 +3687,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 1292104357}
   currState: 1
-  lerpSpeed: 0
 --- !u!1 &2082214274
 GameObject:
   m_ObjectHideFlags: 0
