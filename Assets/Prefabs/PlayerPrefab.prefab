@@ -590,6 +590,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ea49160e-f825-4a25-99bd-1d0865abbdcd
     m_ActionName: Player Controls/UseItem2[/DualShock4GamepadHID/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: ccc16aa5956214ce6b78ffe260c3e2c9, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 865313a3-af11-49d6-8d25-f7d89d87eae2
+    m_ActionName: Player Controls/KeyboardMove[/Keyboard/s,/Keyboard/a,/Keyboard/w,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 19f08f4a-b3d1-4257-8bcc-a0e78eb35406
+    m_ActionName: Player Controls/KeyboardPunch[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player Controls
@@ -619,6 +639,7 @@ MonoBehaviour:
   FistPrefab: {fileID: 4663527929987076166, guid: cbbdb47edd42ba341a1a2e45f19bb597, type: 3}
   FartPrefab: {fileID: 7254340360046970723, guid: 1445beed7aa794357919567014f9ef53, type: 3}
   myReadyUpIcon: {fileID: 0}
+  id: 0
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   trailRendererObjectPrefab: {fileID: 6677122055893577354, guid: b2bd2e0944ab844c9a8aecf42327b2ec, type: 3}
   trailRenderObject: {fileID: 0}
@@ -630,6 +651,9 @@ MonoBehaviour:
   item2: {fileID: 0}
   myItemSlot2: {fileID: 0}
   myItemSlot2Default: {fileID: 0}
+  SandboxScreenCoordinates: {x: 0, y: 0, z: 0}
+  isPhase: 0
+  physicObjects: []
 --- !u!114 &6217668634034457969
 MonoBehaviour:
   m_ObjectHideFlags: 0

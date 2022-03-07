@@ -12,9 +12,9 @@ public class CameraManager : MonoBehaviour
 
     public static CameraManager Instance;
 
-    private float lerpSpeed = .09f;
+    private float lerpSpeed = .02f;
 
-    private float minCameraSize = 16f;
+    private float minCameraSize = 21f;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class CameraManager : MonoBehaviour
         switch (camState)
         {
             case CameraState.Small:
-                cameraSize = 25f;
+                cameraSize = 20f;
                 currState = CameraState.Small;
                 break;
             case CameraState.Medium:
@@ -65,6 +65,12 @@ public class CameraManager : MonoBehaviour
         if(GameManager.Instance.State == GameState.Menu)
         {
             MoveItemsOnScreen();
+        }
+
+        if (GameManager.Instance.winner!= null)
+        {
+   
+            MainCamera.transform.position = new Vector3(GameManager.Instance.winner.transform.position.x, GameManager.Instance.winner.transform.position.y, -10.0f); // Camera follows the player with specified offset position
         }
     }
 

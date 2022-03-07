@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     public GameState State;
 
+    public Player winner;
+
     public static event Action<GameState> OnGameStateChanged;
 
     private float minDoorSpawnTime = 2.0f;
@@ -158,8 +160,12 @@ public class GameManager : MonoBehaviour
 
     public void HandleGameOver()
     {
+        winner = players[0];
+        winner.GetComponent<Boundaries>().enabled = false;
+        CameraManager.Instance.setCameraSize(CameraState.Small);
+
         gameOverTimer = 0.0f;
-        gameOverTime = 5.0f;
+        gameOverTime = 20.0f;
     }
 
     public void HandleLevelChange() {
@@ -284,7 +290,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckForGameOver()
     {
-        if (players.Count == 0)
+        if (players.Count == 1)
         {
             GameTextManager.Instance.GameOver();
             GameManager.Instance.UpdateGameState(GameState.GameOver);

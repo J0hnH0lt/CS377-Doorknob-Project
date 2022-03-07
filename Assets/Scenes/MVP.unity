@@ -1696,6 +1696,10 @@ PrefabInstance:
       value: 0.8820755
       objectReference: {fileID: 0}
     - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -4402,6 +4406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 1292104357}
   currState: 1
+  winner: {fileID: 0}
 --- !u!1 &2082214274
 GameObject:
   m_ObjectHideFlags: 0

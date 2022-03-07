@@ -17,14 +17,18 @@ public class SpawnManager : MonoBehaviour
 
     public ItemManager itemManager;
 
-    private Vector3 GetRandomPosition()
+    private Vector3 GetRandomPosition(bool isDoor = false)
     {
+        if (isDoor)
+        {
+            Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width-.05f*Screen.width), Random.Range(0, 05f * Screen.height), Camera.main.farClipPlane / 2));
+        }
         return Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), Camera.main.farClipPlane / 2));
     }
 
     public GameObject SpawnDoor(Color c)
     {
-        GameObject door = Instantiate(doorPrefab, GetRandomPosition(), Quaternion.identity);
+        GameObject door = Instantiate(doorPrefab, GetRandomPosition(true), Quaternion.identity);
         door.GetComponent<Renderer>().material.color = c;
         return door;
     }
