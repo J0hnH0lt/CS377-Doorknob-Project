@@ -112,6 +112,7 @@ public class Item : MonoBehaviour
 
         // Turn of game object sprite renderer
         spriteRenderer.enabled = false;
+        isSandBox = false;
     }
 
    
