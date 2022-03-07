@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameModeButton
       objectReference: {fileID: 0}
+    - target: {fileID: 4393081674079596346, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8109114013269027260, guid: ddac37fa1bd774d5b9318410ee5ff30d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1697,7 +1701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8617439635446647397, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -1726,6 +1730,10 @@ PrefabInstance:
     - target: {fileID: 4228681140618451091, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_Name
       value: CameraSizeButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228681140618451091, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4491596417589319299, guid: 2ea8abbdc230f45a8a9e78a2fb8502cd, type: 3}
       propertyPath: m_RootOrder
@@ -1799,7 +1807,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633337996}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
