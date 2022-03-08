@@ -14,7 +14,7 @@ public class CameraManager : MonoBehaviour
 
     private float lerpSpeed = .02f;
 
-    private float minCameraSize = 21f;
+    private float minCameraSize = 26f;
 
     private void Awake()
     {
