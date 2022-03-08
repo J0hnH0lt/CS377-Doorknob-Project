@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Menu)
         {
-            if (players.Count >= 1 && PlayersReady())
+            if (players.Count >= 2 && PlayersReady())
             {
                 foreach (Player p in players)
                 {
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
 
         if (isFartRoyale)
         {
-            Debug.Log("Fart Royale Tick");
+            //Debug.Log("Fart Royale Tick");
             CameraManager.Instance.FartRoyaleTick();
         }
 
@@ -218,7 +218,7 @@ public class GameManager : MonoBehaviour
         players.Add(p);
         p.maxHealth = 8;
         p.currHealth = 8;
-        Debug.Log("Player Added");
+        //Debug.Log("Player Added");
 
     }
 
@@ -236,7 +236,7 @@ public class GameManager : MonoBehaviour
         {
             GameManager.Instance.UpdateGameState(GameState.ItemPhase);
         }
-        Debug.Log("Player Removed");
+        //Debug.Log("Player Removed");
 
     }
 
